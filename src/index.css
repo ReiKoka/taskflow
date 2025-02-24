@@ -1,0 +1,48 @@
+@import "tailwindcss";
+
+:root {
+  --background: hsl(14 0% 95%);
+  --foreground: hsl(14 0% 10%);
+  --primary: hsl(14, 91%, 45%);
+  --primary-foreground: hsl(0 0% 100%);
+  --secondary: hsl(14 10% 70%);
+  --secondary-foreground: hsl(0 0% 0%);
+  --muted: hsl(-24 10% 85%);
+  --muted-foreground: hsl(14 0% 35%);
+  --destructive: hsl(0 50% 30%);
+  --destructive-foreground: hsl(14 0% 90%);
+  --border: hsl(14 20% 60%);
+  --input: hsl(14 20% 19%);
+  --ring: hsl(14 91% 45%);
+}
+.dark {
+  --background: hsl(14 10% 10%);
+  --foreground: hsl(14 0% 90%);
+  --primary: hsl(14 91% 45%);
+  --primary-foreground: hsl(0 0% 100%);
+  --secondary: hsl(14 10% 19%);
+  --secondary-foreground: hsl(0 0% 100%);
+  --muted: hsl(-24 10% 19%);
+  --muted-foreground: hsl(14 0% 60%);
+  --destructive: hsl(0 50% 30%);
+  --destructive-foreground: hsl(14 0% 90%);
+  --border: hsl(14 20% 30%);
+  --input: hsl(14 20% 30%);
+  --ring: hsl(14 91% 45%);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+}
