@@ -1,34 +1,57 @@
 @import "tailwindcss";
 
-:root {
-  --background: hsl(14 0% 95%);
-  --foreground: hsl(14 0% 10%);
-  --primary: hsl(14, 91%, 45%);
-  --primary-foreground: hsl(0 0% 100%);
-  --secondary: hsl(14 10% 70%);
-  --secondary-foreground: hsl(0 0% 0%);
-  --muted: hsl(-24 10% 85%);
-  --muted-foreground: hsl(14 0% 35%);
-  --destructive: hsl(0 50% 30%);
-  --destructive-foreground: hsl(14 0% 90%);
-  --border: hsl(14 20% 60%);
-  --input: hsl(14 20% 19%);
-  --ring: hsl(14 91% 45%);
+/**
+* @license
+*
+* Font Family: Clash Display
+* Designed by: Indian Type Foundry
+* URL: https://www.fontshare.com/fonts/clash-display
+* © 2025 Indian Type Foundry
+*
+* Clash Display Extralight 
+* Clash Display Light 
+* Clash Display Regular 
+* Clash Display Medium 
+* Clash Display Semibold 
+* Clash Display Bold 
+* Clash Display Variable (Variable font)
+*
+*/
+
+@font-face {
+  font-family: "ClashDisplay-Variable";
+  src: url("./assets/fonts/ClashDisplay-Variable.ttf") format("truetype");
+  font-weight: 200 700;
+  font-display: swap;
+  font-style: normal;
 }
+
+:root {
+  --background: hsl(212, 27%, 95%);
+  --foreground: hsl(212, 5%, 10%);
+  --primary: hsl(212, 100%, 50%);
+  --primary-foreground: hsl(0, 0%, 100%);
+  --secondary: hsl(212, 27%, 70%);
+  --secondary-foreground: hsl(0, 0%, 0%);
+  --muted: hsl(174, 27%, 85%);
+  --muted-foreground: hsl(212, 5%, 35%);
+  --destructive: hsl(0, 100%, 60.2%);
+  --destructive-foreground: hsl(0, 0%, 100%);
+  --border: hsl(212, 27%, 50%);
+}
+
 .dark {
-  --background: hsl(14 10% 10%);
-  --foreground: hsl(14 0% 90%);
-  --primary: hsl(14 91% 45%);
-  --primary-foreground: hsl(0 0% 100%);
-  --secondary: hsl(14 10% 19%);
-  --secondary-foreground: hsl(0 0% 100%);
-  --muted: hsl(-24 10% 19%);
-  --muted-foreground: hsl(14 0% 60%);
-  --destructive: hsl(0 50% 30%);
-  --destructive-foreground: hsl(14 0% 90%);
-  --border: hsl(14 20% 30%);
-  --input: hsl(14 20% 30%);
-  --ring: hsl(14 91% 45%);
+  --background: hsl(212, 27%, 10%);
+  --foreground: hsl(212, 5%, 90%);
+  --primary: hsl(212, 100%, 50%);
+  --primary-foreground: hsl(0, 0%, 100%);
+  --secondary: hsl(212, 27%, 20%);
+  --secondary-foreground: hsl(0, 0%, 100%);
+  --muted: hsl(174, 27%, 25%);
+  --muted-foreground: hsl(212, 5%, 60%);
+  --destructive: hsl(0, 70%, 40%);
+  --destructive-foreground: hsl(0, 0%, 100%);
+  --border: hsl(212, 27%, 33%);
 }
 
 @theme inline {
@@ -45,4 +68,6 @@
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
+  --font-primary: "ClashDisplay-Variable", sans-serif;
+  --font-secondary: "Work Sans", serif;
 }
