@@ -27,32 +27,34 @@
 }
 
 :root {
-  --background: hsl(212, 27%, 95%);
-  --foreground: hsl(212, 5%, 10%);
-  --primary: hsl(212, 100%, 50%);
+  --background: hsl(197, 8%, 95%);
+  --foreground: hsl(197, 5%, 10%);
+  --primary: hsl(197, 100%, 43%);
   --primary-foreground: hsl(0, 0%, 100%);
-  --secondary: hsl(212, 27%, 70%);
+  --secondary: hsl(197, 10%, 70%);
   --secondary-foreground: hsl(0, 0%, 0%);
-  --muted: hsl(174, 27%, 85%);
-  --muted-foreground: hsl(212, 5%, 35%);
-  --destructive: hsl(0, 100%, 60.2%);
-  --destructive-foreground: hsl(0, 0%, 100%);
-  --border: hsl(212, 27%, 50%);
+  --muted: hsl(159, 10%, 85%);
+  --muted-foreground: hsl(197, 5%, 35%);
+  --destructive: hsl(0, 50%, 30%);
+  --destructive-foreground: hsl(197, 5%, 90%);
+  --border: hsl(197, 20%, 50%);
 }
 
 .dark {
-  --background: hsl(212, 27%, 10%);
-  --foreground: hsl(212, 5%, 90%);
-  --primary: hsl(212, 100%, 50%);
+  --background: hsl(197, 10%, 10%);
+  --foreground: hsl(197, 5%, 90%);
+  --primary: hsl(197, 100%, 43.1%);
   --primary-foreground: hsl(0, 0%, 100%);
-  --secondary: hsl(212, 27%, 20%);
+  --secondary: hsl(197, 10%, 20%);
   --secondary-foreground: hsl(0, 0%, 100%);
-  --muted: hsl(174, 27%, 25%);
-  --muted-foreground: hsl(212, 5%, 60%);
-  --destructive: hsl(0, 70%, 40%);
-  --destructive-foreground: hsl(0, 0%, 100%);
-  --border: hsl(212, 27%, 33%);
+  --muted: hsl(159, 10%, 25%);
+  --muted-foreground: hsl(197, 5%, 60%);
+  --destructive: hsl(0, 50%, 30%);
+  --destructive-foreground: hsl(197, 5%, 90%);
+  --border: hsl(197, 20%, 25%);
 }
+
+
 
 @theme inline {
   --color-background: var(--background);
