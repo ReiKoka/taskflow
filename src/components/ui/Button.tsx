@@ -12,7 +12,7 @@ const Button: React.FC<ButtonProps> = ({
   ...props
 }) => {
   const baseStyles =
-    "px-4 py-1 rounded-md font-secondary transition duration-500 hover:translate-y-[-3px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 cursor-pointer flex items-center gap-4";
+    "px-4 py-2 rounded-lg font-secondary transition duration-500 hover:translate-y-[-3px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 cursor-pointer flex items-center gap-4";
 
   const variantStyles = clsx({
     "bg-primary text-primary-foreground border border-primary focus-visible:ring-primary":
