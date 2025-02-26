@@ -16,7 +16,7 @@ function StyledLink({ children, className, to, ...props }: StyledLinkProps) {
   const isActive = matchRoute({ to, fuzzy: true });
   return (
     //prettier-ignore
-    <Link to={to} {...props} className={twMerge(clsx(baseStyles, className, isActive && 'font-bold before:w-full text-primary'))}>
+    <Link to={to} {...props} className={twMerge(clsx(baseStyles, className, isActive && 'font-bold text-primary hover:before:w-0'))}>
       {children}
     </Link>
   );
