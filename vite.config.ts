@@ -6,7 +6,7 @@ import svgr from "vite-plugin-svgr";
 
 export default defineConfig({
   plugins: [
-    TanStackRouterVite({ target: "react" }),
+    TanStackRouterVite({ target: "react", autoCodeSplitting: true }),
     react(),
     tailwindcss(),
     svgr(),
