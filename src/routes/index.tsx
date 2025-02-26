@@ -5,5 +5,7 @@ export const Route = createFileRoute("/")({
 });
 
 function RouteComponent() {
-  return <div className="font-secondary">Index Route Fixed finally</div>;
+  return <div className="font-secondary">
+    
+  </div>;
 }

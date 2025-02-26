@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 /**
 * @license
 *
@@ -53,7 +55,6 @@
   --destructive-foreground: hsl(216, 5%, 100%);
   --border: hsl(216, 20%, 50%);
 }
-
 
 @theme inline {
   --color-background: var(--background);
