@@ -1,6 +1,7 @@
 import { HiChevronRight } from "react-icons/hi2";
 import CompanyLogo from "../../assets/images/logo.svg?react";
-import Button from "./Button";
+import Button from "../ui/Button";
+
 
 function HeroMain() {
   return (

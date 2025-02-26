@@ -19,7 +19,7 @@ function ThemeToggle() {
 
   return (
     <Button
-      className="group h-10 w-10 text-muted-foreground hover:text-primary border-foreground hover:border-primary hover:translate-y-0 relative flex cursor-pointer items-center justify-center rounded-full p-2 transition-all duration-300 ease-out"
+      className="group h-10 w-10 text-muted-foreground hover:text-primary border-foreground hover:border-primary hover:translate-y-0 relative  cursor-pointer items-center justify-center rounded-full p-2 transition-all duration-300 ease-out"
       onClick={handleToggle}
       variant="icon"
     >

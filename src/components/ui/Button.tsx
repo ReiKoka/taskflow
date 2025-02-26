@@ -9,6 +9,8 @@ type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
 const Button: React.FC<ButtonProps> = ({
   variant = "default",
   className,
+  type = "button",
+  title,
   ...props
 }) => {
   const baseStyles =
@@ -29,6 +31,8 @@ const Button: React.FC<ButtonProps> = ({
 
   return (
     <button
+      title={title}
+      type={type}
       className={twMerge(baseStyles, variantStyles, className)}
       {...props}
     />
