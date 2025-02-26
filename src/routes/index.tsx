@@ -12,7 +12,7 @@ export const Route = createFileRoute("/")({
 });
 
 function RouteComponent() {
-  const matches = useMediaQuery("(min-width: 768px)");
+  const matches = useMediaQuery("(min-width: 1024px)");
 
   return (
     <div className="font-secondary max-w-full rounded-t-4xl h-full max-h-full overflow-clip z-10 p-4 lg:p-6 relative flex items-center justify-center">
