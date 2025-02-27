@@ -1,3 +1,64 @@
 {
-  "users": []
+  "users": [
+    {
+      "email": "reikoka1@outlook.com",
+      "password": "$2a$10$JGkFon/ffj5NUpRCZjBK..Xsto9JRaa.N3wKXeZWxJlY8T/si9P6e",
+      "id": "WOPdO2epiv",
+      "firstName": "Rei",
+      "lastName": "Koka",
+      "avatar": "https://mighty.tools/mockmind-api/content/human/63.jpg",
+      "role": "admin"
+    }
+  ],
+  "workspaces": [
+    {
+      "id": 1,
+      "name": "Development Team",
+      "userId": 1,
+      "members": [
+        1,
+        2
+      ]
+    }
+  ],
+  "boards": [
+    {
+      "id": 1,
+      "name": "Sprint Planning",
+      "workspaceId": 1
+    }
+  ],
+  "lists": [
+    {
+      "id": 1,
+      "name": "To Do",
+      "boardId": 1
+    },
+    {
+      "id": 2,
+      "name": "In Progress",
+      "boardId": 1
+    },
+    {
+      "id": 3,
+      "name": "Completed",
+      "boardId": 1
+    }
+  ],
+  "tasks": [
+    {
+      "id": 1,
+      "title": "Design Login Page",
+      "description": "Create a login page with TailwindCSS",
+      "listId": 1,
+      "assignedTo": 2
+    },
+    {
+      "id": 2,
+      "title": "Setup API",
+      "description": "Initialize json-server with authentication",
+      "listId": 2,
+      "assignedTo": 1
+    }
+  ]
 }

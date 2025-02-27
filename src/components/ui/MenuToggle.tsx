@@ -14,7 +14,7 @@ function MenuToggle() {
   return (
     <>
       <Button
-        className="group h-10 w-10 text-muted-foreground hover:text-primary border-foreground hover:border-primary hover:translate-y-0 relative flex cursor-pointer items-center justify-center rounded-full p-2 transition-all duration-300 ease-out"
+        className="group text-muted-foreground hover:text-primary border-foreground hover:border-primary relative flex h-10 w-10 cursor-pointer items-center justify-center rounded-full p-2 transition-all duration-300 ease-out hover:translate-y-0"
         onClick={toggleIsOpen}
         variant="icon"
       >
@@ -36,15 +36,14 @@ function MenuToggle() {
         />
       </Button>
       <nav
-        className={`flex flex-col fixed top-16 right-0 w-full min-h-dvh z-20 bg-background dark:bg-secondary pt-10 items-center gap-2 transition-all duration-300 ease-out ${
+        className={`bg-background dark:bg-secondary fixed top-16 right-0 z-20 flex min-h-dvh w-full flex-col items-center gap-2 pt-10 transition-all duration-300 ease-out ${
           isOpen
-            ? "opacity-100 scale-100"
-            : "opacity-0 scale-95 pointer-events-none"
+            ? "scale-100 opacity-100"
+            : "pointer-events-none scale-95 opacity-0"
         }`}
       >
         <StyledLink to="/">Home</StyledLink>
         <StyledLink to="/about">About</StyledLink>
-        <StyledLink to="/services">Our Services</StyledLink>
       </nav>
     </>
   );

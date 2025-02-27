@@ -2,10 +2,9 @@ import StyledLink from "../ui/StyledLink";
 
 function LandingLinks() {
   return (
-    <nav className={`flex gap-2 items-end`}>
+    <nav className={`flex items-end gap-2`}>
       <StyledLink to="/">Home</StyledLink>
       <StyledLink to="/about">About</StyledLink>
-      <StyledLink to="/services">Our Services</StyledLink>
     </nav>
   );
 }
