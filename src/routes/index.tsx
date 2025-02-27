@@ -15,7 +15,7 @@ function RouteComponent() {
   const matches = useMediaQuery("(min-width: 1024px)");
 
   return (
-    <div className="font-secondary max-w-full rounded-t-4xl h-full max-h-full overflow-clip z-10 p-4 lg:p-6 relative flex items-center justify-center">
+    <div className="pattern-bg font-secondary max-w-full rounded-t-4xl h-full max-h-full z-10 p-4 lg:p-6 relative flex items-center justify-center">
       {matches && (
         <>
           <HeroImage className="top-12 left-6 -rotate-12" Img={Img1} />
