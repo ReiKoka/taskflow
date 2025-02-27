@@ -3,24 +3,6 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
-/**
-* @license
-*
-* Font Family: Clash Display
-* Designed by: Indian Type Foundry
-* URL: https://www.fontshare.com/fonts/clash-display
-* © 2025 Indian Type Foundry
-*
-* Clash Display Extralight 
-* Clash Display Light 
-* Clash Display Regular 
-* Clash Display Medium 
-* Clash Display Semibold 
-* Clash Display Bold 
-* Clash Display Variable (Variable font)
-*
-*/
-
 @font-face {
   font-family: "ClashDisplay-Variable";
   src: url("./assets/fonts/ClashDisplay-Variable.ttf") format("truetype");
@@ -75,3 +57,4 @@
   --font-secondary: "Work Sans", serif;
   --shadow-custom: rgba(0, 0, 0, 0.4) 0px 30px 90px;
 }
+

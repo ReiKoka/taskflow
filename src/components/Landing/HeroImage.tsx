@@ -8,12 +8,12 @@ type HeroImageProps = {
   Img: FunctionComponent<React.SVGProps<SVGSVGElement>>;
 };
 
-const baseStyles = `absolute  max-w-80`;
+const baseStyles = `absolute lg:w-40 2xl:w-auto max-w-80`;
 
 function HeroImage({ className, Img }: HeroImageProps) {
   return (
     <div className={twMerge(clsx(baseStyles, className))}>
-      <Img className="w-full h-full" />
+      <Img className="h-full w-full" />
     </div>
   );
 }
