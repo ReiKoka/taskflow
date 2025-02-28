@@ -24,7 +24,7 @@ function RouteComponent() {
 
   // Handle undefined context
   if (!context) {
-    throw new Error("ThemeToggle must be used within a ThemeProvider");
+    throw new Error("AuthContext must be used within a AuthProvider");
   }
 
   const { setToken, setUser } = context;
