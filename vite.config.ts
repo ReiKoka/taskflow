@@ -11,4 +11,9 @@ export default defineConfig({
     tailwindcss(),
     svgr(),
   ],
+  server: {
+    watch: {
+      ignored: ["**/db.json"], // Ignore changes to db.json
+    },
+  },
 });

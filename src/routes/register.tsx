@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import Input from "../components/ui/Input";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FormRegisterType } from "../utils/types";
 import RegisterSVG from "../assets/images/register.svg?react";
 import { HiEnvelope, HiLockClosed, HiPhoto } from "react-icons/hi2";
@@ -23,10 +23,15 @@ function RouteComponent() {
     role: "admin",
   });
 
+  useEffect(() => {
+    console.log("Register component mounted");
+    return () => console.log("Register component unmounted");
+  }, []);
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { id, value } = e.target;
     setFormData((prevData) => ({ ...prevData, [id]: value }));
-  };  
+  };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -36,7 +41,6 @@ function RouteComponent() {
     const newUser = { ...formData, id };
     console.log(newUser);
     register(newUser);
-
   };
 
   return (

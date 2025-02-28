@@ -28,13 +28,11 @@ export const register = async (
   user: FormRegisterType,
 ): Promise<UserResponseType> => {
   try {
-    console.log("Starting registration with:", user);
     const response = await axios.post<UserResponseType>(
       `${baseURL}/register`,
       user,
     );
-    
-    console.log("Registration response:", response);
+
     return response.data;
   } catch (error) {
     console.error("Registration error details:", error);
