@@ -1,9 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { HiEnvelope } from "react-icons/hi2";
-
 import { login } from "../services/auth";
 import { FormLoginType } from "../utils/types";
-
 import LoginSVG from "../assets/images/login.svg?react";
 import Input from "../components/ui/Input";
 import Button from "../components/ui/Button";
@@ -28,6 +26,11 @@ function RouteComponent() {
     const payload = Object.fromEntries(formData.entries());
     const email = payload?.email as string;
     const password = payload?.password as string;
+    const submitType = (payload?.submitType as "submit" | "reset") || "submit";
+
+    if (submitType === "reset") {
+      return initialState; // Reset the form state
+    }
 
     try {
       if (!email || !password) {
@@ -43,7 +46,7 @@ function RouteComponent() {
       console.log(user);
       const loggedUser = await login(user);
       showToast("success", `Welcome back ${loggedUser?.user?.firstName}`);
-      return { email: "", password: "" };
+      return { email: "", password: "" }; // Reset after successful login
     } catch (error) {
       showToast(
         "error",
@@ -89,6 +92,12 @@ function RouteComponent() {
             placeholder="Enter your password"
             icon={<HiEnvelope />}
           />
+          {/* Hidden input for submitType */}
+          <input
+            type="hidden"
+            name="submitType"
+            value="submit" // Default, overridden by button clicked
+          />
           <p className="text-muted-foreground font-secondary text-center text-sm font-medium">
             Don't have an account?
             <Link
@@ -100,16 +109,19 @@ function RouteComponent() {
           </p>
           <div className="flex w-full flex-col gap-2 sm:flex-row sm:justify-end 2xl:gap-4">
             <Button
-              type="reset"
+              type="submit"
               variant="outline"
+              name="submitType"
+              value="reset" // Signals reset
               className="w-full justify-center text-xs font-medium sm:w-fit md:text-sm 2xl:text-base"
-              onClick={() => {}}
             >
               Cancel
             </Button>
             <Button
               type="submit"
               variant="default"
+              name="submitType"
+              value="submit" // Signals submit
               className="w-full justify-center text-xs font-medium sm:w-fit md:text-sm 2xl:text-base"
             >
               {isPending ? "Submitting" : "Sign In"}
