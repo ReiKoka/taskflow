@@ -8,7 +8,7 @@ export const Route = createFileRoute("/about")({
 function RouteComponent() {
   return (
     <div className="flex h-full flex-col gap-4 p-4 md:p-8 lg:p-8">
-      <h1 className="font-primary text-3xl font-medium tracking-wider sm:text-4xl md:text-5xl lg:text-6xl 2xl:text-8xl">
+      <h1 className="font-primary text-center text-3xl font-medium tracking-wider sm:text-4xl md:text-5xl lg:text-6xl 2xl:text-8xl">
         About Us
       </h1>
       <div className="flex flex-col items-center gap-4 md:flex-row md:gap-8">

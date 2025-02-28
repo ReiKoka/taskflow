@@ -1,42 +1,73 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import LoginSVG from "../assets/images/login.svg?react";
-import { useState } from "react";
-import { FormLoginType } from "../utils/types";
-import { login } from "../services/auth";
-import Input from "../components/ui/Input";
 import { HiEnvelope } from "react-icons/hi2";
+
+import { login } from "../services/auth";
+import { FormLoginType } from "../utils/types";
+
+import LoginSVG from "../assets/images/login.svg?react";
+import Input from "../components/ui/Input";
 import Button from "../components/ui/Button";
+import { showToast } from "../utils/showToast";
+import { validateEmail } from "../utils/helpers";
+import { useActionState } from "react";
 
 export const Route = createFileRoute("/login")({
   component: RouteComponent,
 });
 
+const initialState = {
+  email: "",
+  password: "",
+};
+
 function RouteComponent() {
-  const [formData, setFormData] = useState<FormLoginType>({
-    email: "",
-    password: "",
-  });
+  const handleAction = async (
+    _prevState: FormLoginType,
+    formData: FormData,
+  ) => {
+    const payload = Object.fromEntries(formData.entries());
+    const email = payload?.email as string;
+    const password = payload?.password as string;
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { id, value } = e.target;
-    setFormData((prevData) => ({ ...prevData, [id]: value }));
+    try {
+      if (!email || !password) {
+        showToast("warning", "Please fill in all fields");
+        return { email, password };
+      }
+      if (!validateEmail(email)) {
+        showToast("error", "Invalid email format");
+        return { email, password };
+      }
+
+      const user: FormLoginType = { email, password };
+      console.log(user);
+      const loggedUser = await login(user);
+      showToast("success", `Welcome back ${loggedUser?.user?.firstName}`);
+      return { email: "", password: "" };
+    } catch (error) {
+      showToast(
+        "error",
+        error instanceof Error
+          ? error.message
+          : "Login failed. Please check your credentials",
+      );
+      return { email, password };
+    }
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
-    console.log(formData);
-    login(formData);
-  };
+  const [formState, formAction, isPending] = useActionState(
+    handleAction,
+    initialState,
+  );
 
   return (
-    <div className="h-full w-full lg:grid lg:grid-cols-2">
+    <div className="divide-secondary h-full w-full divide-x-2 py-20 lg:grid lg:grid-cols-2">
       <div className="hidden h-full items-center justify-center lg:flex">
         <LoginSVG className="max-h-[600px] w-fit lg:block" />
       </div>
       <div className="flex h-full items-center justify-center">
         <form
-          onSubmit={handleSubmit}
+          action={formAction}
           className="bg-background flex w-8/12 max-w-[600px] min-w-[280px] flex-col gap-6 rounded-lg p-4 sm:p-6"
         >
           <h2 className="font-secondary mb-10 text-center text-xl font-semibold">
@@ -46,16 +77,16 @@ function RouteComponent() {
             id="email"
             type="email"
             label="Email"
-            value={formData.email}
-            onChange={handleChange}
             icon={<HiEnvelope />}
+            placeholder="Type your email..."
+            defaultValue={formState.email}
           />
           <Input
             id="password"
             type="password"
             label="Password"
-            value={formData.password}
-            onChange={handleChange}
+            defaultValue={formState.password}
+            placeholder="Enter your password"
             icon={<HiEnvelope />}
           />
           <p className="text-muted-foreground font-secondary text-center text-sm font-medium">
@@ -72,6 +103,7 @@ function RouteComponent() {
               type="reset"
               variant="outline"
               className="w-full justify-center text-xs font-medium sm:w-fit md:text-sm 2xl:text-base"
+              onClick={() => {}}
             >
               Cancel
             </Button>
@@ -80,7 +112,7 @@ function RouteComponent() {
               variant="default"
               className="w-full justify-center text-xs font-medium sm:w-fit md:text-sm 2xl:text-base"
             >
-              Sign In
+              {isPending ? "Submitting" : "Sign In"}
             </Button>
           </div>
         </form>

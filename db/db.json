@@ -2,12 +2,12 @@
   "users": [
     {
       "email": "reikoka1@outlook.com",
-      "password": "$2a$10$qnUw53l3vgHGJ0XrTH0eMeiol7jfAcVyzjvhEKuRJPAPBrdjUnJFW",
+      "password": "$2a$10$mwQYDOB1QxswJpkNxkGZJ.UME8rUmIUyVem0P1Y4xBYqtLD1fiQY.",
+      "id": "0iirwg74IN",
       "firstName": "Rei",
       "lastName": "Koka",
       "avatar": "https://mighty.tools/mockmind-api/content/human/63.jpg",
-      "role": "admin",
-      "id": "L61xTYlXFP"
+      "role": "admin"
     }
   ],
   "workspaces": [

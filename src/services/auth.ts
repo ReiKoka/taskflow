@@ -1,10 +1,6 @@
 import { baseURL } from "../utils/constants";
 
-import {
-  FormLoginType,
-  FormRegisterType,
-  UserResponseType,
-} from "../utils/types";
+import { FormLoginType, User, UserResponseType } from "../utils/types";
 import axios from "axios";
 
 export const login = async (user: FormLoginType): Promise<UserResponseType> => {
@@ -13,20 +9,16 @@ export const login = async (user: FormLoginType): Promise<UserResponseType> => {
       `${baseURL}/login`,
       user,
     );
-    console.log(response.data);
     return response.data;
   } catch (error) {
-    console.log(error);
     if (axios.isAxiosError(error) && error.response) {
-      throw new Error(error.response.data?.message || "Login failed.");
+      throw new Error(`${error.response?.data}. Please check your credentials`);
     }
     throw new Error("Network error. Please try again.");
   }
 };
 
-export const register = async (
-  user: FormRegisterType,
-): Promise<UserResponseType> => {
+export const register = async (user: User): Promise<UserResponseType> => {
   try {
     const response = await axios.post<UserResponseType>(
       `${baseURL}/register`,

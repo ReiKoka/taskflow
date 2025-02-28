@@ -6,6 +6,7 @@ import { Theme } from "../utils/types";
 type ThemeContextType = {
   theme: Theme;
   setTheme: (theme: Theme) => void;
+  removeTheme: () => void;
 };
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
@@ -17,7 +18,7 @@ type ThemeProviderPropTypes = {
 export const ThemeProvider = ({ children }: ThemeProviderPropTypes) => {
   const [theme, setTheme, removeTheme] = useLocalStorage<Theme>(
     "theme",
-    "light"
+    "light",
   );
 
   useEffect(() => {
@@ -32,13 +33,10 @@ export const ThemeProvider = ({ children }: ThemeProviderPropTypes) => {
   const contextValue: ThemeContextType = {
     theme,
     setTheme: setThemeAndPersist,
+    removeTheme,
   };
 
-  return (
-    <ThemeContext.Provider value={contextValue}>
-      {children}
-    </ThemeContext.Provider>
-  );
+  return <ThemeContext value={contextValue}>{children}</ThemeContext>;
 };
 
 export { ThemeContext };
