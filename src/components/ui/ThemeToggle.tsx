@@ -6,7 +6,7 @@ import Button from "./Button";
 function ThemeToggle() {
   const context = use(ThemeContext);
 
-  // Handle the case where context might be undefined
+  // Handle undefined context
   if (!context) {
     throw new Error("ThemeToggle must be used within a ThemeProvider");
   }
@@ -19,7 +19,7 @@ function ThemeToggle() {
 
   return (
     <Button
-      className="group h-10 w-10 text-muted-foreground hover:text-primary border-foreground hover:border-primary hover:translate-y-0 relative  cursor-pointer items-center justify-center rounded-full p-2 transition-all duration-300 ease-out"
+      className="group text-muted-foreground hover:text-primary border-foreground hover:border-primary relative h-10 w-10 cursor-pointer items-center justify-center rounded-full p-2 transition-all duration-300 ease-out hover:translate-y-0"
       onClick={handleToggle}
       variant="icon"
     >

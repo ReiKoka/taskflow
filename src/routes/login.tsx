@@ -7,7 +7,8 @@ import Input from "../components/ui/Input";
 import Button from "../components/ui/Button";
 import { showToast } from "../utils/showToast";
 import { validateEmail } from "../utils/helpers";
-import { useActionState } from "react";
+import { use, useActionState } from "react";
+import { AuthContext } from "../context/AuthContext";
 
 export const Route = createFileRoute("/login")({
   component: RouteComponent,
@@ -19,6 +20,15 @@ const initialState = {
 };
 
 function RouteComponent() {
+  const context = use(AuthContext);
+
+  // Handle undefined context
+  if (!context) {
+    throw new Error("ThemeToggle must be used within a ThemeProvider");
+  }
+
+  const { setToken, setUser } = context;
+
   const handleAction = async (
     _prevState: FormLoginType,
     formData: FormData,
@@ -45,6 +55,8 @@ function RouteComponent() {
       const user: FormLoginType = { email, password };
       console.log(user);
       const loggedUser = await login(user);
+      setToken(loggedUser?.accessToken);
+      setUser(loggedUser?.user);
       showToast("success", `Welcome back ${loggedUser?.user?.firstName}`);
       return { email: "", password: "" }; // Reset after successful login
     } catch (error) {
@@ -93,11 +105,7 @@ function RouteComponent() {
             icon={<HiEnvelope />}
           />
           {/* Hidden input for submitType */}
-          <input
-            type="hidden"
-            name="submitType"
-            value="submit" // Default, overridden by button clicked
-          />
+          <input type="hidden" name="submitType" value="submit" />
           <p className="text-muted-foreground font-secondary text-center text-sm font-medium">
             Don't have an account?
             <Link

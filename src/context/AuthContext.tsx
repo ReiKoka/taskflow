@@ -40,9 +40,9 @@ export const AuthProvider = ({ children }: AuthProviderPropTypes) => {
     };
   }, [token, setToken]);
 
-  return (
-    <AuthContext value={{ user, setUser, token, setToken }}>
-      {children}
-    </AuthContext>
-  );
+  const contextValue = { user, setUser, token, setToken };
+
+  return <AuthContext value={contextValue}>{children}</AuthContext>;
 };
+
+export { AuthContext };
