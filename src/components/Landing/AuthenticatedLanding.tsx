@@ -1,11 +1,5 @@
-import AuthenticatedLayout from "../../pages/AuthenticatedLayout";
-
 function AuthenticatedLanding() {
-  return (
-    <AuthenticatedLayout>
-      <div>Authenticated</div>
-    </AuthenticatedLayout>
-  );
+  return <div>Authenticated</div>;
 }
 
 export default AuthenticatedLanding;

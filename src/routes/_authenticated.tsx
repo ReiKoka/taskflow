@@ -1,7 +1,7 @@
-import { createFileRoute, Outlet, redirect } from "@tanstack/react-router";
+import { createFileRoute, redirect } from "@tanstack/react-router";
 import { AuthContext } from "../context/AuthContext";
-import { use } from "react";
-import AuthenticatedLayout from "../pages/AuthenticatedLayout";
+
+import LayoutWrapper from "../layouts/LayoutWrapper";
 
 export const Route = createFileRoute("/_authenticated")({
   beforeLoad: ({ context }: { context: { auth?: AuthContext } }) => {
@@ -9,19 +9,5 @@ export const Route = createFileRoute("/_authenticated")({
       throw redirect({ to: "/login" });
     }
   },
-  component: RouteComponent,
+  component: () => <LayoutWrapper type="authenticated" />,
 });
-
-function RouteComponent() {
-  const auth = use(AuthContext);
-
-  if (!auth) {
-    throw new Error("AuthContext must be used within a AuthContext");
-  }
-
-  return (
-    <AuthenticatedLayout>
-      <Outlet />
-    </AuthenticatedLayout>
-  );
-}

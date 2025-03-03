@@ -3,6 +3,7 @@ import { use } from "react";
 import { AuthContext } from "../context/AuthContext";
 import PublicLanding from "../components/landing/PublicLanding";
 import AuthenticatedLanding from "../components/landing/AuthenticatedLanding";
+import LayoutWrapper from "../layouts/LayoutWrapper";
 
 export const Route = createFileRoute("/")({
   component: RouteComponent,
@@ -17,5 +18,9 @@ function RouteComponent() {
 
   const { token } = context;
 
-  return !token ? <PublicLanding /> : <AuthenticatedLanding />;
+  return (
+    <LayoutWrapper type={token ? "authenticated" : "public"}>
+      {token ? <AuthenticatedLanding /> : <PublicLanding />}
+    </LayoutWrapper>
+  );
 }
