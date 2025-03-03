@@ -3,6 +3,7 @@ import { useLocalStorage } from "usehooks-ts";
 import { AuthenticatedUser } from "../utils/types";
 import axios from "axios";
 import { jwtDecode } from "jwt-decode";
+import { baseURL } from "../utils/constants";
 
 export type AuthContext = {
   token: string;
@@ -22,13 +23,12 @@ export const AuthProvider = ({ children }: AuthProviderPropTypes) => {
   const [user, setUser] = useState<AuthenticatedUser | undefined>(undefined);
 
   useEffect(() => {
-    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
-    async () => {
+    const fetchUser = async () => {
       if (token) {
         try {
-          const decoded = jwtDecode(token);
-          const res = await axios.get(`${URL}/users/${decoded.sub}`);
-
+          const decoded = jwtDecode<{ sub: string }>(token);
+          console.log(decoded)
+          const res = await axios.get(`${baseURL}/users/${decoded.sub}`);
           const fetchedUser = res.data;
           setUser(fetchedUser);
         } catch (error) {
@@ -38,6 +38,8 @@ export const AuthProvider = ({ children }: AuthProviderPropTypes) => {
         }
       }
     };
+
+    fetchUser(); // Call the function
   }, [token, setToken]);
 
   const contextValue = { user, setUser, token, setToken };

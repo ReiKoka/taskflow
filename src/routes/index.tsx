@@ -1,8 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { use } from "react";
 import { AuthContext } from "../context/AuthContext";
-import PublicLanding from "../components/landing/PublicLanding";
-import AuthenticatedLanding from "../components/landing/AuthenticatedLanding";
+import PublicLanding from "../components/public/PublicLanding";
+import AuthenticatedLanding from "../components/auth/AuthenticatedLanding";
 import LayoutWrapper from "../layouts/LayoutWrapper";
 
 export const Route = createFileRoute("/")({
