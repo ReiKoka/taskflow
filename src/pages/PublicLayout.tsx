@@ -1,5 +1,6 @@
 import { ReactNode } from "react";
-import LandingNav from "./landing/LandingNav";
+import LandingNav from "../components/landing/LandingNav";
+
 
 function PublicLayout({ children }: { children: ReactNode }) {
   return (

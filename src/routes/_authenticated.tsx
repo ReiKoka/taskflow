@@ -1,7 +1,7 @@
 import { createFileRoute, Outlet, redirect } from "@tanstack/react-router";
 import { AuthContext } from "../context/AuthContext";
 import { use } from "react";
-import AppLayout from "../components/AuthenticatedLayput";
+import AuthenticatedLayout from "../pages/AuthenticatedLayout";
 
 export const Route = createFileRoute("/_authenticated")({
   beforeLoad: ({ context }: { context: { auth?: AuthContext } }) => {
@@ -9,10 +9,10 @@ export const Route = createFileRoute("/_authenticated")({
       throw redirect({ to: "/login" });
     }
   },
-  component: AuthenticatedLayout,
+  component: RouteComponent,
 });
 
-function AuthenticatedLayout() {
+function RouteComponent() {
   const auth = use(AuthContext);
 
   if (!auth) {
@@ -20,8 +20,8 @@ function AuthenticatedLayout() {
   }
 
   return (
-    <AppLayout>
+    <AuthenticatedLayout>
       <Outlet />
-    </AppLayout>
+    </AuthenticatedLayout>
   );
 }

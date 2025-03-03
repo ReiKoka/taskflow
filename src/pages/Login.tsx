@@ -1,5 +1,5 @@
 import { use, useActionState } from "react";
-import { Navigate, useNavigate } from "@tanstack/react-router";
+import { useNavigate } from "@tanstack/react-router";
 
 import { login } from "../services/auth";
 import { FormLoginType } from "../utils/types";

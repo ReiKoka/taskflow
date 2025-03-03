@@ -1,5 +1,5 @@
 import { createFileRoute, Outlet } from "@tanstack/react-router";
-import PublicLayout from "../components/PublicLayout";
+import PublicLayout from "../pages/PublicLayout";
 
 export const Route = createFileRoute("/_public")({
   component: RouteComponent,

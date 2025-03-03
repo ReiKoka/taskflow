@@ -1,4 +1,4 @@
-import AuthenticatedLayout from "../AuthenticatedLayput";
+import AuthenticatedLayout from "../../pages/AuthenticatedLayout";
 
 function AuthenticatedLanding() {
   return (
