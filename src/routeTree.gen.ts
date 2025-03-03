@@ -17,7 +17,6 @@ import { Route as IndexImport } from './routes/index'
 import { Route as PublicRegisterImport } from './routes/_public/register'
 import { Route as PublicLoginImport } from './routes/_public/login'
 import { Route as PublicAboutImport } from './routes/_public/about'
-import { Route as AuthenticatedDashboardImport } from './routes/_authenticated/dashboard'
 
 // Create/Update Routes
 
@@ -55,12 +54,6 @@ const PublicAboutRoute = PublicAboutImport.update({
   getParentRoute: () => PublicRoute,
 } as any)
 
-const AuthenticatedDashboardRoute = AuthenticatedDashboardImport.update({
-  id: '/dashboard',
-  path: '/dashboard',
-  getParentRoute: () => AuthenticatedRoute,
-} as any)
-
 // Populate the FileRoutesByPath interface
 
 declare module '@tanstack/react-router' {
@@ -85,13 +78,6 @@ declare module '@tanstack/react-router' {
       fullPath: ''
       preLoaderRoute: typeof PublicImport
       parentRoute: typeof rootRoute
-    }
-    '/_authenticated/dashboard': {
-      id: '/_authenticated/dashboard'
-      path: '/dashboard'
-      fullPath: '/dashboard'
-      preLoaderRoute: typeof AuthenticatedDashboardImport
-      parentRoute: typeof AuthenticatedImport
     }
     '/_public/about': {
       id: '/_public/about'
@@ -119,18 +105,6 @@ declare module '@tanstack/react-router' {
 
 // Create and export the route tree
 
-interface AuthenticatedRouteChildren {
-  AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
-}
-
-const AuthenticatedRouteChildren: AuthenticatedRouteChildren = {
-  AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
-}
-
-const AuthenticatedRouteWithChildren = AuthenticatedRoute._addFileChildren(
-  AuthenticatedRouteChildren,
-)
-
 interface PublicRouteChildren {
   PublicAboutRoute: typeof PublicAboutRoute
   PublicLoginRoute: typeof PublicLoginRoute
@@ -149,7 +123,6 @@ const PublicRouteWithChildren =
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '': typeof PublicRouteWithChildren
-  '/dashboard': typeof AuthenticatedDashboardRoute
   '/about': typeof PublicAboutRoute
   '/login': typeof PublicLoginRoute
   '/register': typeof PublicRegisterRoute
@@ -158,7 +131,6 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '': typeof PublicRouteWithChildren
-  '/dashboard': typeof AuthenticatedDashboardRoute
   '/about': typeof PublicAboutRoute
   '/login': typeof PublicLoginRoute
   '/register': typeof PublicRegisterRoute
@@ -167,9 +139,8 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
-  '/_authenticated': typeof AuthenticatedRouteWithChildren
+  '/_authenticated': typeof AuthenticatedRoute
   '/_public': typeof PublicRouteWithChildren
-  '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
   '/_public/about': typeof PublicAboutRoute
   '/_public/login': typeof PublicLoginRoute
   '/_public/register': typeof PublicRegisterRoute
@@ -177,15 +148,14 @@ export interface FileRoutesById {
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '' | '/dashboard' | '/about' | '/login' | '/register'
+  fullPaths: '/' | '' | '/about' | '/login' | '/register'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '' | '/dashboard' | '/about' | '/login' | '/register'
+  to: '/' | '' | '/about' | '/login' | '/register'
   id:
     | '__root__'
     | '/'
     | '/_authenticated'
     | '/_public'
-    | '/_authenticated/dashboard'
     | '/_public/about'
     | '/_public/login'
     | '/_public/register'
@@ -194,13 +164,13 @@ export interface FileRouteTypes {
 
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  AuthenticatedRoute: typeof AuthenticatedRouteWithChildren
+  AuthenticatedRoute: typeof AuthenticatedRoute
   PublicRoute: typeof PublicRouteWithChildren
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  AuthenticatedRoute: AuthenticatedRouteWithChildren,
+  AuthenticatedRoute: AuthenticatedRoute,
   PublicRoute: PublicRouteWithChildren,
 }
 
@@ -223,10 +193,7 @@ export const routeTree = rootRoute
       "filePath": "index.tsx"
     },
     "/_authenticated": {
-      "filePath": "_authenticated.tsx",
-      "children": [
-        "/_authenticated/dashboard"
-      ]
+      "filePath": "_authenticated.tsx"
     },
     "/_public": {
       "filePath": "_public.tsx",
@@ -235,10 +202,6 @@ export const routeTree = rootRoute
         "/_public/login",
         "/_public/register"
       ]
-    },
-    "/_authenticated/dashboard": {
-      "filePath": "_authenticated/dashboard.tsx",
-      "parent": "/_authenticated"
     },
     "/_public/about": {
       "filePath": "_public/about.tsx",

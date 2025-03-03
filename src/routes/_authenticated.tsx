@@ -1,7 +1,7 @@
 import { createFileRoute, Outlet, redirect } from "@tanstack/react-router";
 import { AuthContext } from "../context/AuthContext";
 import { use } from "react";
-import AppLayout from "../components/AppLayout";
+import AppLayout from "../components/AuthenticatedLayput";
 
 export const Route = createFileRoute("/_authenticated")({
   beforeLoad: ({ context }: { context: { auth?: AuthContext } }) => {
