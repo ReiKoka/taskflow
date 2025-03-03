@@ -7,7 +7,7 @@ import { validateEmail } from "../utils/helpers";
 import { register } from "../services/auth";
 import { nanoid } from "nanoid";
 
-import { Navigate } from "@tanstack/react-router";
+import { Navigate, useNavigate } from "@tanstack/react-router";
 import { AuthContext } from "../context/AuthContext";
 
 const initialState: FormRegisterType = {
@@ -19,6 +19,7 @@ const initialState: FormRegisterType = {
 };
 
 function Register() {
+  const navigate = useNavigate();
   const context = use(AuthContext);
 
   if (!context) {
@@ -64,7 +65,7 @@ function Register() {
       const newUser = await register(user);
       if (newUser) {
         showToast("success", "Registration successful. Please login");
-        Navigate({ to: "/login" });
+        navigate({ to: "/login" });
         return initialState;
       }
     } catch (error) {

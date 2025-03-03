@@ -11,12 +11,12 @@
     },
     {
       "email": "tomas@tomas.com",
-      "password": "$2a$10$vrXUCvjgVX7i29ngUzXhQutYkmFcTvQQsTNN8Cawm2guLaCm9iici",
-      "id": "zI9RDTLSZy",
+      "password": "$2a$10$a5Vns9ZdDli3c4.y/Rbw9OUvCbcyJezTI6ckTAEBcAVub6S5n0B4q",
+      "id": "Pud_xM3ovO",
+      "role": "employee",
       "firstName": "Tomas",
       "lastName": "Jefferson",
-      "avatar": "",
-      "role": "admin"
+      "avatar": ""
     }
   ],
   "workspaces": [
