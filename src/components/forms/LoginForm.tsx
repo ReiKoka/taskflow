@@ -18,7 +18,7 @@ export default function LoginForm({
   return (
     <form
       action={formAction}
-      className="bg-background flex w-8/12 max-w-[600px] min-w-[280px] flex-col gap-6 rounded-lg p-4 sm:p-6"
+      className="bg-background shadow-card dark:shadow-toast-dark flex w-8/12 max-w-[600px] min-w-[280px] flex-col gap-6 rounded-lg p-4 sm:p-6"
     >
       <h2 className="font-secondary mb-10 text-center text-xl font-semibold">
         Sign In

@@ -56,6 +56,7 @@
   --font-primary: "ClashDisplay-Variable", sans-serif;
   --font-secondary: "Work Sans", serif;
   --shadow-custom: rgba(0, 0, 0, 0.4) 0px 30px 90px;
+  --shadow-card: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
   --shadow-toast: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
   --shadow-toast-dark:
     hsla(276, 10%, 10%, 0.16) 0px 2px 4px 0px,

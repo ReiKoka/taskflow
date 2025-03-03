@@ -1,5 +1,5 @@
 import { use, useActionState } from "react";
-import { Navigate } from "@tanstack/react-router";
+import { Navigate, useNavigate } from "@tanstack/react-router";
 
 import { login } from "../services/auth";
 import { FormLoginType } from "../utils/types";
@@ -15,13 +15,14 @@ const initialState: FormLoginType = {
 };
 
 export default function Login() {
+  const navigate = useNavigate();
   const context = use(AuthContext);
 
   if (!context) {
     throw new Error("AuthContext must be used within an AuthProvider");
   }
 
-  const { token, setToken, setUser } = context;
+  const { setToken, setUser } = context;
 
   const handleLoginAction = async (
     _prevState: FormLoginType,
@@ -49,6 +50,7 @@ export default function Login() {
       setToken(loggedUser?.accessToken);
       setUser(loggedUser?.user);
       showToast("success", `Welcome back ${loggedUser?.user?.firstName}`);
+      navigate({ to: "/" });
       return { email: "", password: "" };
     } catch (error) {
       showToast(
@@ -65,8 +67,6 @@ export default function Login() {
     handleLoginAction,
     initialState,
   );
-
-  if (token) return <Navigate to="/" />;
 
   return (
     <div className="divide-secondary h-full w-full divide-x-2 py-20 lg:grid lg:grid-cols-2">
