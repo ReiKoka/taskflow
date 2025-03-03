@@ -4,7 +4,7 @@ import { AuthenticatedUser } from "../utils/types";
 import axios from "axios";
 import { jwtDecode } from "jwt-decode";
 
-type AuthContext = {
+export type AuthContext = {
   token: string;
   setToken: React.Dispatch<React.SetStateAction<string>>;
   user: AuthenticatedUser | undefined;

@@ -3,15 +3,16 @@ import { nanoid } from "nanoid";
 
 import { HiEnvelope, HiLockClosed, HiPhoto, HiUser } from "react-icons/hi2";
 
-import { register } from "../services/auth";
-import { RoleType, User } from "../utils/types";
+import { register } from "../../services/auth";
+import { RoleType, User } from "../../utils/types";
 
-import Input from "../components/ui/Input";
-import RegisterSVG from "../assets/images/register.svg?react";
-import Button from "../components/ui/Button";
-import { router } from "../main";
+import Input from "../../components/ui/Input";
+import RegisterSVG from "../../assets/images/register.svg?react";
+import Button from "../../components/ui/Button";
 
-export const Route = createFileRoute("/register")({
+import { router } from "../../router";
+
+export const Route = createFileRoute("/_public/register")({
   component: RouteComponent,
 });
 

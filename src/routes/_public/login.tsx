@@ -1,16 +1,16 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link, Navigate } from "@tanstack/react-router";
 import { HiEnvelope } from "react-icons/hi2";
-import { login } from "../services/auth";
-import { FormLoginType } from "../utils/types";
-import LoginSVG from "../assets/images/login.svg?react";
-import Input from "../components/ui/Input";
-import Button from "../components/ui/Button";
-import { showToast } from "../utils/showToast";
-import { validateEmail } from "../utils/helpers";
+import { login } from "../../services/auth";
+import { FormLoginType } from "../../utils/types";
+import LoginSVG from "../../assets/images/login.svg?react";
+import Input from "../../components/ui/Input";
+import Button from "../../components/ui/Button";
+import { showToast } from "../../utils/showToast";
+import { validateEmail } from "../../utils/helpers";
 import { use, useActionState } from "react";
-import { AuthContext } from "../context/AuthContext";
+import { AuthContext } from "../../context/AuthContext";
 
-export const Route = createFileRoute("/login")({
+export const Route = createFileRoute("/_public/login")({
   component: RouteComponent,
 });
 
@@ -27,7 +27,7 @@ function RouteComponent() {
     throw new Error("AuthContext must be used within a AuthProvider");
   }
 
-  const { setToken, setUser } = context;
+  const { token, setToken, setUser } = context;
 
   const handleAction = async (
     _prevState: FormLoginType,
@@ -58,7 +58,7 @@ function RouteComponent() {
       setToken(loggedUser?.accessToken);
       setUser(loggedUser?.user);
       showToast("success", `Welcome back ${loggedUser?.user?.firstName}`);
-      return { email: "", password: "" }; // Reset after successful login
+      return { email: "", password: "" };
     } catch (error) {
       showToast(
         "error",
@@ -74,6 +74,8 @@ function RouteComponent() {
     handleAction,
     initialState,
   );
+
+  if (token && token !== "") return <Navigate to="/" />;
 
   return (
     <div className="divide-secondary h-full w-full divide-x-2 py-20 lg:grid lg:grid-cols-2">

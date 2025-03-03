@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
-import AboutSvg from "../assets/images/about.svg?react";
+import AboutSvg from "../../assets/images/about.svg?react"; 
 
-export const Route = createFileRoute("/about")({
+export const Route = createFileRoute("/_public/about")({
   component: RouteComponent,
 });
 
