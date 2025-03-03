@@ -1,9 +1,9 @@
 import { useMediaQuery } from "usehooks-ts";
 import PublicLayout from "../PublicLayout";
-import Img1 from "../assets/images/img-1.svg?react";
-import Img2 from "../assets/images/img-2.svg?react";
-import Img3 from "../assets/images/img-3.svg?react";
-import Img4 from "../assets/images/img-4.svg?react";
+import Img1 from "../../assets/images/img-1.svg?react";
+import Img2 from "../../assets/images/img-2.svg?react";
+import Img3 from "../../assets/images/img-3.svg?react";
+import Img4 from "../../assets/images/img-4.svg?react";
 import HeroImage from "./HeroImage";
 import HeroMain from "./HeroMain";
 

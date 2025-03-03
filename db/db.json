@@ -8,6 +8,15 @@
       "lastName": "Koka",
       "avatar": "https://mighty.tools/mockmind-api/content/human/63.jpg",
       "role": "admin"
+    },
+    {
+      "email": "tomas@tomas.com",
+      "password": "$2a$10$vrXUCvjgVX7i29ngUzXhQutYkmFcTvQQsTNN8Cawm2guLaCm9iici",
+      "id": "zI9RDTLSZy",
+      "firstName": "Tomas",
+      "lastName": "Jefferson",
+      "avatar": "",
+      "role": "admin"
     }
   ],
   "workspaces": [

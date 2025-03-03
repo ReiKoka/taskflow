@@ -33,6 +33,8 @@ const handleAction = (formData: FormData) => {
   router.navigate({ to: "/login" });
 };
 
+
+
 function RouteComponent() {
   return (
     <div className="divide-secondary h-full w-full divide-x-2 py-20 lg:grid lg:grid-cols-2">

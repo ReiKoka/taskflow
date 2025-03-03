@@ -24,3 +24,11 @@ export type UserResponseType = {
   accessToken: string;
   user: AuthenticatedUser;
 };
+
+export type FormRegisterType = {
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string;
+  avatar: string;
+};
