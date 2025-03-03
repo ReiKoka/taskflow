@@ -32,3 +32,11 @@ export type FormRegisterType = {
   password: string;
   avatar: string;
 };
+
+export type WorkspaceType = {
+  id: string;
+  name: string;
+  workspaceType: string;
+  userId: string;
+  members: string[];
+};

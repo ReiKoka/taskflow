@@ -5,7 +5,7 @@ import { twMerge } from "tailwind-merge";
 type InputType = {
   id: string;
   type: string;
-  label: string;
+  label?: string;
   placeholder?: string;
   icon?: ReactNode;
   value?: string;
