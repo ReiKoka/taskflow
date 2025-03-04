@@ -17,6 +17,15 @@
       "firstName": "Tomas",
       "lastName": "Jefferson",
       "avatar": ""
+    },
+    {
+      "email": "laylasmith@yahoo.com",
+      "password": "$2a$10$SArry.jsJiqDRfqcU8xRruxrIdy0uDhjeZp.GW5FxSZ87qmeoMfJC",
+      "id": "vFXHDwVOU5",
+      "role": "employee",
+      "firstName": "Layla",
+      "lastName": "Smith",
+      "avatar": ""
     }
   ],
   "workspaces": [
@@ -25,14 +34,20 @@
       "name": "Development Team",
       "workspaceType": "Engineering-IT",
       "userId": "0iirwg74IN",
-      "members": [1, 2]
+      "members": [
+        "0iirwg74IN",
+        "Pud_xM3ovO"
+      ]
     },
     {
       "id": "2",
       "name": "Sales Team",
       "workspaceType": "Sales",
       "userId": "0iirwg74IN",
-      "members": [1, 2]
+      "members": [
+        "0iirwg74IN",
+        "Pud_xM3ovO"
+      ]
     }
   ],
   "boards": [

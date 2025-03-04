@@ -1,5 +1,5 @@
 import { createFileRoute, redirect } from "@tanstack/react-router";
-import { use, useEffect } from "react";
+import { use } from "react";
 import { AuthContext, AuthContextType } from "../context/AuthContext";
 import PublicLanding from "../components/public/PublicLanding";
 import AuthenticatedLanding from "../components/auth/AuthenticatedLanding";
@@ -15,10 +15,9 @@ type LoaderData = {
 
 export const Route = createFileRoute("/")({
   beforeLoad: async ({ context }: { context: { auth?: AuthContextType } }) => {
-    if (!context?.auth?.token) {
-      throw redirect({ to: "/login" });
+    if (!context?.auth) {
+      throw new Error("Auth context is not available");
     }
-
     const { token, user } = context.auth;
 
     if (token && !user) {
@@ -42,10 +41,6 @@ export const Route = createFileRoute("/")({
     context: { auth?: AuthContextType };
   }): Promise<LoaderData> => {
     const { auth } = context;
-
-    if (!auth?.token) {
-      throw new Error("Not authenticated");
-    }
 
     const userId = auth?.user?.id;
     const response = await axios.get(`${baseURL}/workspaces?userId=${userId}`);
