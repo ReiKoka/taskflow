@@ -1,7 +1,6 @@
 import { useState } from "react";
 import Button from "../ui/Button";
 import { HiChevronDown } from "react-icons/hi2";
-import DropdownMenu from "../ui/DropdownMenu";
 
 function AuthNavLinks() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -18,9 +17,10 @@ function AuthNavLinks() {
           strokeWidth={1.1}
         />
       </Button>
-      <DropdownMenu isOpen={isMenuOpen} setIsOpen={setIsMenuOpen} >
-        
-      </DropdownMenu>
+      {/* <DropdownMenu
+        isOpen={isMenuOpen}
+        setIsOpen={setIsMenuOpen}
+      ></DropdownMenu> */}
     </div>
   );
 }

@@ -11,8 +11,6 @@ function App() {
     throw new Error(`AuthContext cannot be used outside of an AuthProvider`);
   }
 
-  console.log(auth);
-
   return <RouterProvider router={router} context={{ auth }} />;
 }
 
