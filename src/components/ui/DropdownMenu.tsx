@@ -10,7 +10,7 @@ type DropdownMenuProps = {
 function DropdownMenu({
   isOpen,
   setIsOpen,
-  position = "top-[100%] left-0",
+  position = "top-[110%] left-0",
   children,
 }: DropdownMenuProps) {
   const menuRef = useRef<HTMLDivElement>(null);
@@ -30,7 +30,7 @@ function DropdownMenu({
   return (
     <div
       ref={menuRef}
-      className={`font-primary bg-background absolute flex w-44 min-w-fit flex-col rounded-lg p-2 transition-all duration-500 ${position} visible z-50 translate-y-0 opacity-100`}
+      className={`font-primary bg-background shadow-toast dark:border-border absolute flex w-max min-w-fit flex-col rounded-lg p-2 transition-all duration-500 dark:border ${position} visible z-50 translate-y-0 opacity-100`}
     >
       {children}
     </div>

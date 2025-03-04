@@ -26,6 +26,13 @@
       "workspaceType": "Engineering-IT",
       "userId": "0iirwg74IN",
       "members": [1, 2]
+    },
+    {
+      "id": "2",
+      "name": "Sales Team",
+      "workspaceType": "Sales",
+      "userId": "0iirwg74IN",
+      "members": [1, 2]
     }
   ],
   "boards": [

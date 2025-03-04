@@ -1,9 +1,10 @@
-import React from "react";
+import React, { Ref } from "react";
 import { twMerge } from "tailwind-merge";
 import clsx from "clsx";
 
 type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
   variant?: "default" | "outline" | "icon" | "destructive";
+  ref?: Ref<HTMLButtonElement>;
 };
 
 const Button: React.FC<ButtonProps> = ({
@@ -11,6 +12,7 @@ const Button: React.FC<ButtonProps> = ({
   className,
   type = "button",
   title,
+  ref,
   ...props
 }) => {
   const baseStyles =
@@ -31,6 +33,7 @@ const Button: React.FC<ButtonProps> = ({
 
   return (
     <button
+      ref={ref}
       title={title}
       type={type}
       className={twMerge(baseStyles, variantStyles, className)}
