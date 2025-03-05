@@ -1,5 +1,16 @@
+import { use } from "react";
+import { WorkspaceContext } from "../../context/WorkspaceContext";
+
 function Sidebar() {
-  return <div className="h-full w-full border-r border-muted bg-background">Sidebar</div>;
+
+  const workspaceContext = use(WorkspaceContext);
+
+  const workspaces = workspaceContext?.workspaces;
+
+  console.log(workspaces);
+  return (
+    <div className="border-muted bg-background h-full w-full border-r"></div>
+  );
 }
 
 export default Sidebar;

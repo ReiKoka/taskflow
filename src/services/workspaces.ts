@@ -1,6 +1,6 @@
 import axios from "axios";
 import { baseURL } from "../utils/constants";
-import { WorkspaceType } from "../utils/types";
+import { WorkspaceType, WorkspaceWithBoardsType } from "../utils/types";
 
 //prettier-ignore
 export const getWorkspacesOfAdmin = async (adminId: string): Promise<WorkspaceType[]> => {
@@ -19,6 +19,21 @@ export const getWorkspacesOfAdmin = async (adminId: string): Promise<WorkspaceTy
 export const getWorkspacesWhereUserIsGuest = async (adminId:string): Promise<WorkspaceType[]> => {
   try {
     const response = await axios.get<WorkspaceType[]>(`${baseURL}/workspaces?members_like=${adminId}`);
+    return response.data;
+  } catch (error) {
+    if (axios.isAxiosError(error) && error.response) {
+      throw new Error(
+        `${error.response?.data}, Failed to get your workspaces. Please try again later!`,
+      );
+    }
+    throw new Error("Network error. Please try again.");
+  }
+}
+
+//prettier-ignore
+export const getSingleWorkspaceWithBoards = async (workspaceId: string): Promise<WorkspaceWithBoardsType> => {
+  try {
+    const response = await axios.get<WorkspaceWithBoardsType>(`${baseURL}/workpaces/${workspaceId}?_embeed=boards`);
     return response.data;
   } catch (error) {
     if (axios.isAxiosError(error) && error.response) {

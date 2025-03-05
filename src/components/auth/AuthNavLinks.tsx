@@ -9,7 +9,7 @@ import {
 import { WorkspaceType } from "../../utils/types";
 import DropdownMenu from "../ui/DropdownMenu";
 
-import DropdownItem from "../DropdownItem";
+import DropdownItem from "../ui/DropdownItem";
 import { AuthContext } from "../../context/AuthContext";
 import {
   getWorkspacesOfAdmin,

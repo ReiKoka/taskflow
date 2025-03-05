@@ -33,10 +33,20 @@ export type FormRegisterType = {
   avatar: string;
 };
 
-export type WorkspaceType = {
+export interface WorkspaceType {
   id: string;
   name: string;
   workspaceType: string;
   userId: string;
   members: string[];
-};
+}
+
+export interface BoardType {
+  id: string;
+  name: string;
+  workspaceId: string;
+}
+
+export interface WorkspaceWithBoardsType extends WorkspaceType {
+  boards: BoardType[];
+}

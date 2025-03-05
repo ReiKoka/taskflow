@@ -1,14 +1,16 @@
-import { getFirstLetter } from "../utils/helpers";
-import { WorkspaceType } from "../utils/types";
-import Button from "./ui/Button";
+import { useNavigate } from "@tanstack/react-router";
+import { getFirstLetter } from "../../utils/helpers";
+import { WorkspaceType } from "../../utils/types";
+import Button from "./Button";
 
 type DropdownItemProps = {
   workspace: WorkspaceType;
 };
 
 function DropdownItem({ workspace }: DropdownItemProps) {
+  const navigate = useNavigate();
   const handleClick = () => {
-    console.log(workspace.name);
+    navigate({ to: `/workspaces/${workspace?.id}` });
   };
 
   return (
