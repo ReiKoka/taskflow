@@ -34,27 +34,21 @@
       "name": "Development Team",
       "workspaceType": "Engineering-IT",
       "userId": "0iirwg74IN",
-      "members": [
-        "0iirwg74IN",
-        "Pud_xM3ovO"
-      ]
+      "members": ["vFXHDwVOU5", "Pud_xM3ovO"]
     },
     {
       "id": "2",
       "name": "Sales Team",
       "workspaceType": "Sales",
-      "userId": "0iirwg74IN",
-      "members": [
-        "0iirwg74IN",
-        "Pud_xM3ovO"
-      ]
+      "userId": "vFXHDwVOU5",
+      "members": ["0iirwg74IN", "Pud_xM3ovO"]
     }
   ],
   "boards": [
     {
       "id": 1,
       "name": "Sprint Planning",
-      "workspaceId": 1
+      "workspaceId": "1"
     }
   ],
   "lists": [

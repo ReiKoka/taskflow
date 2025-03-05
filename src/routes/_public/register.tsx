@@ -1,9 +1,9 @@
 import { createFileRoute, redirect } from "@tanstack/react-router";
-import { AuthContext } from "../../context/AuthContext";
+import { AuthContextType } from "../../context/AuthContext";
 import Register from "../../pages/Register";
 
 export const Route = createFileRoute("/_public/register")({
-  beforeLoad: ({ context }: { context: { auth?: AuthContext } }) => {
+  beforeLoad: ({ context }: { context: { auth?: AuthContextType } }) => {
     if (context?.auth?.token) {
       throw redirect({ to: "/" });
     }

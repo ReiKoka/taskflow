@@ -17,7 +17,7 @@ import { Route as IndexImport } from './routes/index'
 import { Route as PublicRegisterImport } from './routes/_public/register'
 import { Route as PublicLoginImport } from './routes/_public/login'
 import { Route as PublicAboutImport } from './routes/_public/about'
-import { Route as AuthenticatedBoardsBoardIdImport } from './routes/_authenticated/boards/$boardId'
+import { Route as AuthenticatedWorkspacesWorkspaceIdImport } from './routes/_authenticated/workspaces/$workspaceId'
 
 // Create/Update Routes
 
@@ -55,13 +55,12 @@ const PublicAboutRoute = PublicAboutImport.update({
   getParentRoute: () => PublicRoute,
 } as any)
 
-const AuthenticatedBoardsBoardIdRoute = AuthenticatedBoardsBoardIdImport.update(
-  {
-    id: '/boards/$boardId',
-    path: '/boards/$boardId',
+const AuthenticatedWorkspacesWorkspaceIdRoute =
+  AuthenticatedWorkspacesWorkspaceIdImport.update({
+    id: '/workspaces/$workspaceId',
+    path: '/workspaces/$workspaceId',
     getParentRoute: () => AuthenticatedRoute,
-  } as any,
-)
+  } as any)
 
 // Populate the FileRoutesByPath interface
 
@@ -109,11 +108,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PublicRegisterImport
       parentRoute: typeof PublicImport
     }
-    '/_authenticated/boards/$boardId': {
-      id: '/_authenticated/boards/$boardId'
-      path: '/boards/$boardId'
-      fullPath: '/boards/$boardId'
-      preLoaderRoute: typeof AuthenticatedBoardsBoardIdImport
+    '/_authenticated/workspaces/$workspaceId': {
+      id: '/_authenticated/workspaces/$workspaceId'
+      path: '/workspaces/$workspaceId'
+      fullPath: '/workspaces/$workspaceId'
+      preLoaderRoute: typeof AuthenticatedWorkspacesWorkspaceIdImport
       parentRoute: typeof AuthenticatedImport
     }
   }
@@ -122,11 +121,12 @@ declare module '@tanstack/react-router' {
 // Create and export the route tree
 
 interface AuthenticatedRouteChildren {
-  AuthenticatedBoardsBoardIdRoute: typeof AuthenticatedBoardsBoardIdRoute
+  AuthenticatedWorkspacesWorkspaceIdRoute: typeof AuthenticatedWorkspacesWorkspaceIdRoute
 }
 
 const AuthenticatedRouteChildren: AuthenticatedRouteChildren = {
-  AuthenticatedBoardsBoardIdRoute: AuthenticatedBoardsBoardIdRoute,
+  AuthenticatedWorkspacesWorkspaceIdRoute:
+    AuthenticatedWorkspacesWorkspaceIdRoute,
 }
 
 const AuthenticatedRouteWithChildren = AuthenticatedRoute._addFileChildren(
@@ -154,7 +154,7 @@ export interface FileRoutesByFullPath {
   '/about': typeof PublicAboutRoute
   '/login': typeof PublicLoginRoute
   '/register': typeof PublicRegisterRoute
-  '/boards/$boardId': typeof AuthenticatedBoardsBoardIdRoute
+  '/workspaces/$workspaceId': typeof AuthenticatedWorkspacesWorkspaceIdRoute
 }
 
 export interface FileRoutesByTo {
@@ -163,7 +163,7 @@ export interface FileRoutesByTo {
   '/about': typeof PublicAboutRoute
   '/login': typeof PublicLoginRoute
   '/register': typeof PublicRegisterRoute
-  '/boards/$boardId': typeof AuthenticatedBoardsBoardIdRoute
+  '/workspaces/$workspaceId': typeof AuthenticatedWorkspacesWorkspaceIdRoute
 }
 
 export interface FileRoutesById {
@@ -174,14 +174,20 @@ export interface FileRoutesById {
   '/_public/about': typeof PublicAboutRoute
   '/_public/login': typeof PublicLoginRoute
   '/_public/register': typeof PublicRegisterRoute
-  '/_authenticated/boards/$boardId': typeof AuthenticatedBoardsBoardIdRoute
+  '/_authenticated/workspaces/$workspaceId': typeof AuthenticatedWorkspacesWorkspaceIdRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '' | '/about' | '/login' | '/register' | '/boards/$boardId'
+  fullPaths:
+    | '/'
+    | ''
+    | '/about'
+    | '/login'
+    | '/register'
+    | '/workspaces/$workspaceId'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '' | '/about' | '/login' | '/register' | '/boards/$boardId'
+  to: '/' | '' | '/about' | '/login' | '/register' | '/workspaces/$workspaceId'
   id:
     | '__root__'
     | '/'
@@ -190,7 +196,7 @@ export interface FileRouteTypes {
     | '/_public/about'
     | '/_public/login'
     | '/_public/register'
-    | '/_authenticated/boards/$boardId'
+    | '/_authenticated/workspaces/$workspaceId'
   fileRoutesById: FileRoutesById
 }
 
@@ -227,7 +233,7 @@ export const routeTree = rootRoute
     "/_authenticated": {
       "filePath": "_authenticated.tsx",
       "children": [
-        "/_authenticated/boards/$boardId"
+        "/_authenticated/workspaces/$workspaceId"
       ]
     },
     "/_public": {
@@ -250,8 +256,8 @@ export const routeTree = rootRoute
       "filePath": "_public/register.tsx",
       "parent": "/_public"
     },
-    "/_authenticated/boards/$boardId": {
-      "filePath": "_authenticated/boards/$boardId.tsx",
+    "/_authenticated/workspaces/$workspaceId": {
+      "filePath": "_authenticated/workspaces/$workspaceId.tsx",
       "parent": "/_authenticated"
     }
   }

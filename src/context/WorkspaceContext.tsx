@@ -2,8 +2,8 @@ import { createContext, ReactNode, useState } from "react";
 import { WorkspaceType } from "../utils/types";
 
 type WorkspaceContextType = {
-  workspaces: WorkspaceType[];
-  setWorkspaces: React.Dispatch<React.SetStateAction<WorkspaceType[]>>;
+  workspaces: WorkspaceType[][];
+  setWorkspaces: React.Dispatch<React.SetStateAction<WorkspaceType[][]>>;
 };
 
 const WorkspaceContext = createContext<WorkspaceContextType | undefined>(
@@ -15,7 +15,7 @@ type WorkspaceProviderProps = {
 };
 
 export const WorkspaceProvider = ({ children }: WorkspaceProviderProps) => {
-  const [workspaces, setWorkspaces] = useState<WorkspaceType[]>([]);
+  const [workspaces, setWorkspaces] = useState<WorkspaceType[][]>([]);
 
   return (
     <WorkspaceContext.Provider value={{ workspaces, setWorkspaces }}>

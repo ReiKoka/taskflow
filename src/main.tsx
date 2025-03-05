@@ -5,6 +5,7 @@ import App from "./App";
 import "./index.css";
 import { ThemeProvider } from "./context/ThemeContext";
 import { AuthProvider } from "./context/AuthContext";
+import { WorkspaceProvider } from "./context/WorkspaceContext";
 
 const rootElement = document.getElementById("root")!;
 if (!rootElement.innerHTML) {
@@ -13,7 +14,9 @@ if (!rootElement.innerHTML) {
     <StrictMode>
       <ThemeProvider>
         <AuthProvider>
-          <App />
+          <WorkspaceProvider>
+            <App />
+          </WorkspaceProvider>
         </AuthProvider>
       </ThemeProvider>
     </StrictMode>,
