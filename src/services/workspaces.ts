@@ -33,7 +33,7 @@ export const getWorkspacesWhereUserIsGuest = async (adminId:string): Promise<Wor
 //prettier-ignore
 export const getSingleWorkspaceWithBoards = async (workspaceId: string): Promise<WorkspaceWithBoardsType> => {
   try {
-    const response = await axios.get<WorkspaceWithBoardsType>(`${baseURL}/workpaces/${workspaceId}?_embeed=boards`);
+    const response = await axios.get<WorkspaceWithBoardsType>(`${baseURL}/workspaces/${workspaceId}?_embed=boards`);
     return response.data;
   } catch (error) {
     if (axios.isAxiosError(error) && error.response) {

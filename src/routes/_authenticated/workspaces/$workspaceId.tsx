@@ -1,11 +1,12 @@
-import { createFileRoute } from '@tanstack/react-router'
+import { createFileRoute } from "@tanstack/react-router";
+import Workspace from "../../../components/auth/workspace/Workspace";
+import { getSingleWorkspaceWithBoards } from "../../../services/workspaces";
 
-export const Route = createFileRoute('/_authenticated/workspaces/$workspaceId')(
+export const Route = createFileRoute("/_authenticated/workspaces/$workspaceId")(
   {
-    component: RouteComponent,
+    loader: async ({ params }) => {
+      return await getSingleWorkspaceWithBoards(params.workspaceId);
+    },
+    component: Workspace,
   },
-)
-
-function RouteComponent() {
-  return <div>Hello "/_authenticated/workspaces/$workspaceId"!</div>
-}
+);

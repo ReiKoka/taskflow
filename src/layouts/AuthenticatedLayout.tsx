@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 import AuthNav from "../components/auth/AuthNav";
-import Sidebar from "../components/auth/Sidebar";
+
 
 function AuthenticatedLayout({ children }: { children: ReactNode }) {
   return (

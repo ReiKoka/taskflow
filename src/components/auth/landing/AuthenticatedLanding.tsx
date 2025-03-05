@@ -1,10 +1,10 @@
 import { use } from "react";
-import { WorkspaceContext } from "../../context/WorkspaceContext";
-import { AuthContext } from "../../context/AuthContext";
-import Avatar from "../ui/Avatar";
+import { WorkspaceContext } from "../../../context/WorkspaceContext";
+import { AuthContext } from "../../../context/AuthContext";
+import Avatar from "../../ui/Avatar";
 import { HiOutlineUser, HiOutlineUserGroup } from "react-icons/hi2";
-import Loader from "../ui/Loader";
-import LandingWorkspaceCard from "./landing/LandingWorkspaceCard";
+import Loader from "../../ui/Loader";
+import LandingWorkspaceCard from "./LandingWorkspaceCard";
 
 function AuthenticatedLanding() {
   const workspaceContext = use(WorkspaceContext);

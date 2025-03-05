@@ -29,11 +29,11 @@ function LandingWorkspaceCard({
       <div className="grid grid-cols-[repeat(auto-fill,_minmax(350px,_1fr))] gap-4">
         {workspaces?.map((workspace) => (
           <div
-            className={`bg-background font-secondary flex h-32 cursor-pointer items-center justify-start gap-4 rounded-lg px-9 py-4 text-center`}
+            className={`bg-background font-secondary flex h-32 cursor-pointer items-center justify-start gap-6 rounded-lg px-9 py-4 text-center`}
             onClick={() => handleClick(workspace.id)}
           >
             <p
-              className={`text-background dark:text-foreground h-14 w-14 rounded-md p-4 text-2xl leading-6 ${getRandomTailwindColor()}`}
+              className={`text-background dark:text-foreground h-14 w-14 rounded-md p-4 text-2xl leading-6 font-semibold ${getRandomTailwindColor()}`}
             >
               {getFirstLetter(workspace?.name)}
             </p>
