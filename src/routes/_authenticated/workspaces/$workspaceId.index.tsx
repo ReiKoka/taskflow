@@ -1,11 +1,8 @@
-import { createFileRoute } from '@tanstack/react-router'
+import { createFileRoute } from "@tanstack/react-router";
+import Boards from "../../../components/auth/workspace/Boards";
 
 export const Route = createFileRoute(
-  '/_authenticated/workspaces/$workspaceId/',
+  "/_authenticated/workspaces/$workspaceId/",
 )({
-  component: RouteComponent,
-})
-
-function RouteComponent() {
-  return <div>Hello "/_authenticated/workspaces/$workspaceId/"!</div>
-}
+  component: Boards,
+});

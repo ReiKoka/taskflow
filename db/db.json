@@ -49,6 +49,11 @@
       "id": 1,
       "name": "Sprint Planning",
       "workspaceId": "1"
+    },
+    {
+      "id": 2,
+      "name": "App Sales Report",
+      "workspaceId": "2"
     }
   ],
   "lists": [

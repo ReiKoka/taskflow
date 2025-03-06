@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { HiInboxStack, HiSquares2X2, HiUserGroup } from "react-icons/hi2";
+import { HiSquares2X2, HiUserGroup } from "react-icons/hi2";
 import { WorkspaceWithBoardsType } from "../../../utils/types";
 
 type AdminSidebarContentProps = {
