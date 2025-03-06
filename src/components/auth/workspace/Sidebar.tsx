@@ -32,8 +32,8 @@ function Sidebar({ workspace }: SidebarProps) {
   };
 
   return (
-    <div className="border-muted bg-background font-secondary flex h-full w-full flex-col self-stretch border-r">
-      <div className="border-muted flex items-center gap-4 border-b p-3">
+    <div className="border-muted bg-background font-secondary flex h-full w-full flex-col self-stretch border-r ">
+      <div className="border-muted flex items-center gap-4 border-b p-3 mb-3">
         <p
           className={`h-9 w-9 rounded-sm text-center text-lg leading-9 font-medium ${getRandomTailwindColor()} text-background dark:text-foreground`}
         >
