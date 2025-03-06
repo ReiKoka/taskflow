@@ -29,7 +29,7 @@ function AuthenticatedLanding() {
       <LandingWorkspaceCard
         icon={HiOutlineUser}
         workspaces={workspacesWhereAdmin}
-        title="your workspaces"
+        title="admin workspaces"
       />
 
       <LandingWorkspaceCard

@@ -1,13 +1,15 @@
-import { useLoaderData } from "@tanstack/react-router";
+import { Outlet, useLoaderData } from "@tanstack/react-router";
+import Sidebar from "./Sidebar";
 
 function Workspace() {
   const workspace = useLoaderData({
     from: "/_authenticated/workspaces/$workspaceId",
   });
 
-  console.log(workspace);
-  
-  return <div>Workspace</div>;
+  return <div className="grid grid-cols-[270px_1fr]">
+    <Sidebar workspace={workspace} />
+    <Outlet />
+  </div>;
 }
 
 export default Workspace;

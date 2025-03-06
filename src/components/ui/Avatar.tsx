@@ -6,7 +6,6 @@ type AvatarProps = {
 };
 
 function Avatar({ img }: AvatarProps) {
-  console.log(img);
   return (
     <div className="border-border flex h-12 w-12 items-center justify-center overflow-hidden rounded-full border-2">
       {img && isPicture(img) ? (

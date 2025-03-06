@@ -29,7 +29,8 @@ function LandingWorkspaceCard({
       <div className="grid grid-cols-[repeat(auto-fill,_minmax(350px,_1fr))] gap-4">
         {workspaces?.map((workspace) => (
           <div
-            className={`bg-background font-secondary flex h-32 cursor-pointer items-center justify-start gap-6 rounded-lg px-9 py-4 text-center`}
+            key={workspace.id}
+            className={`bg-background font-secondary shadow-card flex h-32 cursor-pointer items-center justify-start gap-6 rounded-lg px-9 py-4 text-center`}
             onClick={() => handleClick(workspace.id)}
           >
             <p

@@ -30,7 +30,7 @@ function DropdownMenu({
   return (
     <div
       ref={menuRef}
-      className={`font-primary bg-background shadow-toast dark:bg-background absolute flex w-max min-w-fit flex-col rounded-lg border-0 p-2 transition-all duration-500 ${position} visible z-50 translate-y-0 opacity-100`}
+      className={`font-primary bg-background shadow-toast dark:bg-background absolute flex w-max min-w-fit flex-col rounded-md border-0 p-2 transition-all duration-500 ${position} visible z-50 translate-y-0 opacity-100`}
     >
       {children}
     </div>

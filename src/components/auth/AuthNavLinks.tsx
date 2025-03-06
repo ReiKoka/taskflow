@@ -51,7 +51,7 @@ function AuthNavLinks() {
   return (
     <div className="relative">
       <Button
-        className="group hover:translate-0"
+        className="group hover:translate-0 text-sm rounded-md"
         onClick={() => setIsMenuOpen(!isMenuOpen)}
       >
         <span>Workspaces</span>
@@ -63,7 +63,7 @@ function AuthNavLinks() {
 
       <DropdownMenu isOpen={isMenuOpen} setIsOpen={setIsMenuOpen}>
         {workspacesWhereAdmin.length ? (
-          <div className="flex flex-col gap-2">
+          <div className="flex flex-col gap-2 ">
             <Button className="m-2 text-sm font-medium">
               <HiOutlinePlusCircle size={20} />
               Create new workspace
