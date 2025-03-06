@@ -21,7 +21,7 @@ function BoardCart({ board, workspaceId }: BoardCartProps) {
   return (
     <Button
       onClick={handleClick}
-      className="bg-secondary text-foreground flex cursor-pointer items-center justify-center gap-2 rounded-xl border-0 p-4"
+      className="bg-secondary text-foreground flex cursor-pointer items-center justify-center gap-2 rounded-xl border-0 px-4 py-8"
     >
       <HiClipboardDocumentList size={18} />
       <span>{board.name}</span>

@@ -12,6 +12,7 @@ import {
 import Button from "../../ui/Button";
 import { showToast } from "../../../utils/showToast";
 
+
 type SidebarProps = {
   workspace: WorkspaceWithBoardsType;
 };
@@ -32,8 +33,8 @@ function Sidebar({ workspace }: SidebarProps) {
   };
 
   return (
-    <div className="border-muted bg-background font-secondary flex h-full w-full flex-col self-stretch border-r ">
-      <div className="border-muted flex items-center gap-4 border-b p-3 mb-3">
+    <div className="border-muted bg-background font-secondary flex h-full w-full flex-col self-stretch border-r">
+      <div className="border-muted mb-3 flex items-center gap-4 border-b p-3">
         <p
           className={`h-9 w-9 rounded-sm text-center text-lg leading-9 font-medium ${getRandomTailwindColor()} text-background dark:text-foreground`}
         >
@@ -74,7 +75,7 @@ function Sidebar({ workspace }: SidebarProps) {
             <p className="text-muted-foreground text-sm">
               {isAdmin
                 ? "You don't have any boards in this workspace yet! Do you want to create one now?"
-                : "No boards yet in this workspace yet!"}
+                : "No boards are available in this workspace yet!"}
             </p>
           </div>
         )}
