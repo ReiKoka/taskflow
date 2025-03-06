@@ -1,11 +1,11 @@
-import { createFileRoute } from '@tanstack/react-router'
+import { createFileRoute } from "@tanstack/react-router";
+import SingleBoard from "../../../components/auth/boards/SingleBoard";
+import { getBoardById } from "../../../services/boards";
 
-export const Route = createFileRoute(
-  '/_authenticated/workspaces/$workspaceId/$boardId',
-)({
-  component: RouteComponent,
-})
-
-function RouteComponent() {
-  return <div>Hello "/_authenticated/workspaces/$workspaceId/$boardId"!</div>
-}
+//prettier-ignore
+export const Route = createFileRoute("/_authenticated/workspaces/$workspaceId/$boardId")({
+  loader: async ({ params }) => {
+    return await getBoardById(params.boardId);
+  },
+  component: SingleBoard,
+});

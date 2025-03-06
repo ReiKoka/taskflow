@@ -1,21 +1,17 @@
 import { use, useEffect, useState } from "react";
-import Button from "../ui/Button";
-import {
-  HiChevronDown,
-  HiExclamationTriangle,
-  HiOutlinePlusCircle,
-} from "react-icons/hi2";
+import { AuthContext } from "../../context/AuthContext";
+import { WorkspaceContext } from "../../context/WorkspaceContext";
 
 import { WorkspaceType } from "../../utils/types";
-import DropdownMenu from "../ui/DropdownMenu";
 
+import Button from "../ui/Button";
+import DropdownMenu from "../ui/DropdownMenu";
 import DropdownItem from "../ui/DropdownItem";
-import { AuthContext } from "../../context/AuthContext";
-import {
-  getWorkspacesOfAdmin,
-  getWorkspacesWhereUserIsGuest,
-} from "../../services/workspaces";
-import { WorkspaceContext } from "../../context/WorkspaceContext";
+
+//prettier-ignore
+import {getWorkspacesOfAdmin, getWorkspacesWhereUserIsGuest} from "../../services/workspaces";
+//prettier-ignore
+import { HiChevronDown, HiExclamationTriangle, HiOutlinePlusCircle} from "react-icons/hi2";
 
 function AuthNavLinks() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -51,19 +47,20 @@ function AuthNavLinks() {
   return (
     <div className="relative">
       <Button
-        className="group hover:translate-0 text-sm rounded-md"
+        variant="outline"
+        className="group rounded-md border-0 text-sm hover:translate-0 hover:scale-100"
         onClick={() => setIsMenuOpen(!isMenuOpen)}
       >
         <span>Workspaces</span>
         <HiChevronDown
-          className="transition-all duration-500 group-focus:rotate-180"
+          className="transition-all group-hover:text-primary mt-0.5 group-focus:rotate-180"
           strokeWidth={1.1}
         />
       </Button>
 
       <DropdownMenu isOpen={isMenuOpen} setIsOpen={setIsMenuOpen}>
         {workspacesWhereAdmin.length ? (
-          <div className="flex flex-col gap-2 ">
+          <div className="flex flex-col gap-2">
             <Button className="m-2 text-sm font-medium">
               <HiOutlinePlusCircle size={20} />
               Create new workspace

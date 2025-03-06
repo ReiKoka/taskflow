@@ -47,6 +47,16 @@ export interface BoardType {
   workspaceId: string;
 }
 
+export interface ListType {
+  id: string;
+  name: string;
+  boardId: string;
+}
+
 export interface WorkspaceWithBoardsType extends WorkspaceType {
   boards: BoardType[];
+}
+
+export interface BoardWithListsType extends BoardType {
+  lists: ListType[];
 }
