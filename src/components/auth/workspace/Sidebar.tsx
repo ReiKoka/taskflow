@@ -3,11 +3,14 @@ import { getFirstLetter, getRandomTailwindColor } from "../../../utils/helpers";
 import { WorkspaceWithBoardsType } from "../../../utils/types";
 import { AuthContext } from "../../../context/AuthContext";
 import AdminSidebarContent from "./AdminSidebarContent";
-import { Link } from "@tanstack/react-router";
+import { Link, useNavigate } from "@tanstack/react-router";
 import {
+  HiArrowLeftOnRectangle,
   HiClipboardDocumentList,
   HiExclamationTriangle,
 } from "react-icons/hi2";
+import Button from "../../ui/Button";
+import { showToast } from "../../../utils/showToast";
 
 type SidebarProps = {
   workspace: WorkspaceWithBoardsType;
@@ -16,9 +19,20 @@ type SidebarProps = {
 function Sidebar({ workspace }: SidebarProps) {
   const authContext = use(AuthContext);
   const user = authContext?.user;
+  const setToken = authContext?.setToken;
+  const isAdmin = user?.id === workspace.userId;
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    if (setToken) {
+      setToken("");
+      showToast("success", `Goodbye ${user?.firstName}. See you soon!`);
+      navigate({ to: "/" });
+    }
+  };
 
   return (
-    <div className="border-muted bg-background font-secondary h-full w-full border-r">
+    <div className="border-muted bg-background font-secondary flex h-full w-full flex-col self-stretch border-r">
       <div className="border-muted flex items-center gap-4 border-b p-3">
         <p
           className={`h-9 w-9 rounded-sm text-center text-lg leading-9 font-medium ${getRandomTailwindColor()} text-background dark:text-foreground`}
@@ -28,10 +42,8 @@ function Sidebar({ workspace }: SidebarProps) {
         <p className="text-foreground text-sm">{workspace.name}</p>
       </div>
 
-      <div className="mt-2">
-        {user?.id === workspace.userId && (
-          <AdminSidebarContent workspace={workspace} />
-        )}
+      <div>
+        {isAdmin && <AdminSidebarContent workspace={workspace} />}
 
         <p className="mt-2 px-3 py-2 text-sm font-medium">Your boards</p>
         {workspace?.boards.length > 0 ? (
@@ -60,11 +72,21 @@ function Sidebar({ workspace }: SidebarProps) {
           <div className="mt-2 flex items-start justify-between gap-3 px-3">
             <HiExclamationTriangle className="fill-muted-foreground mt-2 w-10" />
             <p className="text-muted-foreground text-sm">
-              You don't have any boards in this workspace yet! Do you want to
-              create one now?
+              {isAdmin
+                ? "You don't have any boards in this workspace yet! Do you want to create one now?"
+                : "No boards yet in this workspace yet!"}
             </p>
           </div>
         )}
+      </div>
+      <div className="mt-auto w-full px-4">
+        <Button
+          variant="destructive"
+          className="mx-auto mb-4 w-full justify-center text-sm"
+          onClick={handleClick}
+        >
+          <HiArrowLeftOnRectangle size={20} /> <span>Log out</span>
+        </Button>
       </div>
     </div>
   );

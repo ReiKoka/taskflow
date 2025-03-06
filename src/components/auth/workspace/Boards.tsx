@@ -1,8 +1,8 @@
-import { useLoaderData, useNavigate } from "@tanstack/react-router";
+import { useLoaderData } from "@tanstack/react-router";
 import { getFirstLetter } from "../../../utils/helpers";
 import Button from "../../ui/Button";
 import { HiOutlinePencilSquare, HiUserPlus } from "react-icons/hi2";
-import { use, useEffect } from "react";
+import { use } from "react";
 import { AuthContext } from "../../../context/AuthContext";
 
 function Boards() {
@@ -11,17 +11,7 @@ function Boards() {
   });
   const authContext = use(AuthContext);
   const user = authContext?.user;
-
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    if (user?.id !== workspace.userId) {
-      navigate({
-        to: `/workspaces/$workspaceId/$boardId`,
-        params: { workspaceId: workspace.id, boardId: workspace.boards[0].id },
-      });
-    }
-  }, [user, workspace, navigate]);
+  const isAdmin = user?.id === workspace.userId;
 
   return (
     <main className="font-secondary px-40 py-6">
@@ -35,17 +25,19 @@ function Boards() {
           <p className="">{workspace.name}</p>
         </div>
 
-        <div className="flex items-center gap-4">
-          <Button variant="outline">
-            <HiOutlinePencilSquare />
-            <span>Edit Workspace</span>
-          </Button>
+        {isAdmin && (
+          <div className="flex items-center gap-4">
+            <Button variant="outline">
+              <HiOutlinePencilSquare />
+              <span>Edit Workspace</span>
+            </Button>
 
-          <Button variant="default">
-            <HiUserPlus />
-            <span>Add members</span>
-          </Button>
-        </div>
+            <Button variant="default">
+              <HiUserPlus />
+              <span>Add members</span>
+            </Button>
+          </div>
+        )}
       </section>
     </main>
   );
