@@ -57,3 +57,14 @@ export const createWorkspace = async (workspace: WorkspaceType): Promise<Workspa
     throw new Error("Network error. Please try again.");
   }
 }
+
+//prettier-ignore
+export const editWorkspace = async (id:string, updatedWorkspace: WorkspaceType): Promise<WorkspaceType> => {
+  try {
+    const response = await axios.put<WorkspaceType>(`${baseURL}/workspaces/${id}`, updatedWorkspace);
+    return response.data;
+  } catch (error) {
+    console.error("Failed to update workspace:", error);
+    throw error;
+  }
+};

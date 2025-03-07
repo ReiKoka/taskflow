@@ -18,10 +18,10 @@ import AddOrEditWorkspaceModal from "./workspace/AddOrEditWorkspaceModal";
 function AuthNavLinks() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const authContext = use(AuthContext);
-  const workspaceContext = use(WorkspaceContext);
-  const modalContext = use(ModalContext);
   const user = authContext?.user;
+  const workspaceContext = use(WorkspaceContext);
   const workspaces = workspaceContext?.workspaces ?? [];
+  const modalContext = use(ModalContext);
   const openModal = modalContext?.openModal;
   const setWorkspaces = workspaceContext?.setWorkspaces;
 

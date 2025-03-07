@@ -1,23 +1,41 @@
 import { useLoaderData } from "@tanstack/react-router";
 
-import { use } from "react";
+import { use, useEffect, useState } from "react";
 import { AuthContext } from "../../../context/AuthContext";
 
 import WorkspaceHeader from "./WorkspaceHeader";
 import WorkspaceMain from "./WorkspaceMain";
+import { WorkspaceWithBoardsType } from "../../../utils/types";
 
 function Boards() {
-  const workspace = useLoaderData({
+  const workspaceData = useLoaderData({
     from: "/_authenticated/workspaces/$workspaceId",
   });
   const authContext = use(AuthContext);
   const user = authContext?.user;
-  const isAdmin = user?.id === workspace.userId;
+
+  const [workspace, setWorkspace] = useState<
+    WorkspaceWithBoardsType | undefined
+  >(workspaceData);
+  const isAdmin = user?.id === workspace?.userId;
+
+  useEffect(() => {
+    if (workspaceData) {
+      setWorkspace(workspaceData);
+    }
+  }, [workspaceData]);
 
   return (
     <main className="font-secondary flex flex-col px-40 py-6">
-      <WorkspaceHeader isAdmin={isAdmin} workspace={workspace} />
-      <WorkspaceMain isAdmin={isAdmin} workspace={workspace} />
+      <WorkspaceHeader
+        isAdmin={isAdmin}
+        workspace={workspace as WorkspaceWithBoardsType}
+        setWorkspace={setWorkspace}
+      />
+      <WorkspaceMain
+        isAdmin={isAdmin}
+        workspace={workspace as WorkspaceWithBoardsType}
+      />
     </main>
   );
 }

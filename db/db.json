@@ -32,16 +32,37 @@
     {
       "id": "1",
       "name": "Development Team",
-      "workspaceType": "Engineering-IT",
+      "workspaceType": "Software-Development",
       "userId": "0iirwg74IN",
-      "members": ["vFXHDwVOU5", "Pud_xM3ovO"]
+      "members": [
+        "vFXHDwVOU5",
+        "Pud_xM3ovO"
+      ]
     },
     {
       "id": "2",
       "name": "Sales Team",
       "workspaceType": "Sales",
       "userId": "vFXHDwVOU5",
-      "members": ["0iirwg74IN", "Pud_xM3ovO"]
+      "members": [
+        "0iirwg74IN",
+        "Pud_xM3ovO"
+      ]
+    },
+    {
+      "name": "Test-1",
+      "id": "KKf2kqax_63a7fL",
+      "workspaceType": "it",
+      "userId": "0iirwg74IN",
+      "members": []
+    },
+    {
+      "name": "Test-252",
+      "id": "WFpAGufhb63f7NR",
+      "workspaceType": "marketing",
+      "userId": "0iirwg74IN",
+      "members": [],
+      "boards": []
     }
   ],
   "boards": [

@@ -20,41 +20,45 @@ function Select({
   options,
 }: SelectType) {
   const baseStyles =
-    "border-muted block w-full min-w-full rounded-lg bg-background border p-2.5 text-foreground text-sm focus-visible:border-primary focus-visible:ring-primary focus-visible:ring-1 focus-visible:outline-0 font-secondary cursor-pointer ";
+    "border-muted block w-full min-w-full rounded-lg bg-background border p-2.5 text-foreground text-sm focus-visible:border-primary focus-visible:ring-primary focus-visible:ring-1 focus-visible:outline-0 font-secondary capitalize cursor-pointer ";
 
   const selectStyles = twMerge(clsx(baseStyles, className));
 
   return (
-    <>
+    <div>
       <label
         htmlFor={id}
-        className="font-secondary text-foreground mb-2 block text-sm"
+        className="font-secondary text-foreground mb-2 block text-sm font-medium"
       >
         Select an option
       </label>
 
-      <div className="relative group">
+      <div className="group relative">
         <select
           id={id}
           className={selectStyles}
           value={value}
           onChange={onChange}
         >
-          <option selected disabled>
+          <option value="" disabled>
             {placeholderSelected}
           </option>
           {options.map((option) => (
-            <option key={option.value} value={option.value}>
+            <option
+              key={option.value}
+              value={option.value}
+              className="capitalize"
+            >
               {option.textValue}
             </option>
           ))}
         </select>
         <HiChevronDown
-          className="fill-foreground group-focus-within:rotate-180 transition-all duration-300 cursor-pointer absolute top-[50%] right-3 translate-y-[-40%]"
+          className="fill-foreground absolute top-[50%] right-3 translate-y-[-40%] cursor-pointer transition-all duration-300 group-focus-within:rotate-180"
           size={18}
         />
       </div>
-    </>
+    </div>
   );
 }
 
