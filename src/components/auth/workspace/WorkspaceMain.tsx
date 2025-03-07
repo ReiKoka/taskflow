@@ -16,7 +16,7 @@ function WorkspaceMain({ isAdmin, workspace }: WorkspaceMainProps) {
     <section className="mt-10 flex grow flex-col gap-4">
       <h1 className="text-foreground text-xl font-medium">Boards</h1>
       
-      {!(workspace?.boards?.length > 0) && <EmptyWorkspace />}
+      {(!isAdmin && !(workspace?.boards?.length > 0)) && <EmptyWorkspace />}
 
       <div className="grid grid-cols-[repeat(4,300px)] gap-4">
         {isAdmin && (
