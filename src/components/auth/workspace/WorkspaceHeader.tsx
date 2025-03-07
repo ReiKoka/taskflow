@@ -1,10 +1,11 @@
-import { HiOutlinePencilSquare, HiUserPlus } from "react-icons/hi2";
+import { HiOutlinePencilSquare, HiTrash, HiUserPlus } from "react-icons/hi2";
 import { getFirstLetter } from "../../../utils/helpers";
 import { WorkspaceWithBoardsType } from "../../../utils/types";
 import Button from "../../ui/Button";
 import AddOrEditWorkspaceModal from "./AddOrEditWorkspaceModal";
 import { ModalContext } from "../../../context/ModalContext";
 import { use } from "react";
+import DeleteWorkspaceModal from "./DeleteWorkspaceModal";
 
 type WorkspaceHeaderProps = {
   isAdmin: boolean;
@@ -20,11 +21,19 @@ function WorkspaceHeader({isAdmin, workspace, setWorkspace}: WorkspaceHeaderProp
   const modalContext = use(ModalContext);
   const openModal = modalContext?.openModal;
 
-  const handleClick = () => {
+  const handleEditClick = () => {
     if (openModal) {
       openModal("editWorkspace");
     }
   };
+
+  const handleDeleteClick = () => {
+    if (openModal) {
+      openModal("deleteWorkspace");
+    }
+  };
+
+
 
   return (
     <section className="border-muted flex justify-between border-b pb-6">
@@ -44,7 +53,7 @@ function WorkspaceHeader({isAdmin, workspace, setWorkspace}: WorkspaceHeaderProp
 
       {isAdmin && (
         <div className="flex items-center gap-4">
-          <Button variant="outline" onClick={handleClick}>
+          <Button variant="outline" onClick={handleEditClick}>
             <HiOutlinePencilSquare />
             <span>Edit Workspace</span>
           </Button>
@@ -52,6 +61,11 @@ function WorkspaceHeader({isAdmin, workspace, setWorkspace}: WorkspaceHeaderProp
           <Button variant="default">
             <HiUserPlus />
             <span>Add members</span>
+          </Button>
+
+          <Button variant="destructive" onClick={handleDeleteClick}>
+            <HiTrash />
+            <span>Delete Workspace</span>
           </Button>
         </div>
       )}
@@ -61,6 +75,7 @@ function WorkspaceHeader({isAdmin, workspace, setWorkspace}: WorkspaceHeaderProp
         oldWorkspace={workspace}
         setOldWorkspace={setWorkspace}
       />
+      <DeleteWorkspaceModal title="Delete Workspace" modalType="deleteWorkspace" workspace={workspace}/>
     </section>
   );
 }

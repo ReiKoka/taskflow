@@ -46,10 +46,13 @@ const Modal: React.FC<ModalProps> = ({
       <div className="bg-background shadow-toast shadow-muted-foreground flex w-full max-w-md flex-col rounded-lg p-6 dark:shadow-black">
         <Button
           variant="icon"
-          className="border-destructive w-fit self-end"
+          className="border-destructive hover:bg-destructive group w-fit self-end"
           onClick={onClose}
         >
-          <HiXMark className="fill-destructive" size={20} />
+          <HiXMark
+            className="fill-destructive group-hover:fill-destructive-foreground"
+            size={20}
+          />
         </Button>
         <h2
           className={`font-secondary text-foreground text-center ${description ? "-mb-2" : "pb-6"} text-xl font-medium`}
