@@ -54,15 +54,23 @@
       "id": "KKf2kqax_63a7fL",
       "workspaceType": "it",
       "userId": "0iirwg74IN",
-      "members": []
+      "members": [],
+      "boards": []
     },
     {
-      "name": "Test-252",
+      "name": "Test-2",
       "id": "WFpAGufhb63f7NR",
       "workspaceType": "marketing",
       "userId": "0iirwg74IN",
       "members": [],
       "boards": []
+    },
+    {
+      "id": "1YDoG_FMOkkdXAj",
+      "name": "Test-3",
+      "workspaceType": "education",
+      "userId": "0iirwg74IN",
+      "members": []
     }
   ],
   "boards": [

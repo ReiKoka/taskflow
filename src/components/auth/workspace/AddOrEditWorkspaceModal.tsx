@@ -1,4 +1,4 @@
-import { use, useCallback, useEffect, useState } from "react";
+import { use, useCallback, useState } from "react";
 import { ModalContext } from "../../../context/ModalContext";
 
 import { WorkspaceType, WorkspaceWithBoardsType } from "../../../utils/types";
@@ -17,6 +17,7 @@ import { normalizeWorkspaceType } from "../../../utils/helpers";
 
 type AddOrEditWorkspaceModalProps = {
   title: string;
+  modalType: "createWorkspace" | "editWorkspace";
   oldWorkspace?: WorkspaceWithBoardsType;
   setOldWorkspace?: React.Dispatch<
     React.SetStateAction<WorkspaceWithBoardsType | undefined>
@@ -24,31 +25,37 @@ type AddOrEditWorkspaceModalProps = {
 };
 
 //prettier-ignore
-function AddOrEditWorkspaceModal({title, oldWorkspace, setOldWorkspace}: AddOrEditWorkspaceModalProps) {
+function AddOrEditWorkspaceModal({title, oldWorkspace, setOldWorkspace, modalType}: AddOrEditWorkspaceModalProps) {
+
   const authContext = use(AuthContext);
   const workspaceContext = use(WorkspaceContext)
   const modalContext = use(ModalContext);
+
   const userId = authContext?.user?.id;
   const setWorkspaces = workspaceContext?.setWorkspaces;
-  const isOpen = modalContext?.activeModal === "createWorkspace" || modalContext?.activeModal === "editWorkspace";
-  const closeModal = modalContext?.closeModal || (() => {});
+  
+  const isOpen = modalContext?.activeModal === modalType;
 
-  const [currentWorkspace, setCurrentWorkspace] = useState<WorkspaceType | undefined>(oldWorkspace || {
-    name: "",
-    id: "",
-    workspaceType: "",
-    userId: userId as string,
-    members: [],
-  });
+  const closeModal = modalContext?.closeModal as () => void;
 
-  useEffect(() => {
-    if (oldWorkspace) {
-      setCurrentWorkspace({
+  const [currentWorkspace, setCurrentWorkspace] = useState<WorkspaceType | undefined>(() => {
+    if (modalType === "createWorkspace") {
+      return {
+        id: "",
+        name: "",
+        workspaceType: "",
+        userId: userId || "",
+        members: [],
+      };
+    } else if (modalType === "editWorkspace" && oldWorkspace) {
+      return {
         ...oldWorkspace,
         workspaceType: normalizeWorkspaceType(oldWorkspace.workspaceType),
-      });
+        id: oldWorkspace.id || "",
+      };
     }
-  }, [oldWorkspace, userId]);
+    return undefined;
+  });
 
   // Handle form field changes
   const handleFieldChange = useCallback(
@@ -61,40 +68,63 @@ function AddOrEditWorkspaceModal({title, oldWorkspace, setOldWorkspace}: AddOrEd
   if (!isOpen) return null;
 
 
-const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-  e.preventDefault();
+  const resetFields = () => {
+    if (modalType === "createWorkspace") {
+      setCurrentWorkspace({
+        id: "",
+        name: "",
+        workspaceType: "",
+        userId: userId || "",
+        members: [],
+      });
+    } else if (modalType === "editWorkspace" && oldWorkspace) {
+      setCurrentWorkspace({
+        ...oldWorkspace,
+        workspaceType: normalizeWorkspaceType(oldWorkspace.workspaceType),
+        id: oldWorkspace.id || "",
+      });
+    }
+  };
   
-  const id = oldWorkspace ? oldWorkspace.id : nanoid(15);
-  const newData = { ...currentWorkspace, id };
 
-  // Create or edit workspace
-  let updatedWorkspace: WorkspaceType;
-  if (!oldWorkspace) {
-    updatedWorkspace = await createWorkspace(newData as WorkspaceType);
-    if (setWorkspaces) {
-      setWorkspaces((prevWorkspaces) => {
-        const updatedAdminWorkspaces = [...prevWorkspaces[0], updatedWorkspace];
-        return [updatedAdminWorkspaces, prevWorkspaces[1]]; 
-      });
-    }
-  } else {
-    updatedWorkspace = await editWorkspace(id, newData as WorkspaceType);
-    if (setWorkspaces) {
-      setWorkspaces((prevWorkspaces) => {
-        return [
-          prevWorkspaces[0].map((workspace) =>
-            workspace.id === updatedWorkspace.id ? updatedWorkspace : workspace
-          ),
-          prevWorkspaces[1], 
-        ];
-      });
-      setOldWorkspace?.((prevWorkspace) => ({ ...prevWorkspace, ...updatedWorkspace } as WorkspaceWithBoardsType))
-    }
-  }
 
-  closeModal();
-  showToast("success", `${oldWorkspace ? `Workspace ${oldWorkspace.name} updated successfully!` : "New workspace added successfully"}`);
-};
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+  
+    if (modalType === "createWorkspace") {
+      const id = nanoid(15);
+      const newData = { ...currentWorkspace, id, userId };
+      const updatedWorkspace = await createWorkspace(newData as WorkspaceType);
+      if (setWorkspaces) {
+        setWorkspaces((prevWorkspaces) => {
+          const updatedAdminWorkspaces = [...prevWorkspaces[0], updatedWorkspace];
+          return [updatedAdminWorkspaces, prevWorkspaces[1]];
+        });
+      }
+      showToast("success", "New workspace added successfully");
+    } else if (modalType === "editWorkspace" && oldWorkspace) {
+      const id = oldWorkspace.id;
+      const newData = { ...currentWorkspace, id };
+      const updatedWorkspace = await editWorkspace(id, newData as WorkspaceType);
+      if (setWorkspaces) {
+        setWorkspaces((prevWorkspaces) => {
+          return [
+            prevWorkspaces[0].map((workspace) =>
+              workspace.id === updatedWorkspace.id ? updatedWorkspace : workspace
+            ),
+            prevWorkspaces[1],
+          ];
+        });
+        setOldWorkspace?.((prevWorkspace) => ({
+          ...prevWorkspace,
+          ...updatedWorkspace,
+        } as WorkspaceWithBoardsType));
+      }
+      showToast("success", `Workspace ${oldWorkspace.name} updated successfully!`);
+    }
+  
+    if (closeModal) closeModal();
+  };
 
 return (
   <Modal isOpen={isOpen} onClose={closeModal} title={title}>
@@ -118,11 +148,11 @@ return (
       />
 
       <div className="flex justify-end gap-2">
-        <Button type="reset" variant="outline">
+        <Button type="button" variant="outline" onClick={resetFields}>
           Cancel
         </Button>
         <Button type="submit" variant="default">
-          {oldWorkspace ? "Edit Workspace" : "Create Workspace"}
+        {modalType === "createWorkspace" ? "Create Workspace" : "Edit Workspace"}
         </Button>
       </div>
     </form>

@@ -107,7 +107,10 @@ function AuthNavLinks() {
           )}
         </DropdownMenu>
       </div>
-      <AddOrEditWorkspaceModal title="Create Workspace" />
+      <AddOrEditWorkspaceModal
+        title="Create Workspace"
+        modalType="createWorkspace"
+      />
     </>
   );
 }

@@ -14,12 +14,9 @@ type WorkspaceHeaderProps = {
   >;
 };
 
-function WorkspaceHeader({
-  isAdmin,
-  workspace,
-  setWorkspace,
-}: WorkspaceHeaderProps) {
-  //Modal Context
+//prettier-ignore
+function WorkspaceHeader({isAdmin, workspace, setWorkspace}: WorkspaceHeaderProps) {
+
   const modalContext = use(ModalContext);
   const openModal = modalContext?.openModal;
 
@@ -60,6 +57,7 @@ function WorkspaceHeader({
       )}
       <AddOrEditWorkspaceModal
         title="Edit Workspace"
+        modalType="editWorkspace"
         oldWorkspace={workspace}
         setOldWorkspace={setWorkspace}
       />
