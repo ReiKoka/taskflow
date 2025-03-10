@@ -34,20 +34,14 @@
       "name": "Development Team",
       "workspaceType": "Software-Development",
       "userId": "0iirwg74IN",
-      "members": [
-        "vFXHDwVOU5",
-        "Pud_xM3ovO"
-      ]
+      "members": ["vFXHDwVOU5", "Pud_xM3ovO"]
     },
     {
       "id": "2",
       "name": "Sales Team",
       "workspaceType": "Sales",
       "userId": "vFXHDwVOU5",
-      "members": [
-        "0iirwg74IN",
-        "Pud_xM3ovO"
-      ]
+      "members": ["0iirwg74IN", "Pud_xM3ovO"]
     },
     {
       "name": "Test-1",
@@ -97,7 +91,7 @@
       "boardId": 1
     }
   ],
-  "tasks": [
+  "cards": [
     {
       "id": 1,
       "title": "Design Login Page",
@@ -111,6 +105,29 @@
       "description": "Initialize json-server with authentication",
       "listId": 2,
       "assignedTo": 1
+    }
+  ],
+  "comments": [
+    {
+      "id": "c1",
+      "cardId": 1,
+      "userId": "0iirwg74IN",
+      "comment": "Starting the design work today. Need feedback soon!",
+      "createdAt": "2025-03-10T12:00:00Z"
+    },
+    {
+      "id": "c2",
+      "cardId": 1,
+      "userId": "vFXHDwVOU5",
+      "comment": "Looking good so far. Let me know if you need help with any part.",
+      "createdAt": "2025-03-10T14:00:00Z"
+    },
+    {
+      "id": "c3",
+      "cardId": 2,
+      "userId": "Pud_xM3ovO",
+      "comment": "Set up the server. Testing authentication now.",
+      "createdAt": "2025-03-10T13:00:00Z"
     }
   ]
 }

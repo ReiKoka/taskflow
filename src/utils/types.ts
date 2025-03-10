@@ -53,10 +53,22 @@ export interface ListType {
   boardId: string;
 }
 
+export interface CardType {
+  id: string;
+  title: string;
+  description: string;
+  listId: string;
+  userId: string;
+}
+
 export interface WorkspaceWithBoardsType extends WorkspaceType {
   boards: BoardType[];
 }
 
 export interface BoardWithListsType extends BoardType {
   lists: ListType[];
+}
+
+export interface ListWithCardsType extends ListType {
+  cards: CardType[];
 }
