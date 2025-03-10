@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { nanoid } from "nanoid";
+import { showToast } from "../utils/showToast";
 
 type Item = {
   id: string;
@@ -24,7 +25,21 @@ export function useAddItem<T extends Item>(
     } as T;
 
     setItems((prevItems) => (prevItems ? [...prevItems, newItem] : [newItem]));
-    await createFn(newItem);
+
+    try {
+      await createFn(newItem);
+      const itemType = nameField === "title" ? "card" : "list";
+      showToast("success", `New ${itemType} "${value}" added successfully`);
+    } catch (error) {
+      setItems((prevItems) =>
+        prevItems ? prevItems.filter((item) => item.id !== newItem.id) : [],
+      );
+      showToast(
+        "error",
+        `Failed to add ${nameField === "title" ? "card" : "list"}`,
+      );
+      console.error("Error adding item:", error);
+    }
   };
 
   const handleCancel = () => {

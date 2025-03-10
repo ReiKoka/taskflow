@@ -28,9 +28,9 @@ function SingleBoard() {
       </section>
 
       <section className="flex grow gap-3 overflow-x-auto p-4">
-        {lists && lists?.length > 0 ? (
+        {board?.lists && board?.lists?.length > 0 ? (
           <>
-            {lists.map((list) => (
+            {lists?.map((list) => (
               <SingleBoardList key={list.id} list={list} />
             ))}
             {isAddingList ? (

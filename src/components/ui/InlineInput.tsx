@@ -1,4 +1,4 @@
-import { MouseEventHandler, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import Input from "./Input";
 import { useOnClickOutside } from "usehooks-ts";
 import Button from "./Button";
@@ -15,7 +15,9 @@ function InlineInput({ placeholder, onSave, onCancel }: InlineInputProps) {
 
   useOnClickOutside(inputRef, onCancel);
 
-  const handleSave = () => {
+  const handleSave = (e: React.MouseEvent) => {
+    e.preventDefault();
+
     if (!inputValue.trim()) return;
     onSave(inputValue);
     setInputValue("");
@@ -23,7 +25,8 @@ function InlineInput({ placeholder, onSave, onCancel }: InlineInputProps) {
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
-      handleSave();
+      e.preventDefault();
+      handleSave(e as unknown as React.MouseEvent);
     }
   };
 
@@ -41,7 +44,7 @@ function InlineInput({ placeholder, onSave, onCancel }: InlineInputProps) {
         onChange={(e) => setInputValue(e.target.value)}
         className="border-muted-foreground -mt-2 w-full p-1"
       />
-      <Button className="w-fit self-end p-1" onClick={handleSave}>
+      <Button className="w-fit self-end p-1" onClick={handleSave} type="button">
         Add List
       </Button>
     </div>

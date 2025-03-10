@@ -7,5 +7,6 @@ export const Route = createFileRoute("/_authenticated/workspaces/$workspaceId/$b
   loader: async ({ params }) => {
     return await getBoardById(params.boardId);
   },
+  
   component: SingleBoard,
 });
