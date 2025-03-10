@@ -1,21 +1,6 @@
 import axios from "axios";
-import { ListType, ListWithCardsType } from "../utils/types";
+import { ListType } from "../utils/types";
 import { baseURL } from "../utils/constants";
-
-//prettier-ignore
-export const getSingleListWithGoals = async (listId: string): Promise<ListWithCardsType> => {
-  try {
-    const response = await axios.get<ListWithCardsType>(`${baseURL}/lists/${listId}?_embed=cards`);
-    return response.data;
-  } catch (error) {
-    if (axios.isAxiosError(error) && error.response) {
-      throw new Error(
-        `${error.response?.data}, Failed to get your lists. Please try again later!`,
-      );
-    }
-    throw new Error("Network error. Please try again.");
-  }
-}
 
 //prettier-ignore
 export const createList = async (newList: ListType): Promise<ListType> => {

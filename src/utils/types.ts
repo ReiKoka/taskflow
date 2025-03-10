@@ -68,7 +68,3 @@ export interface WorkspaceWithBoardsType extends WorkspaceType {
 export interface BoardWithListsType extends BoardType {
   lists: ListType[];
 }
-
-export interface ListWithCardsType extends ListType {
-  cards: CardType[];
-}

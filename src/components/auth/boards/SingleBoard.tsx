@@ -3,34 +3,23 @@ import SingleBoardList from "./SingleBoardList";
 import EmptyBoard from "./EmptyBoard";
 import Button from "../../ui/Button";
 import { HiPlus } from "react-icons/hi2";
-import { useState } from "react";
 import InlineInput from "../../ui/InlineInput";
-import { ListType } from "../../../utils/types";
 import { createList } from "../../../services/lists";
-import { nanoid } from "nanoid";
+import { useAddItem } from "../../../hooks/useAddItem";
+import { ListType } from "../../../utils/types";
 
 function SingleBoard() {
   const board = useLoaderData({
     from: "/_authenticated/workspaces/$workspaceId/$boardId",
   });
 
-  const [lists, setLists] = useState<ListType[] | undefined>(board.lists);
-  const [isAddingList, setIsAddingList] = useState(false);
-
-  const handleAddList = async (listName: string) => {
-    setIsAddingList(false);
-    const data = {
-      id: nanoid(15),
-      name: listName,
-      boardId: board.id,
-    };
-    setLists((prevList) => (prevList ? [...prevList, data] : [data]));
-    await createList(data);
-  };
-
-  const handleCancel = () => {
-    setIsAddingList(false);
-  };
+  const {
+    items: lists,
+    isAdding: isAddingList,
+    setIsAdding: setIsAddingList,
+    handleAdd: handleAddList,
+    handleCancel,
+  } = useAddItem<ListType>(board.lists, createList, { boardId: board.id });
 
   return (
     <main className="flex flex-col">

@@ -34,14 +34,20 @@
       "name": "Development Team",
       "workspaceType": "Software-Development",
       "userId": "0iirwg74IN",
-      "members": ["vFXHDwVOU5", "Pud_xM3ovO"]
+      "members": [
+        "vFXHDwVOU5",
+        "Pud_xM3ovO"
+      ]
     },
     {
       "id": "2",
       "name": "Sales Team",
       "workspaceType": "Sales",
       "userId": "vFXHDwVOU5",
-      "members": ["0iirwg74IN", "Pud_xM3ovO"]
+      "members": [
+        "0iirwg74IN",
+        "Pud_xM3ovO"
+      ]
     },
     {
       "name": "Test-1",
@@ -89,6 +95,11 @@
       "id": 3,
       "name": "Completed",
       "boardId": 1
+    },
+    {
+      "id": "I4qgtLBfdNI98Vh",
+      "name": "test",
+      "boardId": 1
     }
   ],
   "cards": [
@@ -105,6 +116,20 @@
       "description": "Initialize json-server with authentication",
       "listId": 2,
       "assignedTo": 1
+    },
+    {
+      "id": "4vKaYrWcGDv3lsc",
+      "listId": 1,
+      "description": "",
+      "userId": "0iirwg74IN",
+      "title": "test2"
+    },
+    {
+      "id": "1CZyrIwszlc_L9u",
+      "listId": 2,
+      "description": "",
+      "userId": "0iirwg74IN",
+      "title": "test15"
     }
   ],
   "comments": [

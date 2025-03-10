@@ -26,7 +26,7 @@ function InlineInput({ placeholder, onSave, onCancel }: InlineInputProps) {
       handleSave();
     }
   };
-  
+
   return (
     <div
       ref={inputRef}
