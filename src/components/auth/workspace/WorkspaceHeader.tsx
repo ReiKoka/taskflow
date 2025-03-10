@@ -2,10 +2,10 @@ import { HiOutlinePencilSquare, HiTrash, HiUserPlus } from "react-icons/hi2";
 import { getFirstLetter } from "../../../utils/helpers";
 import { WorkspaceWithBoardsType } from "../../../utils/types";
 import Button from "../../ui/Button";
-import AddOrEditWorkspaceModal from "./AddOrEditWorkspaceModal";
+import AddOrEditWorkspaceModal from "../modals/AddOrEditWorkspaceModal";
 import { ModalContext } from "../../../context/ModalContext";
 import { use } from "react";
-import DeleteWorkspaceModal from "./DeleteWorkspaceModal";
+import DeleteWorkspaceModal from "../modals/DeleteWorkspaceModal";
 
 type WorkspaceHeaderProps = {
   isAdmin: boolean;
@@ -32,8 +32,6 @@ function WorkspaceHeader({isAdmin, workspace, setWorkspace}: WorkspaceHeaderProp
       openModal("deleteWorkspace");
     }
   };
-
-
 
   return (
     <section className="border-muted flex justify-between border-b pb-6">

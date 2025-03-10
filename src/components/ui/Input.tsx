@@ -14,6 +14,7 @@ type InputType = {
   iconClassName?: string;
   autocomplete?: string;
   defaultValue?: string;
+  required?: boolean;
 };
 
 function Input({
@@ -28,6 +29,7 @@ function Input({
   iconClassName,
   autocomplete = "on",
   defaultValue,
+  required,
 }: InputType) {
   const baseStyles =
     "border-muted block w-full min-w-full rounded-lg border p-2.5 text-foreground text-sm focus-visible:border-primary focus-visible:ring-primary focus-visible:ring-1 focus-visible:outline-0 font-secondary";
@@ -58,6 +60,7 @@ function Input({
           value={value}
           onChange={onChange}
           defaultValue={defaultValue}
+          required={required}
         />
       </div>
     </div>

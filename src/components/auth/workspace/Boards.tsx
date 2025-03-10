@@ -35,6 +35,8 @@ function Boards() {
       <WorkspaceMain
         isAdmin={isAdmin}
         workspace={workspace as WorkspaceWithBoardsType}
+        setWorkspace={setWorkspace}
+
       />
     </main>
   );

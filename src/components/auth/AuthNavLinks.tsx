@@ -13,7 +13,7 @@ import {getWorkspacesOfAdmin, getWorkspacesWhereUserIsGuest} from "../../service
 //prettier-ignore
 import { HiChevronDown, HiExclamationTriangle, HiOutlinePlusCircle} from "react-icons/hi2";
 import { ModalContext } from "../../context/ModalContext";
-import AddOrEditWorkspaceModal from "./workspace/AddOrEditWorkspaceModal";
+import AddOrEditWorkspaceModal from "./modals/AddOrEditWorkspaceModal";
 
 function AuthNavLinks() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);

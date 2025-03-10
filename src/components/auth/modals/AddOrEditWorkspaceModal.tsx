@@ -85,7 +85,6 @@ function AddOrEditWorkspaceModal({title, oldWorkspace, setOldWorkspace, modalTyp
       });
     }
   };
-  
 
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -137,6 +136,7 @@ return (
         placeholder="Enter workspace name..."
         value={currentWorkspace?.name || ""}
         onChange={(e) => handleFieldChange("name", e.target.value)}
+        required={true}
       />
 
       <Select
