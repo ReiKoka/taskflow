@@ -55,7 +55,7 @@ const Modal: React.FC<ModalProps> = ({
           />
         </Button>
         <h2
-          className={`font-secondary text-foreground text-center ${description ? "-mb-2" : "pb-6"} text-xl font-medium`}
+          className={`font-secondary text-foreground text-center ${description ? "-mb-2" : "pb-6"} text-xl font-semibold`}
         >
           {title}
         </h2>

@@ -26,7 +26,7 @@ function Boards() {
   }, [workspaceData]);
 
   return (
-    <main className="font-secondary flex flex-col px-40 py-6">
+    <main className="font-secondary flex w-full flex-col px-40 py-6">
       <WorkspaceHeader
         isAdmin={isAdmin}
         workspace={workspace as WorkspaceWithBoardsType}
