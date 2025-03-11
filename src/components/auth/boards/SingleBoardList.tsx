@@ -40,6 +40,7 @@ function SingleBoardList({ list }: SingleBoardListProps) {
         listId,
         description: "",
         userId: user?.id,
+        status: "in-complete",
       },
       "title",
     );
@@ -64,10 +65,10 @@ function SingleBoardList({ list }: SingleBoardListProps) {
       ) : (
         <Button
           variant="default"
-          className="text-foreground text-xs hover:bg-muted mt-auto border-0 bg-transparent px-2.5 py-2 hover:scale-100"
+          className="text-foreground hover:bg-muted mt-auto border-0 bg-transparent px-2.5 py-2 text-xs hover:scale-100"
           onClick={() => setIsAdding(true)}
         >
-          <HiPlus size={13}/>
+          <HiPlus size={13} />
           <span>Add a card</span>
         </Button>
       )}

@@ -14,22 +14,18 @@ function SingleCard({ item }: SingleCardProps) {
     const newStatus: CardStatusType =
       status === "completed" ? "in-complete" : "completed";
 
-    // Update the state
     setStatus(newStatus);
 
-    // Use the new status value directly in the API call
     await editCardStatus(item.id, newStatus);
   };
 
-  console.log(status);
-
   return (
     <div className="flex flex-col gap-2">
-      <div className="bg-muted flex w-full items-center gap-4 rounded-lg px-3 py-2">
+      <div className="group bg-muted flex w-full cursor-pointer items-center gap-4 overflow-hidden rounded-lg px-3 py-2">
         <div
           tabIndex={1}
           onClick={handleStatusChange}
-          className={`flex h-4 w-4 cursor-pointer items-center justify-center rounded-full ${
+          className={`flex h-4 w-4 -translate-x-4 cursor-pointer items-center justify-center rounded-full opacity-0 transition-all duration-300 ease-in group-hover:translate-x-0 group-hover:opacity-100 group-hover:ease-out ${
             status === "completed"
               ? "ring-offset-muted bg-green-500 ring-green-400 ring-offset-2 focus-visible:ring focus-visible:outline-0 dark:bg-green-700 dark:ring-green-700"
               : "border-border border"
@@ -38,12 +34,16 @@ function SingleCard({ item }: SingleCardProps) {
           <HiCheck
             size={10}
             strokeWidth={2}
-            className={`stroke-background dark:stroke-secondary-foreground ${
-              status === "completed" ? "opacity-100" : "opacity-0"
+            className={`stroke-background dark:stroke-secondary-foreground transition-all duration-300 ${
+              status === "completed"
+                ? "animate-jump-in animate-once animate-ease-out opacity-100"
+                : "opacity-0"
             }`}
           />
         </div>
-        <p className="text-xs font-medium">{item?.title}</p>
+        <p className="-translate-x-4 text-xs font-medium transition-transform duration-300 ease-in group-hover:translate-x-0 group-hover:ease-out">
+          {item?.title}
+        </p>
       </div>
     </div>
   );
