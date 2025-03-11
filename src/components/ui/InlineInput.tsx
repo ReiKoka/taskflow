@@ -50,9 +50,9 @@ function InlineInput({
         placeholder={placeholder}
         value={inputValue}
         onChange={(e) => setInputValue(e.target.value)}
-        className="border-muted-foreground -mt-2 w-full p-1"
+        className="border-muted-foreground -mt-2 w-full p-2 text-xs"
       />
-      <Button className="w-fit" onClick={handleSave} type="button">
+      <Button className="w-fit text-xs" onClick={handleSave} type="button">
         Add {buttonText}
       </Button>
     </div>

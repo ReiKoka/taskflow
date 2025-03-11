@@ -31,10 +31,8 @@ export const createCard = async (newCard: CardType): Promise<CardType> => {
   }
 }
 
-export const editCardStatus = async (
-  cardId: string,
-  newStatus: CardStatusType,
-): Promise<CardType> => {
+//prettier-ignore
+export const editCardStatus = async (cardId: string,newStatus: CardStatusType): Promise<CardType> => {
   try {
     const response = await axios.patch<CardType>(`${baseURL}/cards/${cardId}`, {
       status: newStatus,
@@ -45,6 +43,21 @@ export const editCardStatus = async (
     if (axios.isAxiosError(error) && error.response) {
       throw new Error(
         `${error.response?.data}, Failed to edit card status. Please try again later!`,
+      );
+    }
+    throw new Error("Network error. Please try again.");
+  }
+};
+
+//prettier-ignore
+export const editCardListId = async (cardId: string, listId: string): Promise<CardType> => {
+  try {
+    const response = await axios.patch<CardType>(`${baseURL}/cards/${cardId}`, {listId})
+    return response.data
+  } catch (error) {
+    if (axios.isAxiosError(error) && error.response) {
+      throw new Error(
+        `${error.response?.data}, Failed to edit card list ID. Please try again later!`,
       );
     }
     throw new Error("Network error. Please try again.");

@@ -69,14 +69,9 @@
       "boardId": 1
     },
     {
-      "id": 3,
-      "name": "Completed",
-      "boardId": 1
-    },
-    {
-      "id": "WQMSYJpg4zHiDkR",
+      "id": "xF2GwS3Sy058mVk",
       "boardId": 1,
-      "name": "Archived"
+      "name": "Completed Tasks"
     }
   ],
   "cards": [
@@ -90,7 +85,7 @@
     },
     {
       "id": "JSxpmqdAJvdeamQ",
-      "listId": 2,
+      "listId": 1,
       "description": "",
       "userId": "0iirwg74IN",
       "status": "in-complete",

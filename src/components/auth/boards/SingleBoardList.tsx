@@ -11,26 +11,19 @@ import SingleCard from "./SingleCard";
 
 type SingleBoardListProps = {
   list: ListType;
+  cards: CardType[];
+  onCardMove: (
+    cardId: string,
+    sourceListId: string,
+    targetListId: string,
+  ) => Promise<void>;
 };
 
-function SingleBoardList({ list }: SingleBoardListProps) {
+function SingleBoardList({ list, cards, onCardMove }: SingleBoardListProps) {
   const { id: listId } = list;
   const authContext = use(AuthContext);
   const user = authContext?.user;
-  const [cards, setCards] = useState<CardType[]>([]);
-
-  useEffect(() => {
-    async function loadCards() {
-      try {
-        const fetchedCards = await getCards(listId);
-        setCards(fetchedCards);
-      } catch (error) {
-        console.error(`Failed to fetch cards for list ${listId}:`, error);
-      }
-    }
-
-    loadCards();
-  }, [listId]);
+  const [isDragOver, setIsDragOver] = useState(false);
 
   const { items, setItems, isAdding, setIsAdding, handleAdd, handleCancel } =
     useAddItem<CardType>(
@@ -49,9 +42,35 @@ function SingleBoardList({ list }: SingleBoardListProps) {
     setItems(cards);
   }, [cards, setItems]);
 
+  const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    setIsDragOver(true);
+  };
+
+  const handleDragLeave = () => {
+    setIsDragOver(false);
+  };
+
+  const handleDrop = async (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    setIsDragOver(false);
+
+    const cardId = e.dataTransfer.getData("cardId");
+    const sourceListId = e.dataTransfer.getData("sourceListId");
+
+    if (sourceListId === listId) return;
+
+    await onCardMove(cardId, sourceListId, listId);
+  };
+
   return (
-    <div className="bg-secondary font-secondary flex h-fit min-h-24 max-w-72 min-w-72 flex-col rounded-xl p-3">
-      <p className="mb-4 text-sm font-semibold">{list?.name}</p>
+    <div
+      className="bg-secondary font-secondary flex h-fit min-h-20 max-w-72 min-w-72 flex-col rounded-xl p-3"
+      onDragOver={handleDragOver}
+      onDragLeave={handleDragLeave}
+      onDrop={handleDrop}
+    >
+      <p className="mb-2 text-sm font-semibold">{list?.name}</p>
       <div className="mb-2 flex flex-col gap-2">
         {items?.map((item) => <SingleCard key={item.id} item={item} />)}
       </div>
