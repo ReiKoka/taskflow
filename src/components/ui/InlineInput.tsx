@@ -7,6 +7,7 @@ interface InlineInputProps {
   placeholder: string;
   onSave: (value: string) => void;
   onCancel: () => void;
+  className?: string;
 }
 
 function InlineInput({ placeholder, onSave, onCancel }: InlineInputProps) {
@@ -15,9 +16,7 @@ function InlineInput({ placeholder, onSave, onCancel }: InlineInputProps) {
 
   useOnClickOutside(inputRef, onCancel);
 
-  const handleSave = (e: React.MouseEvent) => {
-    e.preventDefault();
-
+  const handleSave = () => {
     if (!inputValue.trim()) return;
     onSave(inputValue);
     setInputValue("");
@@ -26,14 +25,14 @@ function InlineInput({ placeholder, onSave, onCancel }: InlineInputProps) {
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
       e.preventDefault();
-      handleSave(e as unknown as React.MouseEvent);
+      handleSave();
     }
   };
 
   return (
     <div
       ref={inputRef}
-      className="bg-secondary flex h-fit flex-col gap-2 rounded-xl p-2"
+      className="bg-muted flex h-fit flex-col justify-between rounded-xl p-2"
     >
       <Input
         id="inline-input"
@@ -44,7 +43,7 @@ function InlineInput({ placeholder, onSave, onCancel }: InlineInputProps) {
         onChange={(e) => setInputValue(e.target.value)}
         className="border-muted-foreground -mt-2 w-full p-1"
       />
-      <Button className="w-fit self-end p-1" onClick={handleSave} type="button">
+      <Button className="w-fit" onClick={handleSave} type="button">
         Add List
       </Button>
     </div>

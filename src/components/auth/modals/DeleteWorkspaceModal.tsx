@@ -34,7 +34,7 @@ function DeleteWorkspaceModal({workspace, title, modalType}: DeleteWorkspaceModa
   }
 
   return <Modal isOpen={isOpen} onClose={closeModal} title={title}>
-    <h2 className="text-medium text-base text-center font-medium mb-6">Are you sure you want to delete this workspace? This action cannot be undone</h2>
+    <h2 className="text-medium text-base text-center text-foreground font-medium mb-6">Are you sure you want to delete this workspace? This action cannot be undone</h2>
     <div className="flex items-center gap-4 justify-end">
       <Button type="button" variant="outline" onClick={handleCancel}>Cancel</Button>
       <Button type="button" variant="destructive" onClick={handleConfirm}>Confirm Delete</Button>

@@ -42,9 +42,9 @@ function SingleBoard() {
             ) : (
               <Button
                 onClick={() => setIsAddingList(true)}
-                className="border-muted dark:text-foreground bg-muted-foreground text-muted dark:bg-muted h-fit font-medium"
+                className="bg-primary/40 text-foreground flex items-center justify-center hover:bg-primary/50 h-fit min-w-72 border-0"
               >
-                <HiPlus strokeWidth={2} />
+                <HiPlus strokeWidth={1} />
                 <span>Add another list</span>
               </Button>
             )}

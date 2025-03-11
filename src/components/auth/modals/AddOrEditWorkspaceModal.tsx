@@ -20,7 +20,7 @@ type AddOrEditWorkspaceModalProps = {
   modalType: "createWorkspace" | "editWorkspace";
   oldWorkspace?: WorkspaceWithBoardsType;
   setOldWorkspace?: React.Dispatch<
-    React.SetStateAction<WorkspaceWithBoardsType | undefined>
+    React.SetStateAction<WorkspaceWithBoardsType>
   >;
 };
 

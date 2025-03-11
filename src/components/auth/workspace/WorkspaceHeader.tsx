@@ -1,22 +1,21 @@
 import { HiOutlinePencilSquare, HiTrash, HiUserPlus } from "react-icons/hi2";
 import { getFirstLetter } from "../../../utils/helpers";
-import { WorkspaceWithBoardsType } from "../../../utils/types";
 import Button from "../../ui/Button";
 import AddOrEditWorkspaceModal from "../modals/AddOrEditWorkspaceModal";
 import { ModalContext } from "../../../context/ModalContext";
 import { use } from "react";
 import DeleteWorkspaceModal from "../modals/DeleteWorkspaceModal";
+import { SingleWorkspaceContext } from "../../../context/SingleWorkspaceContext";
+import Loader from "../../ui/Loader";
 
 type WorkspaceHeaderProps = {
   isAdmin: boolean;
-  workspace: WorkspaceWithBoardsType;
-  setWorkspace: React.Dispatch<
-    React.SetStateAction<WorkspaceWithBoardsType | undefined>
-  >;
 };
 
 //prettier-ignore
-function WorkspaceHeader({isAdmin, workspace, setWorkspace}: WorkspaceHeaderProps) {
+function WorkspaceHeader({isAdmin}: WorkspaceHeaderProps) {
+
+  const { workspace, setWorkspace } = use(SingleWorkspaceContext);
 
   const modalContext = use(ModalContext);
   const openModal = modalContext?.openModal;
@@ -33,13 +32,15 @@ function WorkspaceHeader({isAdmin, workspace, setWorkspace}: WorkspaceHeaderProp
     }
   };
 
+  if (!workspace) return <Loader />
+
   return (
     <section className="border-muted flex justify-between border-b pb-6">
       <div className="flex w-fit items-center gap-4">
         <p
           className={`text-background dark:text-foreground bg-primary h-14 w-14 rounded-md text-center text-3xl leading-14 font-medium`}
         >
-          {getFirstLetter(workspace.name)}
+          {getFirstLetter(workspace.name as string)}
         </p>
         <div className="flex flex-col">
           <p className="font-medium">{workspace.name}</p>

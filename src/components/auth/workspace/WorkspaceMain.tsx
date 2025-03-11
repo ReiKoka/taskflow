@@ -1,27 +1,19 @@
-import { WorkspaceWithBoardsType } from "../../../utils/types";
-
 import Button from "../../ui/Button";
-
 import { HiPlus } from "react-icons/hi2";
 import BoardCart from "./BoardCart";
 import EmptyWorkspace from "./EmptyWorkspace";
 import { use } from "react";
 import { ModalContext } from "../../../context/ModalContext";
 import AddOrEditBoardModal from "../modals/AddOrEditBoardModal";
+import { SingleWorkspaceContext } from "../../../context/SingleWorkspaceContext";
 
 type WorkspaceMainProps = {
   isAdmin: boolean;
-  workspace: WorkspaceWithBoardsType;
-  setWorkspace: React.Dispatch<
-    React.SetStateAction<WorkspaceWithBoardsType | undefined>
-  >;
 };
 
-function WorkspaceMain({
-  isAdmin,
-  workspace,
-  setWorkspace,
-}: WorkspaceMainProps) {
+function WorkspaceMain({ isAdmin }: WorkspaceMainProps) {
+  const { workspace, setWorkspace } = use(SingleWorkspaceContext);
+
   const modalContext = use(ModalContext);
   const openModal = modalContext?.openModal;
 
@@ -40,7 +32,7 @@ function WorkspaceMain({
       <div className="grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-4">
         {isAdmin && (
           <Button
-            className="bg-primary/30 text-foreground hover:bg-primary/50 flex cursor-pointer items-center justify-center gap-2 rounded-xl border-0 px-4 py-8 transition-all duration-300"
+            className={`bg-primary/40 text-foreground hover:bg-primary/50 flex items-center justify-center gap-2 rounded-xl border-0 px-4 py-8 transition-all duration-300 ${workspace?.boards?.length === 0 ? "max-w-96" : ""}`}
             onClick={handleCreateBoard}
           >
             <HiPlus size={20} />

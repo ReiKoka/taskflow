@@ -12,9 +12,7 @@ type AddOrEditBoardModalProps = {
   title: string;
   modalType: "createBoard" | "editBoard";
   workspace: WorkspaceWithBoardsType;
-  setWorkspace: React.Dispatch<
-    React.SetStateAction<WorkspaceWithBoardsType | undefined>
-  >;
+  setWorkspace: React.Dispatch<React.SetStateAction<WorkspaceWithBoardsType>>;
 };
 
 function AddOrEditBoardModal({

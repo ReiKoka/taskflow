@@ -11,17 +11,17 @@ import {
 } from "react-icons/hi2";
 import Button from "../../ui/Button";
 import { showToast } from "../../../utils/showToast";
+import { SingleWorkspaceContext } from "../../../context/SingleWorkspaceContext";
 
-
-type SidebarProps = {
-  workspace: WorkspaceWithBoardsType;
-};
-
-function Sidebar({ workspace }: SidebarProps) {
+function Sidebar() {
   const authContext = use(AuthContext);
   const user = authContext?.user;
+
+  const singleWorkspaceContext = use(SingleWorkspaceContext);
+  const workspace = singleWorkspaceContext?.workspace;
+
   const setToken = authContext?.setToken;
-  const isAdmin = user?.id === workspace.userId;
+  const isAdmin = workspace && user?.id === workspace.userId;
   const navigate = useNavigate();
 
   const handleClick = () => {
@@ -31,6 +31,8 @@ function Sidebar({ workspace }: SidebarProps) {
       navigate({ to: "/" });
     }
   };
+
+  if (!workspace) return null;
 
   return (
     <div className="border-muted bg-background font-secondary flex h-full w-full flex-col self-stretch border-r">
