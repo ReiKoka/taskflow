@@ -1,6 +1,5 @@
 import { use } from "react";
 import { getFirstLetter, getRandomTailwindColor } from "../../../utils/helpers";
-import { WorkspaceWithBoardsType } from "../../../utils/types";
 import { AuthContext } from "../../../context/AuthContext";
 import AdminSidebarContent from "./AdminSidebarContent";
 import { Link, useNavigate } from "@tanstack/react-router";

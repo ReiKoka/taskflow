@@ -7,6 +7,7 @@ import { use, useEffect, useState } from "react";
 import { createCard, getCards } from "../../../services/cards";
 import InlineInput from "../../ui/InlineInput";
 import { AuthContext } from "../../../context/AuthContext";
+import SingleCard from "./SingleCard";
 
 type SingleBoardListProps = {
   list: ListType;
@@ -49,23 +50,24 @@ function SingleBoardList({ list }: SingleBoardListProps) {
 
   return (
     <div className="bg-secondary font-secondary flex h-fit min-h-24 max-w-72 min-w-72 flex-col rounded-xl p-3">
-      <p className="text-sm font-medium">{list?.name}</p>
-      <div className="flex flex-col gap-2">
-        {items?.map((item) => <div key={item.id}>{item?.title}</div>)}
+      <p className="mb-4 text-sm font-semibold">{list?.name}</p>
+      <div className="mb-2 flex flex-col gap-2">
+        {items?.map((item) => <SingleCard key={item.id} item={item} />)}
       </div>
       {isAdding ? (
         <InlineInput
           placeholder="Enter card name..."
           onSave={handleAdd}
           onCancel={handleCancel}
+          buttonText="card"
         />
       ) : (
         <Button
           variant="default"
-          className="text-foreground hover:bg-muted mt-auto border-0 bg-transparent px-2 py-1 hover:scale-100"
+          className="text-foreground text-xs hover:bg-muted mt-auto border-0 bg-transparent px-2.5 py-2 hover:scale-100"
           onClick={() => setIsAdding(true)}
         >
-          <HiPlus />
+          <HiPlus size={13}/>
           <span>Add a card</span>
         </Button>
       )}

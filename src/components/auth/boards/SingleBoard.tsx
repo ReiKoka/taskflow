@@ -38,6 +38,8 @@ function SingleBoard() {
                 placeholder="Enter list name..."
                 onSave={handleAddList}
                 onCancel={handleCancel}
+                className="min-h-24 min-w-72"
+                buttonText="list"
               />
             ) : (
               <Button

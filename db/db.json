@@ -48,42 +48,12 @@
         "0iirwg74IN",
         "Pud_xM3ovO"
       ]
-    },
-    {
-      "name": "Test-1",
-      "id": "KKf2kqax_63a7fL",
-      "workspaceType": "it",
-      "userId": "0iirwg74IN",
-      "members": [],
-      "boards": []
-    },
-    {
-      "id": "YSR8iNew9XWZE8u",
-      "name": "testing",
-      "workspaceType": "logistics",
-      "userId": "0iirwg74IN",
-      "members": []
     }
   ],
   "boards": [
     {
       "id": 1,
       "name": "Sprint Planning",
-      "workspaceId": "1"
-    },
-    {
-      "id": "3elM5qfj0F047Kb",
-      "name": "test1234",
-      "workspaceId": "1"
-    },
-    {
-      "id": "bEGeIsc2WC81Zav",
-      "name": "NEW TEST",
-      "workspaceId": "1"
-    },
-    {
-      "id": "Gyf8JHA237i6i8a",
-      "name": "test500",
       "workspaceId": "1"
     }
   ],
@@ -102,6 +72,11 @@
       "id": 3,
       "name": "Completed",
       "boardId": 1
+    },
+    {
+      "id": "WQMSYJpg4zHiDkR",
+      "boardId": 1,
+      "name": "Archived"
     }
   ],
   "cards": [
@@ -110,42 +85,8 @@
       "title": "Design Login Page",
       "description": "Create a login page with TailwindCSS",
       "listId": 1,
-      "assignedTo": 2
-    },
-    {
-      "id": 2,
-      "title": "Setup API",
-      "description": "Initialize json-server with authentication",
-      "listId": 2,
-      "assignedTo": 1
-    },
-    {
-      "id": "MmY8Rw-KXVniBkB",
-      "listId": 3,
-      "description": "",
-      "userId": "0iirwg74IN",
-      "title": "Chat App"
-    },
-    {
-      "id": "U4baVTnFjb4H6Bd",
-      "listId": 1,
-      "description": "",
-      "userId": "0iirwg74IN",
-      "title": "test1234"
-    },
-    {
-      "id": "-f5S1aoTeg3oT3O",
-      "listId": 1,
-      "description": "",
-      "userId": "0iirwg74IN",
-      "title": "askkafwa"
-    },
-    {
-      "id": "vXpjCYghnc0Yqkt",
-      "listId": 1,
-      "description": "",
-      "userId": "0iirwg74IN",
-      "title": "blaballbalbalba"
+      "assignedTo": 2,
+      "status": "completed"
     }
   ],
   "comments": [

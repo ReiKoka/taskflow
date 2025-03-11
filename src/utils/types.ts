@@ -59,7 +59,10 @@ export interface CardType {
   description: string;
   listId: string;
   userId: string;
+  status: CardStatusType;
 }
+
+export type CardStatusType = "in-complete" | "completed";
 
 export interface WorkspaceWithBoardsType extends WorkspaceType {
   boards: BoardType[];

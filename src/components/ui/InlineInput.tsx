@@ -2,15 +2,24 @@ import { useRef, useState } from "react";
 import Input from "./Input";
 import { useOnClickOutside } from "usehooks-ts";
 import Button from "./Button";
+import { twMerge } from "tailwind-merge";
+import clsx from "clsx";
 
 interface InlineInputProps {
   placeholder: string;
   onSave: (value: string) => void;
   onCancel: () => void;
   className?: string;
+  buttonText: string;
 }
 
-function InlineInput({ placeholder, onSave, onCancel }: InlineInputProps) {
+function InlineInput({
+  placeholder,
+  onSave,
+  onCancel,
+  className,
+  buttonText,
+}: InlineInputProps) {
   const [inputValue, setInputValue] = useState("");
   const inputRef = useRef<HTMLDivElement>(null!);
 
@@ -29,11 +38,11 @@ function InlineInput({ placeholder, onSave, onCancel }: InlineInputProps) {
     }
   };
 
+  const baseStyles =
+    "bg-muted flex h-fit flex-col gap-2 justify-between rounded-xl p-2";
+
   return (
-    <div
-      ref={inputRef}
-      className="bg-muted flex h-fit flex-col justify-between rounded-xl p-2"
-    >
+    <div ref={inputRef} className={twMerge(clsx(baseStyles, className))}>
       <Input
         id="inline-input"
         onKeyDown={handleKeyDown}
@@ -44,7 +53,7 @@ function InlineInput({ placeholder, onSave, onCancel }: InlineInputProps) {
         className="border-muted-foreground -mt-2 w-full p-1"
       />
       <Button className="w-fit" onClick={handleSave} type="button">
-        Add List
+        Add {buttonText}
       </Button>
     </div>
   );
