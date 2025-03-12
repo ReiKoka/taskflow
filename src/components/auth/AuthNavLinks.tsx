@@ -49,6 +49,7 @@ function AuthNavLinks() {
   const [workspacesWhereAdmin = [], workspacesWhereGuest = []] = workspaces;
 
   const handleClick = () => {
+    console.log('Test')
     if (openModal) {
       openModal("createWorkspace");
     }

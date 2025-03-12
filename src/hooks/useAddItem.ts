@@ -15,7 +15,7 @@ export function useAddItem<T extends Item>(
   const [items, setItems] = useState<T[] | undefined>(initialItems);
   const [isAdding, setIsAdding] = useState(false);
 
-  const handleAdd = async (value: string) => {
+  const handleAdd = async (value: string): Promise<T | void> => {
     setIsAdding(false);
 
     const newItem = {
@@ -27,9 +27,10 @@ export function useAddItem<T extends Item>(
     setItems((prevItems) => (prevItems ? [...prevItems, newItem] : [newItem]));
 
     try {
-      await createFn(newItem);
+      const data = await createFn(newItem);
       const itemType = nameField === "title" ? "card" : "list";
       showToast("success", `New ${itemType} "${value}" added successfully`);
+      return data;
     } catch (error) {
       setItems((prevItems) =>
         prevItems ? prevItems.filter((item) => item.id !== newItem.id) : [],
@@ -40,6 +41,7 @@ export function useAddItem<T extends Item>(
       );
       console.error("Error adding item:", error);
     }
+    return;
   };
 
   const handleCancel = () => {

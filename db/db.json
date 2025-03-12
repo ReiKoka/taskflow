@@ -26,6 +26,15 @@
       "firstName": "Layla",
       "lastName": "Smith",
       "avatar": ""
+    },
+    {
+      "email": "jonas@jonas.io",
+      "password": "$2a$10$TJp3l0oIy/wlmqoKfB5t0Ot/D7C9eJTSPmG/QkTRZjb8vsy9PsutW",
+      "id": "TH97DXgQOz",
+      "role": "employee",
+      "firstName": "Jonas",
+      "lastName": "Schmeedtman",
+      "avatar": ""
     }
   ],
   "workspaces": [
@@ -76,20 +85,60 @@
   ],
   "cards": [
     {
-      "id": 1,
-      "title": "Design Login Page",
-      "description": "Create a login page with TailwindCSS",
+      "id": "hsbEMM7qNCSOzNa",
       "listId": 1,
-      "assignedTo": 2,
-      "status": "completed"
+      "description": "",
+      "userId": "0iirwg74IN",
+      "status": "completed",
+      "title": "Design a login page"
     },
     {
-      "id": "JSxpmqdAJvdeamQ",
+      "id": "s_EYX25Htb-9BT7",
+      "listId": 1,
+      "description": "",
+      "userId": "0iirwg74IN",
+      "status": "completed",
+      "title": "Design a register page"
+    },
+    {
+      "id": "MODXSkHsCsTb5zR",
       "listId": 1,
       "description": "",
       "userId": "0iirwg74IN",
       "status": "in-complete",
-      "title": "test-1234"
+      "title": "Add Landing Page"
+    },
+    {
+      "id": "tDgZ-l7P6-BZkdT",
+      "listId": 2,
+      "description": "",
+      "userId": "0iirwg74IN",
+      "status": "in-complete",
+      "title": "test1234"
+    },
+    {
+      "id": "VRRgafnKBLilHv0",
+      "listId": 2,
+      "description": "",
+      "userId": "0iirwg74IN",
+      "status": "in-complete",
+      "title": "blablbalba"
+    },
+    {
+      "id": "SEYXwffIDqFlHIW",
+      "listId": 2,
+      "description": "",
+      "userId": "0iirwg74IN",
+      "status": "in-complete",
+      "title": "blablbalba"
+    },
+    {
+      "id": "j4vrUHWlYFSnQBJ",
+      "listId": "xF2GwS3Sy058mVk",
+      "description": "",
+      "userId": "0iirwg74IN",
+      "status": "in-complete",
+      "title": "testingfordamntomuch"
     }
   ],
   "comments": [

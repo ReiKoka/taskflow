@@ -2,28 +2,30 @@ import { HiPlus } from "react-icons/hi2";
 import { CardType, ListType } from "../../../utils/types";
 import Button from "../../ui/Button";
 import { useAddItem } from "../../../hooks/useAddItem";
-import { use, useEffect, useState } from "react";
+import { use, useEffect } from "react";
 
-import { createCard, getCards } from "../../../services/cards";
+import { createCard } from "../../../services/cards";
 import InlineInput from "../../ui/InlineInput";
 import { AuthContext } from "../../../context/AuthContext";
 import SingleCard from "./SingleCard";
 
+//prettier-ignore
 type SingleBoardListProps = {
   list: ListType;
   cards: CardType[];
-  onCardMove: (
-    cardId: string,
-    sourceListId: string,
-    targetListId: string,
-  ) => Promise<void>;
+  onCardMove: (cardId: string, sourceListId: string, targetListId: string) => void;
+  setAllCards: React.Dispatch<React.SetStateAction<CardType[]>>;
 };
 
-function SingleBoardList({ list, cards, onCardMove }: SingleBoardListProps) {
+function SingleBoardList({
+  list,
+  cards,
+  onCardMove,
+  setAllCards,
+}: SingleBoardListProps) {
   const { id: listId } = list;
   const authContext = use(AuthContext);
   const user = authContext?.user;
-  const [isDragOver, setIsDragOver] = useState(false);
 
   const { items, setItems, isAdding, setIsAdding, handleAdd, handleCancel } =
     useAddItem<CardType>(
@@ -42,42 +44,43 @@ function SingleBoardList({ list, cards, onCardMove }: SingleBoardListProps) {
     setItems(cards);
   }, [cards, setItems]);
 
-  const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
+  const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault();
-    setIsDragOver(true);
-  };
-
-  const handleDragLeave = () => {
-    setIsDragOver(false);
-  };
-
-  const handleDrop = async (e: React.DragEvent<HTMLDivElement>) => {
-    e.preventDefault();
-    setIsDragOver(false);
 
     const cardId = e.dataTransfer.getData("cardId");
     const sourceListId = e.dataTransfer.getData("sourceListId");
 
-    if (sourceListId === listId) return;
+    if (sourceListId !== listId) {
+      onCardMove(cardId, sourceListId, listId);
+    }
+  };
 
-    await onCardMove(cardId, sourceListId, listId);
+  const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+  };
+
+  const handleAddWithParentUpdate = async (value: string) => {
+    const newCard = await handleAdd(value);
+
+    if (newCard) {
+      setAllCards((prevCards) => [...prevCards, newCard]);
+    }
   };
 
   return (
     <div
-      className="bg-secondary font-secondary flex h-fit min-h-20 max-w-72 min-w-72 flex-col rounded-xl p-3"
-      onDragOver={handleDragOver}
-      onDragLeave={handleDragLeave}
+      className="bg-secondary font-secondary flex h-fit min-h-24 max-w-72 min-w-72 flex-col rounded-xl p-3"
       onDrop={handleDrop}
+      onDragOver={handleDragOver}
     >
-      <p className="mb-2 text-sm font-semibold">{list?.name}</p>
+      <p className="mb-4 text-sm font-semibold">{list?.name}</p>
       <div className="mb-2 flex flex-col gap-2">
         {items?.map((item) => <SingleCard key={item.id} item={item} />)}
       </div>
       {isAdding ? (
         <InlineInput
           placeholder="Enter card name..."
-          onSave={handleAdd}
+          onSave={handleAddWithParentUpdate}
           onCancel={handleCancel}
           buttonText="card"
         />

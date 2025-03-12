@@ -15,13 +15,10 @@ function SingleBoard() {
   const board = useLoaderData({
     from: "/_authenticated/workspaces/$workspaceId/$boardId",
   });
-
   const router = useRouter();
   const goBack = () => {
     router.history.back();
   };
-
-  const [listCards, setListCards] = useState<Record<string, CardType[]>>({});
 
   const {
     items: lists,
@@ -33,69 +30,57 @@ function SingleBoard() {
     boardId: board.id,
   });
 
+  const [allCards, setAllCards] = useState<CardType[]>([]);
+
   useEffect(() => {
     const loadAllCards = async () => {
-      const cardsMap: Record<string, CardType[]> = {};
-
-      for (const list of lists ?? []) {
-        try {
-          const cards = await getCards(list.id);
-          cardsMap[list.id] = cards;
-        } catch (error) {
-          console.error(`Failed to fetch cards for list ${list.id}:`, error);
+      let loadedCards: CardType[] = [];
+      if (lists) {
+        for (const list of lists) {
+          try {
+            const listCards = await getCards(list.id);
+            loadedCards = [...loadedCards, ...listCards];
+          } catch (error) {
+            console.error(`Failed to fetch cards for list ${list.id}:`, error);
+          }
         }
-      }
 
-      setListCards(cardsMap);
+        setAllCards(loadedCards);
+      }
     };
 
-    if (lists && lists?.length > 0) {
+    if (lists && lists.length > 0) {
       loadAllCards();
     }
   }, [lists]);
 
-  const handleCardMove = async (
-    cardId: string,
-    sourceListId: string,
-    targetListId: string,
-  ) => {
+  //prettier-ignore
+  const handleCardMove = async (cardId: string, sourceListId: string, targetListId: string) => {
+
+    // Finding the card on the allCards array
+    const cardIndex = allCards.findIndex(card => card.id === cardId);
+    if (cardIndex === -1) return;
+
+    // Updating the card
+    const updatedCard = {...allCards[cardIndex], listId: targetListId};
+    
+    setAllCards(cards => [...cards.slice(0, cardIndex), updatedCard, ...cards.slice(cardIndex + 1)]);
+
+    // Updating the database
     try {
-      // Find the card in the source list
-      const sourceCards = listCards[sourceListId] || [];
-      const cardIndex = sourceCards.findIndex((card) => card.id === cardId);
+      await editCardListId(cardId, targetListId)
 
-      if (cardIndex === -1) {
-        console.error("Card not found in source list");
-        return;
-      }
-
-      // Get the card and update its listId
-      const card = sourceCards[cardIndex];
-      const updatedCard = { ...card, listId: targetListId };
-
-      // Update the database
-      await editCardListId(cardId, targetListId);
-
-      // Update local state
-      setListCards((prev) => {
-        const newState = { ...prev };
-
-        // Remove from source list
-        newState[sourceListId] = sourceCards.filter((c) => c.id !== cardId);
-
-        // Add to target list
-        newState[targetListId] = [
-          ...(newState[targetListId] || []),
-          updatedCard,
-        ];
-
-        return newState;
-      });
     } catch (error) {
-      showToast("error", "Failed to move card");
-      console.error(error);
+      console.log(error)
+      const revertedCard = {...updatedCard, listId: sourceListId};
+      setAllCards(cards => [
+        ...cards.slice(0, cardIndex),
+        revertedCard,
+        ...cards.slice(cardIndex + 1)
+      ]);
+      showToast('error', `Failed to move card`)
     }
-  };
+  }
 
   return (
     <main className="flex flex-col">
@@ -117,7 +102,8 @@ function SingleBoard() {
               <SingleBoardList
                 key={list.id}
                 list={list}
-                cards={listCards[list.id] || []}
+                cards={allCards?.filter((card) => card.listId === list.id)}
+                setAllCards={setAllCards}
                 onCardMove={handleCardMove}
               />
             ))}

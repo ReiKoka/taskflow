@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { CardStatusType, CardType } from "../../../utils/types";
 import { HiCheck } from "react-icons/hi2";
 import { editCardStatus } from "../../../services/cards";
@@ -10,18 +10,16 @@ type SingleCardProps = {
 function SingleCard({ item }: SingleCardProps) {
   const [status, setStatus] = useState<CardStatusType>(item.status);
 
-  const handleStatusChange = async () => {
-    const newStatus: CardStatusType =
-      status === "completed" ? "in-complete" : "completed";
-
-    setStatus(newStatus);
-
-    await editCardStatus(item.id, newStatus);
-  };
-
   const handleDragStart = (e: React.DragEvent<HTMLDivElement>) => {
     e.dataTransfer.setData("cardId", item.id);
     e.dataTransfer.setData("sourceListId", item.listId);
+  };
+
+  const handleStatusChange = async () => {
+    const newStatus: CardStatusType =
+      status === "completed" ? "in-complete" : "completed";
+    setStatus(newStatus);
+    await editCardStatus(item.id, newStatus);
   };
 
   return (
@@ -34,11 +32,7 @@ function SingleCard({ item }: SingleCardProps) {
         <div
           tabIndex={1}
           onClick={handleStatusChange}
-          className={`flex aspect-square h-4 w-4 -translate-x-4 cursor-pointer items-center justify-center rounded-full opacity-0 transition-all duration-300 ease-in group-hover:translate-x-0 group-hover:opacity-100 group-hover:ease-out ${
-            status === "completed"
-              ? "ring-offset-muted bg-green-500 ring-green-400 ring-offset-2 focus-visible:ring focus-visible:outline-0 dark:bg-green-700 dark:ring-green-700"
-              : "border-border border"
-          }`}
+          className={`ring-offset-muted border-border flex aspect-square h-4 w-4 -translate-x-4 cursor-pointer items-center justify-center rounded-full border opacity-0 ring-green-400 ring-offset-2 transition-all duration-300 ease-in group-hover:translate-x-0 group-hover:opacity-100 group-hover:ease-out focus-visible:ring focus-visible:outline-0 ${status === "completed" && "border-green-500 bg-green-500 dark:border-green-700 dark:bg-green-700 dark:ring-green-700"}`}
         >
           <HiCheck
             size={10}
