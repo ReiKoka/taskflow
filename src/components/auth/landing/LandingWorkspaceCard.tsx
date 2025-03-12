@@ -9,11 +9,8 @@ type LandingWorkspaceCardProps = {
   title: string;
 };
 
-function LandingWorkspaceCard({
-  icon: Icon,
-  workspaces,
-  title,
-}: LandingWorkspaceCardProps) {
+//prettier-ignore
+function LandingWorkspaceCard({ icon: Icon, workspaces, title}: LandingWorkspaceCardProps) {
   const navigate = useNavigate();
 
   const handleClick = (id: string) => {

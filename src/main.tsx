@@ -5,8 +5,8 @@ import App from "./App";
 import "./index.css";
 import { ThemeProvider } from "./context/ThemeContext";
 import { AuthProvider } from "./context/AuthContext";
-import { WorkspaceProvider } from "./context/WorkspaceContext";
 import { ModalProvider } from "./context/ModalContext";
+import { AllWorkspacesProvider } from "./context/AllWorkspacesContext";
 
 const rootElement = document.getElementById("root")!;
 if (!rootElement.innerHTML) {
@@ -16,9 +16,9 @@ if (!rootElement.innerHTML) {
       <ThemeProvider>
         <AuthProvider>
           <ModalProvider>
-            <WorkspaceProvider>
+            <AllWorkspacesProvider>
               <App />
-            </WorkspaceProvider>
+            </AllWorkspacesProvider>
           </ModalProvider>
         </AuthProvider>
       </ThemeProvider>

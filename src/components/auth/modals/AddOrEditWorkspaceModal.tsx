@@ -1,10 +1,6 @@
-import { use, useCallback, useState } from "react";
-import { ModalContext } from "../../../context/ModalContext";
-
+import { useCallback, useState } from "react";
 import { WorkspaceType, WorkspaceWithBoardsType } from "../../../utils/types";
-import { AuthContext } from "../../../context/AuthContext";
 import { TYPES_OF_WORKSPACES } from "../../../utils/constants";
-
 import Modal from "../../ui/Modal";
 import Button from "../../ui/Button";
 import Input from "../../ui/Input";
@@ -12,8 +8,10 @@ import Select from "../../ui/Select";
 import { nanoid } from "nanoid";
 import { createWorkspace, editWorkspace } from "../../../services/workspaces";
 import { showToast } from "../../../utils/showToast";
-import { WorkspaceContext } from "../../../context/WorkspaceContext";
 import { normalizeWorkspaceType } from "../../../utils/helpers";
+import useAuth from "../../../hooks/useAuth";
+import useAllWorkspaces from "../../../hooks/useAllWorkspaces";
+import useModal from "../../../hooks/useModal";
 
 type AddOrEditWorkspaceModalProps = {
   title: string;
@@ -27,16 +25,12 @@ type AddOrEditWorkspaceModalProps = {
 //prettier-ignore
 function AddOrEditWorkspaceModal({title, oldWorkspace, setOldWorkspace, modalType}: AddOrEditWorkspaceModalProps) {
 
-  const authContext = use(AuthContext);
-  const workspaceContext = use(WorkspaceContext)
-  const modalContext = use(ModalContext);
+  const {user} = useAuth();
+  const userId = user?.id;
+  const {setWorkspaces} = useAllWorkspaces()
+  const {activeModal, closeModal} = useModal()
 
-  const userId = authContext?.user?.id;
-  const setWorkspaces = workspaceContext?.setWorkspaces;
-  
-  const isOpen = modalContext?.activeModal === modalType;
-
-  const closeModal = modalContext?.closeModal as () => void;
+  const isOpen = activeModal === modalType;
 
   const [currentWorkspace, setCurrentWorkspace] = useState<WorkspaceType | undefined>(() => {
     if (modalType === "createWorkspace") {

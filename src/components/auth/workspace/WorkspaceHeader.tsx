@@ -2,11 +2,10 @@ import { HiOutlinePencilSquare, HiTrash, HiUserPlus } from "react-icons/hi2";
 import { getFirstLetter } from "../../../utils/helpers";
 import Button from "../../ui/Button";
 import AddOrEditWorkspaceModal from "../modals/AddOrEditWorkspaceModal";
-import { ModalContext } from "../../../context/ModalContext";
-import { use } from "react";
 import DeleteWorkspaceModal from "../modals/DeleteWorkspaceModal";
-import { SingleWorkspaceContext } from "../../../context/SingleWorkspaceContext";
 import Loader from "../../ui/Loader";
+import useSingleWorkspace from "../../../hooks/useSingleWorkspace";
+import useModal from "../../../hooks/useModal";
 
 type WorkspaceHeaderProps = {
   isAdmin: boolean;
@@ -14,11 +13,9 @@ type WorkspaceHeaderProps = {
 
 //prettier-ignore
 function WorkspaceHeader({isAdmin}: WorkspaceHeaderProps) {
+  const { workspace, setWorkspace } = useSingleWorkspace();
+  const { openModal } = useModal();
 
-  const { workspace, setWorkspace } = use(SingleWorkspaceContext);
-
-  const modalContext = use(ModalContext);
-  const openModal = modalContext?.openModal;
 
   const handleEditClick = () => {
     if (openModal) {

@@ -1,17 +1,9 @@
-import { use } from "react";
 import { HiOutlineSun, HiOutlineMoon } from "react-icons/hi";
-import { ThemeContext } from "../../context/ThemeContext";
 import Button from "./Button";
+import useTheme from "../../hooks/useTheme";
 
 function ThemeToggle() {
-  const context = use(ThemeContext);
-
-  // Handle undefined context
-  if (!context) {
-    throw new Error("ThemeToggle must be used within a ThemeProvider");
-  }
-
-  const { theme, setTheme } = context;
+  const { theme, setTheme } = useTheme();
 
   const handleToggle = () => {
     setTheme(theme === "dark" ? "light" : "dark");

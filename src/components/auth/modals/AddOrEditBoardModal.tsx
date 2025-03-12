@@ -1,12 +1,13 @@
-import { use, useCallback, useState } from "react";
+import { useCallback, useState } from "react";
 import Modal from "../../ui/Modal";
-import { ModalContext } from "../../../context/ModalContext";
+
 import Input from "../../ui/Input";
 import { BoardType, WorkspaceWithBoardsType } from "../../../utils/types";
 import Button from "../../ui/Button";
 import { nanoid } from "nanoid";
 import { createBoard } from "../../../services/boards";
 import { showToast } from "../../../utils/showToast";
+import useModal from "../../../hooks/useModal";
 
 type AddOrEditBoardModalProps = {
   title: string;
@@ -15,29 +16,23 @@ type AddOrEditBoardModalProps = {
   setWorkspace: React.Dispatch<React.SetStateAction<WorkspaceWithBoardsType>>;
 };
 
-function AddOrEditBoardModal({
-  title,
-  modalType,
-  workspace,
-  setWorkspace,
-}: AddOrEditBoardModalProps) {
-  const modalContext = use(ModalContext);
-  const isOpen = modalContext?.activeModal === modalType;
-  const closeModal = modalContext?.closeModal as () => void;
-
+//prettier-ignore
+function AddOrEditBoardModal({ title, modalType, workspace, setWorkspace}: AddOrEditBoardModalProps) {
+  const {activeModal, closeModal} = useModal();
+  const isOpen = activeModal === modalType;
+ 
   const [currentBoard, setCurrentBoard] = useState<BoardType | undefined>(
     () => {
       if (modalType === "createBoard") {
         return {
           id: "",
-          name: "", // Ensure name is always a string
+          name: "", 
           workspaceId: workspace?.id,
         } as BoardType;
       }
     },
   );
 
-  // Handle form field changes
   const handleFieldChange = useCallback(
     (field: keyof BoardType, value: string) => {
       setCurrentBoard((prev) => (prev ? { ...prev, [field]: value } : prev));

@@ -1,22 +1,15 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { use } from "react";
-import { AuthContext } from "../context/AuthContext";
 import PublicLanding from "../components/public/PublicLanding";
 import AuthenticatedLanding from "../components/auth/landing/AuthenticatedLanding";
 import LayoutWrapper from "../layouts/LayoutWrapper";
+import useAuth from "../hooks/useAuth";
 
 export const Route = createFileRoute("/")({
   component: RouteComponent,
 });
 
 function RouteComponent() {
-  const context = use(AuthContext);
-
-  if (!context) {
-    throw new Error("AuthContext must be used within a AuthProvider");
-  }
-
-  const { token } = context;
+  const { token } = useAuth();
 
   return (
     <LayoutWrapper type={token ? "authenticated" : "public"}>

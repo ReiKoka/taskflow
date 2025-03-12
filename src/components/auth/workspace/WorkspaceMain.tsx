@@ -2,20 +2,17 @@ import Button from "../../ui/Button";
 import { HiPlus } from "react-icons/hi2";
 import BoardCart from "./BoardCart";
 import EmptyWorkspace from "./EmptyWorkspace";
-import { use } from "react";
-import { ModalContext } from "../../../context/ModalContext";
 import AddOrEditBoardModal from "../modals/AddOrEditBoardModal";
-import { SingleWorkspaceContext } from "../../../context/SingleWorkspaceContext";
+import useSingleWorkspace from "../../../hooks/useSingleWorkspace";
+import useModal from "../../../hooks/useModal";
 
 type WorkspaceMainProps = {
   isAdmin: boolean;
 };
 
 function WorkspaceMain({ isAdmin }: WorkspaceMainProps) {
-  const { workspace, setWorkspace } = use(SingleWorkspaceContext);
-
-  const modalContext = use(ModalContext);
-  const openModal = modalContext?.openModal;
+  const { workspace, setWorkspace } = useSingleWorkspace();
+  const { openModal } = useModal();
 
   const handleCreateBoard = () => {
     if (openModal) openModal("createBoard");

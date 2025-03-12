@@ -32,7 +32,6 @@ function Input({
   autocomplete = "on",
   defaultValue,
   required,
-
   onKeyDown,
 }: InputType) {
   const baseStyles =

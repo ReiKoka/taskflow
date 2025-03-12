@@ -1,30 +1,31 @@
-import { use, useEffect, useState } from "react";
-import { AuthContext } from "../../context/AuthContext";
-import { WorkspaceContext } from "../../context/WorkspaceContext";
+import { useEffect, useState } from "react";
+//prettier-ignore
+import {HiChevronDown, HiExclamationTriangle, HiOutlinePlusCircle} from "react-icons/hi2";
 
 import { WorkspaceType } from "../../utils/types";
-
 import Button from "../ui/Button";
 import DropdownMenu from "../ui/DropdownMenu";
 import DropdownItem from "../ui/DropdownItem";
 
 //prettier-ignore
-import {getWorkspacesOfAdmin, getWorkspacesWhereUserIsGuest} from "../../services/workspaces";
-//prettier-ignore
-import { HiChevronDown, HiExclamationTriangle, HiOutlinePlusCircle} from "react-icons/hi2";
-import { ModalContext } from "../../context/ModalContext";
+import { getWorkspacesOfAdmin, getWorkspacesWhereUserIsGuest,} from "../../services/workspaces";
+
 import AddOrEditWorkspaceModal from "./modals/AddOrEditWorkspaceModal";
 
-function AuthNavLinks() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const authContext = use(AuthContext);
-  const user = authContext?.user;
-  const workspaceContext = use(WorkspaceContext);
-  const workspaces = workspaceContext?.workspaces ?? [];
-  const modalContext = use(ModalContext);
-  const openModal = modalContext?.openModal;
-  const setWorkspaces = workspaceContext?.setWorkspaces;
+import useAuth from "../../hooks/useAuth";
+import useAllWorkspaces from "../../hooks/useAllWorkspaces";
+import useModal from "../../hooks/useModal";
 
+
+
+
+function AuthNavLinks() {
+  const { user } = useAuth();
+  const { workspaces, setWorkspaces } = useAllWorkspaces() || [];
+  const { openModal } = useModal();
+  
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  
   useEffect(() => {
     if (!user || !setWorkspaces) return;
     const fetchData = async () => {
@@ -49,7 +50,7 @@ function AuthNavLinks() {
   const [workspacesWhereAdmin = [], workspacesWhereGuest = []] = workspaces;
 
   const handleClick = () => {
-    console.log('Test')
+    console.log("Test");
     if (openModal) {
       openModal("createWorkspace");
     }
@@ -100,7 +101,10 @@ function AuthNavLinks() {
                   Maybe time to create one?
                 </span>
               </p>
-              <Button className="mt-3 text-sm font-medium">
+              <Button
+                className="mt-3 text-sm font-medium"
+                onClick={handleClick}
+              >
                 <HiOutlinePlusCircle size={20} />
                 Create new workspace
               </Button>

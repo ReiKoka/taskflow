@@ -10,13 +10,8 @@ interface ModalProps {
   children: ReactNode;
 }
 
-const Modal: React.FC<ModalProps> = ({
-  isOpen,
-  onClose,
-  title,
-  description,
-  children,
-}) => {
+//prettier-ignore
+const Modal: React.FC<ModalProps> = ({ isOpen, onClose, title, description, children}) => {
   const dialogRef = useRef<HTMLDialogElement>(null);
 
   useEffect(() => {

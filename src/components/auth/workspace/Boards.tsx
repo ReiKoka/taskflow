@@ -1,17 +1,12 @@
-import { use } from "react";
-import { AuthContext } from "../../../context/AuthContext";
-
 import WorkspaceHeader from "./WorkspaceHeader";
 import WorkspaceMain from "./WorkspaceMain";
 
-import { SingleWorkspaceContext } from "../../../context/SingleWorkspaceContext";
+import useAuth from "../../../hooks/useAuth";
+import useSingleWorkspace from "../../../hooks/useSingleWorkspace";
 
 function Boards() {
-  const authContext = use(AuthContext);
-  const user = authContext?.user;
-
-  const singleWorkspaceContext = use(SingleWorkspaceContext);
-  const workspace = singleWorkspaceContext?.workspace;
+  const { user } = useAuth();
+  const { workspace } = useSingleWorkspace();
 
   const isAdmin = user?.id === workspace?.userId;
 

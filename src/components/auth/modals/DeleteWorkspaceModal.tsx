@@ -1,11 +1,10 @@
-import { use } from "react";
 import { WorkspaceType } from "../../../utils/types";
-import { ModalContext } from "../../../context/ModalContext";
 import Modal from "../../ui/Modal";
 import Button from "../../ui/Button";
 import { deleteWorkspace } from "../../../services/workspaces";
 import { useNavigate } from "@tanstack/react-router";
 import { showToast } from "../../../utils/showToast";
+import useModal from "../../../hooks/useModal";
 
 type DeleteWorkspaceModalProps = {
   title: string;
@@ -15,9 +14,8 @@ type DeleteWorkspaceModalProps = {
 
 //prettier-ignore
 function DeleteWorkspaceModal({workspace, title, modalType}: DeleteWorkspaceModalProps) {
-  const modalContext = use(ModalContext);
-  const isOpen = modalContext?.activeModal === modalType;
-  const closeModal = modalContext?.closeModal as () => void;
+  const {activeModal, closeModal} = useModal();
+  const isOpen = activeModal === modalType;
   const navigate = useNavigate()
 
   if (!isOpen) return null;

@@ -1,25 +1,21 @@
-import { use } from "react";
+//prettier-ignore
+
+import {HiArrowLeftOnRectangle, HiClipboardDocumentList, HiExclamationTriangle} from "react-icons/hi2";
 import { getFirstLetter, getRandomTailwindColor } from "../../../utils/helpers";
-import { AuthContext } from "../../../context/AuthContext";
-import AdminSidebarContent from "./AdminSidebarContent";
+
 import { Link, useNavigate } from "@tanstack/react-router";
-import {
-  HiArrowLeftOnRectangle,
-  HiClipboardDocumentList,
-  HiExclamationTriangle,
-} from "react-icons/hi2";
+
+import AdminSidebarContent from "./AdminSidebarContent";
 import Button from "../../ui/Button";
 import { showToast } from "../../../utils/showToast";
-import { SingleWorkspaceContext } from "../../../context/SingleWorkspaceContext";
+
+import useAuth from "../../../hooks/useAuth";
+import useSingleWorkspace from "../../../hooks/useSingleWorkspace";
 
 function Sidebar() {
-  const authContext = use(AuthContext);
-  const user = authContext?.user;
+  const { user, setToken } = useAuth();
+  const { workspace } = useSingleWorkspace();
 
-  const singleWorkspaceContext = use(SingleWorkspaceContext);
-  const workspace = singleWorkspaceContext?.workspace;
-
-  const setToken = authContext?.setToken;
   const isAdmin = workspace && user?.id === workspace.userId;
   const navigate = useNavigate();
 

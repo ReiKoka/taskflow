@@ -13,13 +13,8 @@ interface InlineInputProps {
   buttonText: string;
 }
 
-function InlineInput({
-  placeholder,
-  onSave,
-  onCancel,
-  className,
-  buttonText,
-}: InlineInputProps) {
+//prettier-ignore
+function InlineInput({placeholder, onSave, onCancel, className, buttonText,}: InlineInputProps) {
   const [inputValue, setInputValue] = useState("");
   const inputRef = useRef<HTMLDivElement>(null!);
 

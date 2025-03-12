@@ -1,15 +1,9 @@
 import { RouterProvider } from "@tanstack/react-router";
-import { AuthContext } from "./context/AuthContext";
-
 import { router } from "./router";
-import { use } from "react";
+import useAuth from "./hooks/useAuth";
 
 function App() {
-  const auth = use(AuthContext);
-
-  if (!auth) {
-    throw new Error(`AuthContext cannot be used outside of an AuthProvider`);
-  }
+  const auth = useAuth();
 
   return <RouterProvider router={router} context={{ auth }} />;
 }
