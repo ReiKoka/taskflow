@@ -11,6 +11,7 @@ export function useAddItem<T extends Item>(
   createFn: (data: T) => Promise<T>,
   additionalData: Partial<T> = {},
   nameField: keyof T = "name" as keyof T,
+  onUpdate?: (newItem: T) => void,
 ) {
   const [items, setItems] = useState<T[] | undefined>(initialItems);
   const [isAdding, setIsAdding] = useState(false);
@@ -28,13 +29,18 @@ export function useAddItem<T extends Item>(
 
     try {
       const data = await createFn(newItem);
+      onUpdate?.(data);
+
       const itemType = nameField === "title" ? "card" : "list";
       showToast("success", `New ${itemType} "${value}" added successfully`);
       return data;
     } catch (error) {
       setItems((prevItems) =>
-        prevItems ? prevItems.filter((item) => item.id !== newItem.id) : [],
+        prevItems
+          ? [...prevItems.filter((item) => item.id !== newItem.id)]
+          : [],
       );
+
       showToast(
         "error",
         `Failed to add ${nameField === "title" ? "card" : "list"}`,

@@ -6,19 +6,21 @@ import { HiArrowLeft, HiPlus } from "react-icons/hi2";
 import InlineInput from "../../ui/InlineInput";
 import { createList } from "../../../services/lists";
 import { useAddItem } from "../../../hooks/useAddItem";
-import { CardType, ListType } from "../../../utils/types";
+import { BoardWithListsType, CardType, ListType } from "../../../utils/types";
 import { useEffect, useState } from "react";
 import { editCardListId, getCards } from "../../../services/cards";
 import { showToast } from "../../../utils/showToast";
 
 function SingleBoard() {
-  const board = useLoaderData({
+  const boardData = useLoaderData({
     from: "/_authenticated/workspaces/$workspaceId/$boardId",
   });
   const router = useRouter();
   const goBack = () => {
     router.history.back();
   };
+
+  const [board, setBoard] = useState<BoardWithListsType>(boardData);
 
   const {
     items: lists,
@@ -82,6 +84,17 @@ function SingleBoard() {
     }
   }
 
+  const handleAddListWrapper = async (value: string) => {
+    const newList = await handleAddList(value);
+    if (newList) {
+      const updatedBoard = {
+        ...board,
+        lists: [...(board.lists || []), newList],
+      };
+      setBoard(updatedBoard);
+    }
+  };
+
   return (
     <main className="flex flex-col">
       <section className="border-muted font-secondary text-foreground flex items-center gap-4 border-b p-4 text-lg font-semibold">
@@ -110,7 +123,7 @@ function SingleBoard() {
             {isAddingList ? (
               <InlineInput
                 placeholder="Enter list name..."
-                onSave={handleAddList}
+                onSave={handleAddListWrapper}
                 onCancel={handleCancel}
                 className="min-h-20 min-w-72"
                 buttonText="list"
@@ -126,7 +139,12 @@ function SingleBoard() {
             )}
           </>
         ) : (
-          <EmptyBoard />
+          <EmptyBoard
+            isAddingList={isAddingList}
+            setIsAddingList={setIsAddingList}
+            handleAddListWrapper={handleAddListWrapper}
+            handleCancel={handleCancel}
+          />
         )}
       </section>
     </main>
