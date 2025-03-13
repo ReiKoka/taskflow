@@ -2,7 +2,7 @@ import { HiPlus } from "react-icons/hi2";
 import { CardType, ListType } from "../../../utils/types";
 import Button from "../../ui/Button";
 import { useAddItem } from "../../../hooks/useAddItem";
-import { use, useEffect } from "react";
+import { use } from "react";
 
 import { createCard } from "../../../services/cards";
 import InlineInput from "../../ui/InlineInput";
@@ -27,9 +27,10 @@ function SingleBoardList({
   const authContext = use(AuthContext);
   const user = authContext?.user;
 
-  const { items, setItems, isAdding, setIsAdding, handleAdd, handleCancel } =
+  // Only use the hook for adding new cards, not for managing existing ones
+  const { isAdding, setIsAdding, handleAdd, handleCancel } =
     useAddItem<CardType>(
-      cards,
+      [], // Start with empty array
       createCard,
       {
         listId,
@@ -39,10 +40,6 @@ function SingleBoardList({
       },
       "title",
     );
-
-  useEffect(() => {
-    setItems(cards);
-  }, [cards, setItems]);
 
   const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault();
@@ -75,7 +72,19 @@ function SingleBoardList({
     >
       <p className="mb-4 text-sm font-semibold">{list?.name}</p>
       <div className="mb-2 flex flex-col gap-2">
-        {items?.map((item) => <SingleCard key={item.id} item={item} />)}
+        {cards?.map((card) => (
+          <SingleCard
+            key={card.id}
+            item={card}
+            updateCards={(updatedCard) => {
+              setAllCards((prevCards) =>
+                prevCards.map((c) =>
+                  c.id === updatedCard.id ? updatedCard : c,
+                ),
+              );
+            }}
+          />
+        ))}
       </div>
       {isAdding ? (
         <InlineInput

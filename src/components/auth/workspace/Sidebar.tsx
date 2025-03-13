@@ -27,8 +27,6 @@ function Sidebar() {
     }
   };
 
-  if (!workspace) return null;
-
   return (
     <div className="border-muted bg-background font-secondary flex h-full w-full flex-col self-stretch border-r">
       <div className="border-muted mb-3 flex items-center gap-4 border-b p-3">

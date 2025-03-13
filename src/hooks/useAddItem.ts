@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { nanoid } from "nanoid";
 import { showToast } from "../utils/showToast";
 
@@ -11,10 +11,13 @@ export function useAddItem<T extends Item>(
   createFn: (data: T) => Promise<T>,
   additionalData: Partial<T> = {},
   nameField: keyof T = "name" as keyof T,
-  onUpdate?: (newItem: T) => void,
 ) {
   const [items, setItems] = useState<T[] | undefined>(initialItems);
   const [isAdding, setIsAdding] = useState(false);
+
+  useEffect(() => {
+    setItems(initialItems);
+  }, [initialItems]);
 
   const handleAdd = async (value: string): Promise<T | void> => {
     setIsAdding(false);
@@ -29,7 +32,6 @@ export function useAddItem<T extends Item>(
 
     try {
       const data = await createFn(newItem);
-      onUpdate?.(data);
 
       const itemType = nameField === "title" ? "card" : "list";
       showToast("success", `New ${itemType} "${value}" added successfully`);

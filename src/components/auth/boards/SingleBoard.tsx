@@ -21,6 +21,11 @@ function SingleBoard() {
   };
 
   const [board, setBoard] = useState<BoardWithListsType>(boardData);
+  const [allCards, setAllCards] = useState<CardType[]>([]);
+
+  useEffect(() => {
+    setBoard(boardData);
+  }, [boardData]);
 
   const {
     items: lists,
@@ -31,8 +36,6 @@ function SingleBoard() {
   } = useAddItem<ListType>(board.lists || [], createList, {
     boardId: board.id,
   });
-
-  const [allCards, setAllCards] = useState<CardType[]>([]);
 
   useEffect(() => {
     const loadAllCards = async () => {
@@ -57,32 +60,32 @@ function SingleBoard() {
   }, [lists]);
 
   //prettier-ignore
-  const handleCardMove = async (cardId: string, sourceListId: string, targetListId: string) => {
-
-    // Finding the card on the allCards array
-    const cardIndex = allCards.findIndex(card => card.id === cardId);
+  const handleCardMove = async ( cardId: string, sourceListId: string, targetListId: string) => {
+    const cardIndex = allCards.findIndex((card) => card.id === cardId);
     if (cardIndex === -1) return;
+    const currentCard = allCards[cardIndex];
+    const updatedCard = { ...currentCard, listId: targetListId };
 
-    // Updating the card
-    const updatedCard = {...allCards[cardIndex], listId: targetListId};
+    setAllCards((cards) => [
+      ...cards.slice(0, cardIndex),
+      updatedCard,
+      ...cards.slice(cardIndex + 1),
+    ]);
+
     
-    setAllCards(cards => [...cards.slice(0, cardIndex), updatedCard, ...cards.slice(cardIndex + 1)]);
-
-    // Updating the database
     try {
-      await editCardListId(cardId, targetListId)
-
+      await editCardListId(cardId, targetListId);
     } catch (error) {
-      console.log(error)
-      const revertedCard = {...updatedCard, listId: sourceListId};
-      setAllCards(cards => [
+      console.log(error);
+      const revertedCard = { ...currentCard, listId: sourceListId };
+      setAllCards((cards) => [
         ...cards.slice(0, cardIndex),
         revertedCard,
-        ...cards.slice(cardIndex + 1)
+        ...cards.slice(cardIndex + 1),
       ]);
-      showToast('error', `Failed to move card`)
+      showToast("error", `Failed to move card`);
     }
-  }
+  };
 
   const handleAddListWrapper = async (value: string) => {
     const newList = await handleAddList(value);

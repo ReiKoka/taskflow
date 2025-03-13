@@ -1,14 +1,19 @@
-import { useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { CardStatusType, CardType } from "../../../utils/types";
 import { HiCheck } from "react-icons/hi2";
 import { editCardStatus } from "../../../services/cards";
 
 type SingleCardProps = {
   item: CardType;
+  updateCards?: (updatedCard: CardType) => void;
 };
 
-function SingleCard({ item }: SingleCardProps) {
+function SingleCard({ item, updateCards }: SingleCardProps) {
   const [status, setStatus] = useState<CardStatusType>(item.status);
+
+  useEffect(() => {
+    setStatus(item.status);
+  }, [item.status]);
 
   const handleDragStart = (e: React.DragEvent<HTMLDivElement>) => {
     e.dataTransfer.setData("cardId", item.id);
@@ -19,7 +24,22 @@ function SingleCard({ item }: SingleCardProps) {
     const newStatus: CardStatusType =
       status === "completed" ? "in-complete" : "completed";
     setStatus(newStatus);
-    await editCardStatus(item.id, newStatus);
+    const updatedCard = { ...item, status: newStatus };
+
+    if (updateCards) {
+      updateCards(updatedCard);
+    }
+
+    try {
+      await editCardStatus(item.id, newStatus);
+    } catch (error) {
+      console.error("Failed to update card status:", error);
+
+      setStatus(item.status);
+      if (updateCards) {
+        updateCards(item);
+      }
+    }
   };
 
   return (
