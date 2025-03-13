@@ -1,5 +1,5 @@
 import { useLoaderData } from "@tanstack/react-router";
-import SingleBoardList from "../lists/SingleBoardList";
+import SingleBoardList from "../list/SingleBoardList";
 import EmptyBoard from "./EmptyBoard";
 import { createList, editList } from "../../../services/lists";
 import { useAddItem } from "../../../hooks/useAddItem";
@@ -16,11 +16,16 @@ function SingleBoard() {
   const [board, setBoard] = useState<BoardWithListsType>(boardData);
   const lastListPosition = board.lists[board.lists.length - 1]?.position || 0;
   //prettier-ignore
-  const { items, isAdding, setIsAdding, handleAdd, handleCancel } = useAddItem<ListType>(board.lists, createList, {boardId: board.id, position: lastListPosition + 1});
+  const { items, setItems, isAdding, setIsAdding, handleAdd, handleCancel } = useAddItem<ListType>(board.lists, createList, {boardId: board.id, position: lastListPosition + 1});
   const { allCards, setAllCards } = useAllCards(items);
   const { handleCardMove } = useCardMovement(allCards, setAllCards);
 
   const [draggedListId, setDraggedListId] = useState<string | null>(null);
+  const [editingListId, setEditingListId] = useState<string | null>(null);
+
+  const handleListEditStateChange = (listId: string, isEditing: boolean) => {
+    setEditingListId(isEditing ? listId : null);
+  };
 
   useEffect(() => {
     setBoard(boardData);
@@ -63,8 +68,6 @@ function SingleBoard() {
       setDraggedListId(null);
       return;
     }
-
-
 
     // Find the dragged list and target list
     const draggedList = sortedItems.find((list) => list.id === draggedListId);
@@ -166,18 +169,20 @@ function SingleBoard() {
             {sortedItems.map((list) => (
               <div
                 key={list.id}
-                draggable={true}
+                draggable={editingListId === null}
                 onDragStart={() => handleDragStart(list.id)}
                 onDragOver={handleDragOver}
                 onDrop={(e) => handleDrop(e, list.id)}
                 onDragEnd={handleDragEnd}
-                className="h-fit cursor-grab"
+                className="group h-fit cursor-grab"
               >
                 <SingleBoardList
                   list={list}
+                  setItems={setItems}
                   cards={allCards?.filter((card) => card.listId === list.id)}
                   setAllCards={setAllCards}
                   onCardMove={handleCardMove}
+                  onEditStateChange={handleListEditStateChange}
                 />
               </div>
             ))}

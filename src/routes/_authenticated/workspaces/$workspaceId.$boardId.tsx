@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import SingleBoard from "../../../components/auth/boards/SingleBoard";
+import SingleBoard from "../../../components/auth/board/SingleBoard";
 import { getBoardById } from "../../../services/boards";
 
 //prettier-ignore
