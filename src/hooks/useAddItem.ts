@@ -16,7 +16,9 @@ export function useAddItem<T extends Item>(
   const [isAdding, setIsAdding] = useState(false);
 
   useEffect(() => {
-    setItems(initialItems);
+    if (initialItems !== undefined) {
+      setItems(initialItems);
+    }
   }, [initialItems]);
 
   const handleAdd = async (value: string): Promise<T | void> => {
