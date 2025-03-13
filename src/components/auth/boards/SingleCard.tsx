@@ -16,6 +16,7 @@ function SingleCard({ item, updateCards }: SingleCardProps) {
   }, [item.status]);
 
   const handleDragStart = (e: React.DragEvent<HTMLDivElement>) => {
+    e.stopPropagation();
     e.dataTransfer.setData("cardId", item.id);
     e.dataTransfer.setData("sourceListId", item.listId);
   };

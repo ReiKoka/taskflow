@@ -51,6 +51,7 @@ export interface ListType {
   id: string;
   name: string;
   boardId: string;
+  position: number;
 }
 
 export interface CardType {
