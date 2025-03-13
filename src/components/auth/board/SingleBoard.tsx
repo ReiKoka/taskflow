@@ -160,10 +160,10 @@ function SingleBoard() {
   };
 
   return (
-    <main className="flex flex-col">
+    <main className="flex flex-col h-[calc(100dvh-60px)]">
       <BoardHeader boardName={board.name} />
 
-      <section className="flex grow gap-3 overflow-x-auto p-4">
+      <section className="flex grow gap-3 overflow-x-auto overflow-y-hidden h-full p-4">
         {board?.lists && board?.lists?.length > 0 ? (
           <>
             {sortedItems.map((list) => (
@@ -174,7 +174,7 @@ function SingleBoard() {
                 onDragOver={handleDragOver}
                 onDrop={(e) => handleDrop(e, list.id)}
                 onDragEnd={handleDragEnd}
-                className="group h-fit cursor-grab"
+                className="group h-full overflow-y-hidden cursor-grab"
               >
                 <SingleBoardList
                   list={list}

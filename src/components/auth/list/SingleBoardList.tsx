@@ -65,7 +65,7 @@ function SingleBoardList({ list, setItems, cards, onCardMove, setAllCards, onEdi
 
   return (
     <div
-      className="bg-secondary font-secondary flex h-fit min-h-24 max-w-72 min-w-72 flex-col rounded-xl p-3"
+      className="bg-secondary font-secondary flex max-h-full overflow-y-auto min-h-24 max-w-72 min-w-72 flex-col rounded-xl pl-3 py-3 pr-1.5"
       onDrop={handleDrop}
       onDragOver={handleDragOver}
     >
@@ -81,7 +81,7 @@ function SingleBoardList({ list, setItems, cards, onCardMove, setAllCards, onEdi
           }
         }}
         className="ring-offset-muted border-0 flex items-center justify-center ring-primary min-w-20 w-[50%] mb-4 duration-300 ease-in focus-visible:ring-2 focus-visible:outline-0 opacity-100 text-sm font-semibold focus:outline-0 focus:p-2 transition-all rounded-lg " />  
-      <div className="mb-2 flex flex-col gap-2">
+      <div className="mb-2 flex flex-col gap-2 flex-1 overflow-y-auto pr-1.5" >
         {cards?.map((card) => (
           <SingleCard
             key={card.id}
