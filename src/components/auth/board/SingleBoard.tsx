@@ -3,7 +3,7 @@ import SingleBoardList from "../list/SingleBoardList";
 import EmptyBoard from "./EmptyBoard";
 import { createList, editList } from "../../../services/lists";
 import { useAddItem } from "../../../hooks/useAddItem";
-import { BoardWithListsType, CardType, ListType } from "../../../utils/types";
+import { BoardWithListsType, ListType } from "../../../utils/types";
 import { useEffect, useState } from "react";
 import BoardHeader from "./BoardHeader";
 import AddListOnBoard from "./AddListOnBoard";

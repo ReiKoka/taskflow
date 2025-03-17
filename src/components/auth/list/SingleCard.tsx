@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { CardStatusType, CardType } from "../../../utils/types";
 import { HiCheck } from "react-icons/hi2";
 import { editCardStatus } from "../../../services/cards";
-import SingleCardModal from "../modals/SingleCardModal";
+
 
 type SingleCardProps = {
   item: CardType;
