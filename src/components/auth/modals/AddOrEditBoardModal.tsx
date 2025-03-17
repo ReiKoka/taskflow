@@ -112,6 +112,7 @@ function AddOrEditBoardModal({ title, modalType, workspace, setWorkspace, toBeEd
           value={currentBoard?.name}
           onChange={(e) => handleFieldChange("name", e.target.value)}
           required
+          className="font-normal"
         />
 
         <div className="flex items-center justify-end gap-2">

@@ -38,7 +38,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, title, description, chil
       onClose={onClose}
       onClick={handleOutsideClick}
     >
-      <div className="bg-background shadow-toast shadow-muted-foreground flex w-full max-w-md flex-col rounded-lg p-6 dark:shadow-black">
+      <div className="bg-background shadow-toast shadow-muted-foreground animate-jump-in duration-500 animate-ease-out flex w-full max-w-md flex-col rounded-lg p-6 dark:shadow-black">
         <Button
           variant="icon"
           className="border-destructive group/x hover:bg-destructive group w-fit self-end"

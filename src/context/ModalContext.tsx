@@ -8,6 +8,7 @@ export type ModalType =
   | "editBoard"
   | "deleteBoard"
   | "deleteList"
+  | `editCard-${string}`
   | null;
 
 interface ModalContextType {
