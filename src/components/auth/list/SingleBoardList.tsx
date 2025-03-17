@@ -8,6 +8,8 @@ import { useDragDrop } from "../../../hooks/useDragDrop";
 import { useState } from "react";
 import { showToast } from "../../../utils/showToast";
 import { editList } from "../../../services/lists";
+import Button from "../../ui/Button";
+import { HiTrash } from "react-icons/hi2";
 
 //prettier-ignore
 type SingleBoardListProps = {
@@ -65,22 +67,25 @@ function SingleBoardList({ list, setItems, cards, onCardMove, setAllCards, onEdi
 
   return (
     <div
-      className="bg-secondary font-secondary flex max-h-full overflow-y-auto min-h-24 max-w-72 min-w-72 flex-col rounded-xl pl-3 py-3 pr-1.5"
+      className="bg-secondary font-secondary flex max-h-full overflow-y-auto min-h-24 max-w-72  min-w-72 flex-col rounded-xl pl-3 py-3 pr-1.5"
       onDrop={handleDrop}
       onDragOver={handleDragOver}
     >
-      <input 
-        value={listName} 
-        onChange={(e) => setListName(e.target.value)} 
-        onBlur={onBlurHandle} 
-        onFocus={handleFocus}
-        onKeyDown={(e) => {
-          if (e.key === 'Enter') {
-            e.preventDefault();
-            e.currentTarget.blur(); 
-          }
-        }}
-        className="ring-offset-muted border-0 flex items-center justify-center ring-primary min-w-20 w-[50%] mb-4 duration-300 ease-in focus-visible:ring-2 focus-visible:outline-0 opacity-100 text-sm font-semibold focus:outline-0 focus:p-2 transition-all rounded-lg " />  
+      <div className="flex items-center justify-between mb-4">
+        <input 
+          value={listName} 
+          onChange={(e) => setListName(e.target.value)} 
+          onBlur={onBlurHandle} 
+          onFocus={handleFocus}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter') {
+              e.preventDefault();
+              e.currentTarget.blur(); 
+            }
+          }}
+          className="ring-offset-muted border-0 flex items-center justify-center ring-primary min-w-20 w-[50%]  duration-300 ease-in focus-visible:ring-2 focus-visible:outline-0 opacity-100 text-sm font-semibold focus:outline-0 focus:p-2 transition-all rounded-lg " />
+          <Button variant="icon" className="group/delete-list border-0 hover:bg-destructive rounded-md mr-1"><HiTrash size={18} className="fill-foreground group-hover/delete-list:fill-destructive-foreground"  /></Button>
+      </div>  
       <div className="mb-2 flex flex-col gap-2 flex-1 overflow-y-auto pr-1.5" >
         {cards?.map((card) => (
           <SingleCard

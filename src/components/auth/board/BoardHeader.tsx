@@ -30,7 +30,7 @@ function BoardHeader({ board, setBoard }: BoardHeaderProps) {
   };
 
   return (
-    <section className="border-muted font-secondary text-foreground flex items-center justify-between border-b p-4 text-lg font-semibold">
+    <section className="border-muted font-secondary text-foreground flex items-center justify-between border-b p-[11px] px-4 text-lg font-semibold">
       <div className="flex gap-4">
         <Button variant="icon" className="group border-0 p-0">
           <HiArrowLeft
