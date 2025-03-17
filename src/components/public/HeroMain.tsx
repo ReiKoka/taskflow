@@ -1,10 +1,16 @@
 import { HiChevronRight } from "react-icons/hi2";
 import CompanyLogo from "../../assets/images/logo.svg?react";
 import Button from "../ui/Button";
+import { useNavigate } from "@tanstack/react-router";
 
 function HeroMain() {
+  const navigate = useNavigate();
+
+  const handleGetStarted = () => {
+    navigate({ to: "/register" });
+  };
   return (
-    <div className="flex min-h-full w-full max-w-[800px] flex-col items-center lg:gap-6 sm:justify-around">
+    <div className="flex min-h-full w-full max-w-[800px] flex-col items-center sm:justify-around lg:gap-6">
       <div className="bg-background shadow-custom shadow-primary animate-wiggle animate-infinite animate-duration-[2000ms] md: mt-auto mb-8 h-36 w-36 rounded-3xl sm:mt-0 lg:mb-14">
         <CompanyLogo className="h-full w-full" />
       </div>
@@ -20,9 +26,12 @@ function HeroMain() {
         Simplify task management and stay productive effortlessly.
       </h3>
 
-      <Button className="animate-thrice animate-fill-backwards mt-auto w-full animate-bounce justify-between rounded-full px-8 py-4 text-lg font-medium sm:mt-0 sm:w-fit lg:w-fit">
+      <Button
+        className="animate-thrice animate-fill-backwards mt-auto w-full animate-bounce justify-between rounded-full px-8 py-4 text-lg font-medium sm:mt-0 sm:w-fit lg:w-fit"
+        onClick={handleGetStarted}
+      >
         <span>Get started</span>
-        <HiChevronRight strokeWidth={1} />
+        <HiChevronRight strokeWidth={1.3} />
       </Button>
     </div>
   );

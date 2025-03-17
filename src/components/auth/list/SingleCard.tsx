@@ -3,7 +3,6 @@ import { CardStatusType, CardType } from "../../../utils/types";
 import { HiCheck } from "react-icons/hi2";
 import { editCardStatus } from "../../../services/cards";
 
-
 type SingleCardProps = {
   item: CardType;
   updateCards?: (updatedCard: CardType) => void;
@@ -23,7 +22,11 @@ function SingleCard({ item, updateCards, onCardClick }: SingleCardProps) {
     e.dataTransfer.setData("sourceListId", item.listId);
   };
 
-  const handleStatusChange = async () => {
+  const handleStatusChange = async (
+    e: React.MouseEvent<HTMLDivElement, MouseEvent>,
+  ) => {
+    e.stopPropagation();
+
     const newStatus: CardStatusType =
       status === "completed" ? "in-complete" : "completed";
     setStatus(newStatus);
