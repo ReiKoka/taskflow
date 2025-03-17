@@ -184,25 +184,26 @@ function SingleBoard() {
         {board?.lists && board?.lists?.length > 0 ? (
           <>
             {sortedItems.map((list) => (
-              <div
-                key={list.id}
-                draggable={editingListId === null}
-                onDragStart={() => handleDragStart(list.id)}
-                onDragOver={handleDragOver}
-                onDrop={(e) => handleDrop(e, list.id)}
-                onDragEnd={handleDragEnd}
-                className="group h-full cursor-grab"
-              >
-                <SingleBoardList
-                  list={list}
-                  setItems={setItems}
-                  cards={allCards?.filter((card) => card.listId === list.id)}
-                  setAllCards={setAllCards}
-                  setBoard={setBoard}
-                  onCardMove={handleCardMove}
-                  onEditStateChange={handleListEditStateChange}
-                  onCardClick={handleCardClick}
-                />
+              <div key={list.id} className="group h-full">
+                <div
+                  draggable={editingListId === null}
+                  onDragStart={() => handleDragStart(list.id)}
+                  onDragOver={handleDragOver}
+                  onDrop={(e) => handleDrop(e, list.id)}
+                  onDragEnd={handleDragEnd}
+                  className="cursor-grab"
+                >
+                  <SingleBoardList
+                    list={list}
+                    setItems={setItems}
+                    cards={allCards?.filter((card) => card.listId === list.id)}
+                    setAllCards={setAllCards}
+                    setBoard={setBoard}
+                    onCardMove={handleCardMove}
+                    onEditStateChange={handleListEditStateChange}
+                    onCardClick={handleCardClick}
+                  />
+                </div>
               </div>
             ))}
             <AddListOnBoard

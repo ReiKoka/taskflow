@@ -34,7 +34,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, title, description, chil
   return (
     <dialog
       ref={dialogRef}
-      className="fixed top-0 left-0 z-50 m-0 flex h-dvh max-h-none w-dvw max-w-none items-center justify-center bg-transparent backdrop-blur-md"
+      className="fixed top-0 left-0 z-50 m-0 flex h-dvh max-h-none w-dvw max-w-none items-center justify-center bg-transparent dark:bg-secondary/50 backdrop-blur-sm"
       onClose={onClose}
       onClick={handleOutsideClick}
     >
