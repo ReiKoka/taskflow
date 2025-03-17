@@ -69,19 +69,6 @@
       "id": "TuyvU5dr2zUiE-P",
       "name": "test1",
       "workspaceId": "1"
-    },
-    {
-      "id": "O_CLdL1zTpr9OgL",
-      "name": "Test-0000",
-      "workspaceId": "1",
-      "lists": [
-        {
-          "id": "66bm2IteVYEmLDa",
-          "boardId": "O_CLdL1zTpr9OgL",
-          "position": 1,
-          "name": "Rei's Test List"
-        }
-      ]
     }
   ],
   "lists": [
@@ -121,12 +108,6 @@
       "boardId": "TuyvU5dr2zUiE-P",
       "position": 2,
       "name": "agdfhhh"
-    },
-    {
-      "id": "66bm2IteVYEmLDa",
-      "boardId": "O_CLdL1zTpr9OgL",
-      "position": 1,
-      "name": "Rei's Test List"
     }
   ],
   "cards": [
@@ -331,27 +312,5 @@
       "title": "asdfadgafafaef"
     }
   ],
-  "comments": [
-    {
-      "id": "c1",
-      "cardId": 1,
-      "userId": "0iirwg74IN",
-      "comment": "Starting the design work today. Need feedback soon!",
-      "createdAt": "2025-03-10T12:00:00Z"
-    },
-    {
-      "id": "c2",
-      "cardId": 1,
-      "userId": "vFXHDwVOU5",
-      "comment": "Looking good so far. Let me know if you need help with any part.",
-      "createdAt": "2025-03-10T14:00:00Z"
-    },
-    {
-      "id": "c3",
-      "cardId": 2,
-      "userId": "Pud_xM3ovO",
-      "comment": "Set up the server. Testing authentication now.",
-      "createdAt": "2025-03-10T13:00:00Z"
-    }
-  ]
+  "comments": []
 }

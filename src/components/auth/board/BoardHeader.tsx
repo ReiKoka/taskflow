@@ -5,10 +5,11 @@ import useModal from "../../../hooks/useModal";
 import AddOrEditBoardModal from "../modals/AddOrEditBoardModal";
 import useSingleWorkspace from "../../../hooks/useSingleWorkspace";
 import { BoardWithListsType } from "../../../utils/types";
+import DeleteBoardModal from "../modals/DeleteBoardModal";
 
 type BoardHeaderProps = {
   board: BoardWithListsType;
-  setBoard:  React.Dispatch<React.SetStateAction<BoardWithListsType>>
+  setBoard: React.Dispatch<React.SetStateAction<BoardWithListsType>>;
 };
 
 function BoardHeader({ board, setBoard }: BoardHeaderProps) {
@@ -58,6 +59,11 @@ function BoardHeader({ board, setBoard }: BoardHeaderProps) {
         setWorkspace={setWorkspace}
         toBeEditedBoard={board}
         setToBeEditedBoard={setBoard}
+      />
+      <DeleteBoardModal
+        title="Delete Board"
+        boardId={board.id}
+        modalType="deleteBoard"
       />
     </section>
   );
