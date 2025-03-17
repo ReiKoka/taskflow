@@ -161,7 +161,7 @@ function SingleBoard() {
 
   return (
     <main className="flex flex-col h-[calc(100dvh-60px)]">
-      <BoardHeader boardName={board.name} />
+      <BoardHeader board={board} setBoard={setBoard} />
 
       <section className="flex grow gap-3 overflow-x-auto h-full p-4">
         {board?.lists && board?.lists?.length > 0 ? (

@@ -95,7 +95,8 @@ function AddOrEditWorkspaceModal({title, oldWorkspace, setOldWorkspace, modalTyp
         });
       }
       showToast("success", "New workspace added successfully");
-    } else if (modalType === "editWorkspace" && oldWorkspace) {
+    } 
+    else if (modalType === "editWorkspace" && oldWorkspace) {
       const id = oldWorkspace.id;
       const newData = { ...currentWorkspace, id };
       const updatedWorkspace = await editWorkspace(id, newData as WorkspaceType);

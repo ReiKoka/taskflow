@@ -33,18 +33,18 @@ export const createBoard = async (board: BoardType): Promise<BoardType> => {
   }
 }
 
-// //prettier-ignore
-// export const editWorkspace = async (id:string, updatedWorkspace: WorkspaceType): Promise<WorkspaceType> => {
-//   try {
-//     const response = await axios.put<WorkspaceType>(`${baseURL}/workspaces/${id}`, updatedWorkspace);
-//     return response.data;
-//   } catch (error) {
-//     if (axios.isAxiosError(error) && error.response) {
-//       throw new Error(`${error.response?.data}, Failed to update workspace. Please try again later!`);
-//     }
-//     throw new Error("Network error. Please try again.");
-//   }
-// };
+//prettier-ignore
+export const editBoard = async (id:string, updatedBoard: BoardType): Promise<BoardType> => {
+  try {
+    const response = await axios.put<BoardType>(`${baseURL}/boards/${id}`, updatedBoard);
+    return response.data;
+  } catch (error) {
+    if (axios.isAxiosError(error) && error.response) {
+      throw new Error(`${error.response?.data}, Failed to update board. Please try again later!`);
+    }
+    throw new Error("Network error. Please try again.");
+  }
+};
 
 // //prettier-ignore
 // export const deleteWorkspace = async (id:string): Promise<WorkspaceType> => {

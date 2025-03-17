@@ -18,15 +18,11 @@ function WorkspaceHeader({isAdmin}: WorkspaceHeaderProps) {
 
 
   const handleEditClick = () => {
-    if (openModal) {
       openModal("editWorkspace");
-    }
   };
 
   const handleDeleteClick = () => {
-    if (openModal) {
       openModal("deleteWorkspace");
-    }
   };
 
   if (!workspace) return <Loader />

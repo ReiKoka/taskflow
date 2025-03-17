@@ -2,10 +2,14 @@ import { useCallback, useState } from "react";
 import Modal from "../../ui/Modal";
 
 import Input from "../../ui/Input";
-import { BoardType, WorkspaceWithBoardsType } from "../../../utils/types";
+import {
+  BoardType,
+  BoardWithListsType,
+  WorkspaceWithBoardsType,
+} from "../../../utils/types";
 import Button from "../../ui/Button";
 import { nanoid } from "nanoid";
-import { createBoard } from "../../../services/boards";
+import { createBoard, editBoard } from "../../../services/boards";
 import { showToast } from "../../../utils/showToast";
 import useModal from "../../../hooks/useModal";
 
@@ -14,13 +18,15 @@ type AddOrEditBoardModalProps = {
   modalType: "createBoard" | "editBoard";
   workspace: WorkspaceWithBoardsType;
   setWorkspace: React.Dispatch<React.SetStateAction<WorkspaceWithBoardsType>>;
+  toBeEditedBoard?: BoardWithListsType;
+  setToBeEditedBoard?: React.Dispatch<React.SetStateAction<BoardWithListsType>>;
 };
 
 //prettier-ignore
-function AddOrEditBoardModal({ title, modalType, workspace, setWorkspace}: AddOrEditBoardModalProps) {
+function AddOrEditBoardModal({ title, modalType, workspace, setWorkspace, toBeEditedBoard, setToBeEditedBoard}: AddOrEditBoardModalProps) {
   const {activeModal, closeModal} = useModal();
   const isOpen = activeModal === modalType;
- 
+
   const [currentBoard, setCurrentBoard] = useState<BoardType | undefined>(
     () => {
       if (modalType === "createBoard") {
@@ -29,6 +35,8 @@ function AddOrEditBoardModal({ title, modalType, workspace, setWorkspace}: AddOr
           name: "", 
           workspaceId: workspace?.id,
         } as BoardType;
+      } else if (modalType === 'editBoard') {
+        return toBeEditedBoard
       }
     },
   );
@@ -45,22 +53,51 @@ function AddOrEditBoardModal({ title, modalType, workspace, setWorkspace}: AddOr
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    try {
-      const id = nanoid(15);
-      const newBoard = { ...currentBoard, id } as BoardType;
-      await createBoard(newBoard as BoardType);
-      setWorkspace((prevWorkspace) => {
-        if (!prevWorkspace) return prevWorkspace;
-        return {
-          ...prevWorkspace,
-          boards: [...(prevWorkspace.boards || []), newBoard],
-        };
-      });
-      showToast("success", "Board created successfully!");
-      closeModal();
-    } catch (error) {
-      console.error("Failed to create board:", error);
-      showToast("error", "Failed to create board. Please try again.");
+    if (modalType === 'createBoard') {
+      try {
+        const id = nanoid(15);
+        ;
+        const newBoard = await createBoard({ ...currentBoard, id } as BoardType);
+        setWorkspace((prevWorkspace) => {
+          if (!prevWorkspace) return prevWorkspace;
+          return {
+            ...prevWorkspace,
+            boards: [...(prevWorkspace.boards || []), newBoard],
+          };
+        });
+        showToast("success", "Board created successfully!");
+        closeModal();
+      } catch (error) {
+        console.error("Failed to create board:", error);
+        showToast("error", "Failed to create board. Please try again.");
+      }
+    } 
+    else if (modalType === 'editBoard' && toBeEditedBoard && setToBeEditedBoard) {
+      const { lists, ...boardWithoutLists } = toBeEditedBoard || [];
+      try {
+        const id = toBeEditedBoard.id;
+        const updatedBoard = await editBoard(id, { ...currentBoard, id, } as BoardType);
+        setWorkspace((prevWorkspace) => {
+          if (!prevWorkspace) return prevWorkspace;
+          return {
+            ...prevWorkspace,
+            boards: prevWorkspace.boards.map((board) =>
+              board.id === id ? updatedBoard : board
+            ),
+          };
+        });
+        setToBeEditedBoard((prevBoard) => {
+          if (!prevBoard) return prevBoard;
+          return {
+            ...updatedBoard, 
+            lists: prevBoard.lists, 
+          };
+        });
+        showToast("success", "Board edited successfully!");
+        closeModal();
+      } catch (error) {
+        console.error('Failed to edit board', error);
+      }
     }
   };
 
