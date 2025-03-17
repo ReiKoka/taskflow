@@ -25,7 +25,7 @@ function AddCardOnList({
   ) : (
     <Button
       variant="default"
-      className="text-foreground hover:bg-muted mt-auto border-0 bg-transparent px-2.5 py-2 text-xs hover:scale-100"
+      className="text-foreground hover:bg-muted mt-auto mr-1.5 border-0 bg-transparent px-2.5 py-2 text-xs hover:scale-100"
       onClick={() => setIsAdding(true)}
     >
       <HiPlus size={13} />
