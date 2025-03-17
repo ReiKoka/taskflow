@@ -8,7 +8,7 @@ import { BoardWithListsType } from "../../../utils/types";
 type DeleteListModalProps = {
   title: string;
   listId: string;
-  modalType: "deleteList";
+  modalType: `deleteList-${string}`;
   setBoard: React.Dispatch<React.SetStateAction<BoardWithListsType>>;
 };
 

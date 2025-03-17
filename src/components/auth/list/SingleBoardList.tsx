@@ -22,10 +22,11 @@ type SingleBoardListProps = {
   setAllCards: React.Dispatch<React.SetStateAction<CardType[]>>;
   onEditStateChange?: (listId: string, isEditing: boolean) => void;
   setBoard: React.Dispatch<React.SetStateAction<BoardWithListsType>>
+  onCardClick: (card: CardType) => void
 };
 
 //prettier-ignore
-function SingleBoardList({ list, setItems, cards, onCardMove, setAllCards, onEditStateChange, setBoard}: SingleBoardListProps) {
+function SingleBoardList({ list, setItems, cards, onCardMove, setAllCards, onEditStateChange, setBoard, onCardClick}: SingleBoardListProps) {
   const { id: listId } = list;
   const {user} = useAuth() 
   const [listName, setListName] = useState<string>(list.name);
@@ -70,7 +71,7 @@ function SingleBoardList({ list, setItems, cards, onCardMove, setAllCards, onEdi
   };
 
   const handleDeleteList = () => {
-    openModal('deleteList')
+    openModal(`deleteList-${list.id}`)
   }
 
   return (
@@ -95,7 +96,7 @@ function SingleBoardList({ list, setItems, cards, onCardMove, setAllCards, onEdi
           <Button variant="icon" className="group/delete-list border-0 hover:bg-destructive rounded-md mr-1.5" onClick={handleDeleteList}>
             <HiTrash size={18} className="fill-muted-foreground group-hover/delete-list:fill-destructive-foreground"  />
           </Button>
-          <DeleteListModal title={`Delete ${list.name}?`} listId={list.id} modalType="deleteList" setBoard={setBoard}/>
+          <DeleteListModal title={`Delete ${list.name}?`} listId={list.id} modalType={`deleteList-${list.id}`} setBoard={setBoard}/>
       </div>  
       <div className="mb-2 flex flex-col gap-2 flex-1 overflow-y-auto pr-1.5" >
         {cards?.map((card) => (
@@ -109,6 +110,7 @@ function SingleBoardList({ list, setItems, cards, onCardMove, setAllCards, onEdi
                 ),
               );
             }}
+            onCardClick={onCardClick}
           />
         ))}
       </div>

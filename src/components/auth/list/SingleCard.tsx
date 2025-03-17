@@ -2,17 +2,16 @@ import { useEffect, useState } from "react";
 import { CardStatusType, CardType } from "../../../utils/types";
 import { HiCheck } from "react-icons/hi2";
 import { editCardStatus } from "../../../services/cards";
-import useModal from "../../../hooks/useModal";
 import SingleCardModal from "../modals/SingleCardModal";
 
 type SingleCardProps = {
   item: CardType;
   updateCards?: (updatedCard: CardType) => void;
+  onCardClick: (card: CardType) => void;
 };
 
-function SingleCard({ item, updateCards }: SingleCardProps) {
+function SingleCard({ item, updateCards, onCardClick }: SingleCardProps) {
   const [status, setStatus] = useState<CardStatusType>(item.status);
-  const { openModal } = useModal();
 
   useEffect(() => {
     setStatus(item.status);
@@ -47,7 +46,7 @@ function SingleCard({ item, updateCards }: SingleCardProps) {
   };
 
   const handleCardClick = () => {
-    openModal(`editCard-${item.id}`);
+    onCardClick(item);
   };
 
   return (
@@ -80,11 +79,6 @@ function SingleCard({ item, updateCards }: SingleCardProps) {
           </p>
         </div>
       </div>
-      <SingleCardModal
-        title="Edit Card"
-        card={item}
-        modalType={`editCard-${item.id}`}
-      />
     </>
   );
 }

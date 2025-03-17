@@ -119,12 +119,6 @@
       "boardId": 1,
       "position": 5,
       "name": "fasdfgasdgadg"
-    },
-    {
-      "id": "ao5juYk0p1bSlNo",
-      "boardId": "6Oc9kZtt61vYjNh",
-      "position": 1,
-      "name": "test-1-list"
     }
   ],
   "cards": [
@@ -327,14 +321,6 @@
       "userId": "0iirwg74IN",
       "status": "in-complete",
       "title": "asdfadgafafaef"
-    },
-    {
-      "id": "WV8Xg9hfFFxSLPZ",
-      "listId": "ao5juYk0p1bSlNo",
-      "description": "",
-      "userId": "0iirwg74IN",
-      "status": "in-complete",
-      "title": "asdfadf"
     }
   ],
   "comments": []

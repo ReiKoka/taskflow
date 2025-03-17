@@ -7,7 +7,7 @@ export type ModalType =
   | "createBoard"
   | "editBoard"
   | "deleteBoard"
-  | "deleteList"
+  | `deleteList-${string}`
   | `editCard-${string}`
   | null;
 

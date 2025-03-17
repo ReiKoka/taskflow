@@ -3,23 +3,40 @@ import SingleBoardList from "../list/SingleBoardList";
 import EmptyBoard from "./EmptyBoard";
 import { createList, editList } from "../../../services/lists";
 import { useAddItem } from "../../../hooks/useAddItem";
-import { BoardWithListsType, ListType } from "../../../utils/types";
+import { BoardWithListsType, CardType, ListType } from "../../../utils/types";
 import { useEffect, useState } from "react";
 import BoardHeader from "./BoardHeader";
 import AddListOnBoard from "./AddListOnBoard";
 import { useAllCards } from "../../../hooks/useAllCards";
 import { useCardMovement } from "../../../hooks/useCardMovement";
+import useSelectedCard from "../../../hooks/useSelectedCard";
+import SingleCardModal from "../modals/SingleCardModal";
 
 function SingleBoard() {
-  //prettier-ignore
-  const boardData = useLoaderData({from: "/_authenticated/workspaces/$workspaceId/$boardId"});
+  // Loading the data from the loader
+  const boardData = useLoaderData({
+    from: "/_authenticated/workspaces/$workspaceId/$boardId",
+  });
+
+  // Settings state for the board in order to be able to keep the UI in sync with changes to the data in the db.
   const [board, setBoard] = useState<BoardWithListsType>(boardData);
+
+  // Getting the last ListPosition to use it in re sorting of the cards.
   const lastListPosition = board.lists[board.lists.length - 1]?.position || 0;
-  //prettier-ignore
-  const { items, setItems, isAdding, setIsAdding, handleAdd, handleCancel } = useAddItem<ListType>(board.lists, createList, {boardId: board.id, position: lastListPosition + 1});
+
+  // Using the custom hook to set up the lists.
+  const { items, setItems, isAdding, setIsAdding, handleAdd, handleCancel } =
+    useAddItem<ListType>(board.lists, createList, {
+      boardId: board.id,
+      position: lastListPosition + 1,
+    });
+
+  // State for all cards (of the lists of a specific board. => board -> 3 lists each with 3 cards = 9 cards in an array.)
   const { allCards, setAllCards } = useAllCards(items);
   const { handleCardMove } = useCardMovement(allCards, setAllCards);
 
+  // State for managing the selected card in order to render just one modal rather than have one modal instance for each card.
+  const { selectedCard, setSelectedCard, handleCardClick } = useSelectedCard();
   const [draggedListId, setDraggedListId] = useState<string | null>(null);
   const [editingListId, setEditingListId] = useState<string | null>(null);
 
@@ -160,10 +177,10 @@ function SingleBoard() {
   };
 
   return (
-    <main className="flex flex-col h-[calc(100dvh-60px)]">
+    <main className="flex h-[calc(100dvh-60px)] flex-col">
       <BoardHeader board={board} setBoard={setBoard} />
 
-      <section className="flex grow gap-3 overflow-x-auto h-full p-4">
+      <section className="flex h-full grow gap-3 overflow-x-auto p-4">
         {board?.lists && board?.lists?.length > 0 ? (
           <>
             {sortedItems.map((list) => (
@@ -184,6 +201,7 @@ function SingleBoard() {
                   setBoard={setBoard}
                   onCardMove={handleCardMove}
                   onEditStateChange={handleListEditStateChange}
+                  onCardClick={handleCardClick}
                 />
               </div>
             ))}
@@ -203,6 +221,17 @@ function SingleBoard() {
           />
         )}
       </section>
+
+      {selectedCard && (
+        <SingleCardModal
+          title="Edit Card"
+          card={selectedCard}
+          modalType={`editCard-${selectedCard.id}`}
+          onClose={() => {
+            setSelectedCard(null);
+          }}
+        />
+      )}
     </main>
   );
 }
