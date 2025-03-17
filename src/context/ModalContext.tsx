@@ -7,6 +7,7 @@ export type ModalType =
   | "createBoard"
   | "editBoard"
   | "deleteBoard"
+  | "deleteList"
   | null;
 
 interface ModalContextType {

@@ -69,11 +69,6 @@
       "id": "TuyvU5dr2zUiE-P",
       "name": "test1",
       "workspaceId": "1"
-    },
-    {
-      "id": "wtD38yjwhHU_cMv",
-      "name": "Test-0000",
-      "workspaceId": "1"
     }
   ],
   "lists": [
@@ -115,10 +110,10 @@
       "name": "agdfhhh"
     },
     {
-      "id": "61HPYlTYagnYbhJ",
-      "boardId": "wtD38yjwhHU_cMv",
-      "position": 1,
-      "name": "Board-Test-0000"
+      "id": "vHtQ8mjl12-yV9o",
+      "boardId": 1,
+      "position": 5,
+      "name": "fasdfgasdgadg"
     }
   ],
   "cards": [
@@ -321,14 +316,6 @@
       "userId": "0iirwg74IN",
       "status": "in-complete",
       "title": "asdfadgafafaef"
-    },
-    {
-      "id": "EcysEJ2TUljHBRy",
-      "listId": "61HPYlTYagnYbhJ",
-      "description": "",
-      "userId": "0iirwg74IN",
-      "status": "in-complete",
-      "title": "test"
     }
   ],
   "comments": []

@@ -41,11 +41,11 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, title, description, chil
       <div className="bg-background shadow-toast shadow-muted-foreground flex w-full max-w-md flex-col rounded-lg p-6 dark:shadow-black">
         <Button
           variant="icon"
-          className="border-destructive hover:bg-destructive group w-fit self-end"
+          className="border-destructive group/x hover:bg-destructive group w-fit self-end"
           onClick={onClose}
         >
           <HiXMark
-            className="fill-destructive group-hover:fill-destructive-foreground"
+            className="fill-destructive group-hover/x:fill-destructive-foreground"
             size={20}
           />
         </Button>

@@ -181,6 +181,7 @@ function SingleBoard() {
                   setItems={setItems}
                   cards={allCards?.filter((card) => card.listId === list.id)}
                   setAllCards={setAllCards}
+                  setBoard={setBoard}
                   onCardMove={handleCardMove}
                   onEditStateChange={handleListEditStateChange}
                 />

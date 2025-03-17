@@ -46,7 +46,7 @@ function SingleCard({ item, updateCards }: SingleCardProps) {
   return (
     <div className="flex flex-col gap-2">
       <div
-        className="group bg-muted hover:ring-foreground flex w-full cursor-pointer items-center gap-2 overflow-hidden rounded-lg px-2 py-2"
+        className="group bg-muted hover:ring-foreground flex w-full cursor-pointer items-center gap-2 overflow-hidden rounded-md px-2 py-2"
         draggable
         onDragStart={handleDragStart}
       >
