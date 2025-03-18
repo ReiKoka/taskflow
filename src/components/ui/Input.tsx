@@ -35,7 +35,7 @@ function Input({
   onKeyDown,
 }: InputType) {
   const baseStyles =
-    "border-muted block w-full min-w-full rounded-lg border p-2.5 text-foreground text-sm focus-visible:border-primary focus-visible:ring-primary focus-visible:ring-1 focus-visible:outline-0 font-secondary";
+    "border-border block w-full min-w-full rounded-lg border p-2.5 text-foreground text-sm focus-visible:border-primary focus-visible:ring-primary focus-visible:ring-1 focus-visible:outline-0 font-secondary ";
 
   const baseIconStyles =
     "text-muted-foreground group-focus-within:text-primary pointer-events-none absolute inset-y-0 start-0 flex items-center ps-3.5";
