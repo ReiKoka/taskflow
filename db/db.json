@@ -6,14 +6,12 @@
       "id": "0iirwg74IN",
       "firstName": "Rei",
       "lastName": "Koka",
-      "avatar": "https://mighty.tools/mockmind-api/content/human/63.jpg",
-      "role": "admin"
+      "avatar": "https://mighty.tools/mockmind-api/content/human/63.jpg"
     },
     {
       "email": "tomas@tomas.com",
       "password": "$2a$10$a5Vns9ZdDli3c4.y/Rbw9OUvCbcyJezTI6ckTAEBcAVub6S5n0B4q",
       "id": "Pud_xM3ovO",
-      "role": "employee",
       "firstName": "Tomas",
       "lastName": "Jefferson",
       "avatar": ""
@@ -22,7 +20,6 @@
       "email": "laylasmith@yahoo.com",
       "password": "$2a$10$SArry.jsJiqDRfqcU8xRruxrIdy0uDhjeZp.GW5FxSZ87qmeoMfJC",
       "id": "vFXHDwVOU5",
-      "role": "employee",
       "firstName": "Layla",
       "lastName": "Smith",
       "avatar": ""
@@ -31,9 +28,16 @@
       "email": "jonas@jonas.io",
       "password": "$2a$10$TJp3l0oIy/wlmqoKfB5t0Ot/D7C9eJTSPmG/QkTRZjb8vsy9PsutW",
       "id": "TH97DXgQOz",
-      "role": "employee",
       "firstName": "Jonas",
       "lastName": "Schmeedtman",
+      "avatar": ""
+    },
+    {
+      "email": "testuser1@test.com",
+      "password": "$2a$10$w4FsMsC2x59mzQXNZoVHLOsNX12j5wlDPBiwV08pK7XS1Vek6i.wu",
+      "id": "ef0Q6JWDtY",
+      "firstName": "test",
+      "lastName": "User",
       "avatar": ""
     }
   ],

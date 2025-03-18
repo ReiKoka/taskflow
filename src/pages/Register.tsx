@@ -54,7 +54,6 @@ function Register() {
 
       const user: User = {
         id: nanoid(10),
-        role: "employee",
         firstName,
         lastName,
         email,

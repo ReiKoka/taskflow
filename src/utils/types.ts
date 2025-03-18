@@ -1,13 +1,12 @@
 export type Theme = "light" | "dark";
 
-export type RoleType = "admin" | "employee";
+export type RoleType = "admin" | "member";
 
 export interface AuthenticatedUser {
   id: string;
   firstName: string;
   lastName: string;
   email: string;
-  role: RoleType;
   avatar?: string;
 }
 

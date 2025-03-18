@@ -16,16 +16,13 @@ import useAuth from "../../hooks/useAuth";
 import useAllWorkspaces from "../../hooks/useAllWorkspaces";
 import useModal from "../../hooks/useModal";
 
-
-
-
 function AuthNavLinks() {
   const { user } = useAuth();
   const { workspaces, setWorkspaces } = useAllWorkspaces() || [];
   const { openModal } = useModal();
-  
+
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  
+
   useEffect(() => {
     if (!user || !setWorkspaces) return;
     const fetchData = async () => {
@@ -50,10 +47,7 @@ function AuthNavLinks() {
   const [workspacesWhereAdmin = [], workspacesWhereGuest = []] = workspaces;
 
   const handleClick = () => {
-    console.log("Test");
-    if (openModal) {
-      openModal("createWorkspace");
-    }
+    openModal("createWorkspace");
   };
 
   return (
