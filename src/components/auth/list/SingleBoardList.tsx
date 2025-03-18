@@ -5,7 +5,7 @@ import SingleCard from "./SingleCard";
 import useAuth from "../../../hooks/useAuth";
 import AddCardOnList from "./AddCardOnList";
 import { useDragDrop } from "../../../hooks/useDragDrop";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { showToast } from "../../../utils/showToast";
 import { editList } from "../../../services/lists";
 import Button from "../../ui/Button";
@@ -21,12 +21,13 @@ type SingleBoardListProps = {
   onCardMove: (cardId: string, sourceListId: string, targetListId: string) => void;
   setAllCards: React.Dispatch<React.SetStateAction<CardType[]>>;
   onEditStateChange?: (listId: string, isEditing: boolean) => void;
-  setBoard: React.Dispatch<React.SetStateAction<BoardWithListsType>>
-  onCardClick: (card: CardType) => void
+  setBoard: React.Dispatch<React.SetStateAction<BoardWithListsType>>;
+  onCardClick: (card: CardType) => void;
+  maxHeight: number;
 };
 
 //prettier-ignore
-function SingleBoardList({ list, setItems, cards, onCardMove, setAllCards, onEditStateChange, setBoard, onCardClick}: SingleBoardListProps) {
+function SingleBoardList({ list, setItems, cards, onCardMove, setAllCards, onEditStateChange, setBoard, onCardClick, maxHeight}: SingleBoardListProps) {
   const { id: listId } = list;
   const {user} = useAuth() 
   const [listName, setListName] = useState<string>(list.name);
@@ -35,6 +36,8 @@ function SingleBoardList({ list, setItems, cards, onCardMove, setAllCards, onEdi
   const handleFocus = () => {
     onEditStateChange?.(list.id, true);
   };
+
+
   
   const onBlurHandle = () => {
     onEditStateChange?.(list.id, false);
@@ -76,7 +79,8 @@ function SingleBoardList({ list, setItems, cards, onCardMove, setAllCards, onEdi
 
   return (
     <div
-      className="bg-secondary font-secondary flex max-h-full shadow-custom-3 dark:shadow-toast-dark overflow-y-auto min-h-24 max-w-72  min-w-72 flex-col rounded-xl pl-3 py-3 pr-1.5"
+      className="bg-secondary font-secondary flex shadow-custom-3 dark:shadow-toast-dark overflow-y-auto min-h-24 max-w-72 min-w-72 flex-col rounded-xl pl-3 py-3 pr-1.5"
+      style={{maxHeight: maxHeight}}
       onDrop={handleDrop}
       onDragOver={handleDragOver}
     >
@@ -98,7 +102,7 @@ function SingleBoardList({ list, setItems, cards, onCardMove, setAllCards, onEdi
           </Button>
           <DeleteListModal title={`Delete ${list.name}?`} listId={list.id} modalType={`deleteList-${list.id}`} setBoard={setBoard}/>
       </div>  
-      <div className="mb-2 flex flex-col gap-2 flex-1 overflow-y-auto pr-1.5" >
+      <div className="my-2 flex flex-col gap-2 flex-1 overflow-y-auto pr-1.5" >
         {cards?.map((card) => (
           <SingleCard
             key={card.id}

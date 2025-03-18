@@ -19,10 +19,8 @@ function WorkspaceMain({ isAdmin }: WorkspaceMainProps) {
   };
 
   return (
-    <section className="mt-6 flex grow flex-col gap-4">
-      <h1 className="text-foreground text-xl leading-2.5 font-medium">
-        Boards
-      </h1>
+    <section className="mt-4 flex grow flex-col gap-4">
+      <h1 className="text-foreground text-xl font-medium">Boards</h1>
 
       {!isAdmin && !(workspace?.boards?.length > 0) && <EmptyWorkspace />}
 

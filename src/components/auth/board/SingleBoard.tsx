@@ -4,7 +4,7 @@ import EmptyBoard from "./EmptyBoard";
 import { createList, editList } from "../../../services/lists";
 import { useAddItem } from "../../../hooks/useAddItem";
 import { BoardWithListsType, ListType } from "../../../utils/types";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import BoardHeader from "./BoardHeader";
 import AddListOnBoard from "./AddListOnBoard";
 import { useAllCards } from "../../../hooks/useAllCards";
@@ -176,6 +176,22 @@ function SingleBoard() {
     }
   };
 
+  const heightRef = useRef<HTMLDivElement>(null);
+  const [height, setHeight] = useState(0);
+
+  useEffect(() => {
+    const updateHeight = () => {
+      if (heightRef.current) {
+        setHeight(heightRef.current.offsetHeight);
+      }
+    };
+
+    updateHeight();
+    window.addEventListener("resize", updateHeight);
+
+    return () => window.removeEventListener("resize", updateHeight);
+  }, [height]);
+
   return (
     <main className="flex h-[calc(100dvh-60px)] flex-col">
       <BoardHeader board={board} setBoard={setBoard} />
@@ -184,14 +200,18 @@ function SingleBoard() {
         {board?.lists && board?.lists?.length > 0 ? (
           <>
             {sortedItems.map((list) => (
-              <div key={list.id} className="group h-full">
+              <div
+                key={list.id}
+                className="group flex flex-col"
+                ref={heightRef}
+              >
                 <div
                   draggable={editingListId === null}
                   onDragStart={() => handleDragStart(list.id)}
                   onDragOver={handleDragOver}
                   onDrop={(e) => handleDrop(e, list.id)}
                   onDragEnd={handleDragEnd}
-                  className="cursor-grab"
+                  className="flex cursor-grab flex-col"
                 >
                   <SingleBoardList
                     list={list}
@@ -202,6 +222,7 @@ function SingleBoard() {
                     onCardMove={handleCardMove}
                     onEditStateChange={handleListEditStateChange}
                     onCardClick={handleCardClick}
+                    maxHeight={height}
                   />
                 </div>
               </div>
