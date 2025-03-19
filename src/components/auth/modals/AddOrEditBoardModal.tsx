@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import Modal from "../../ui/Modal";
 
 import Input from "../../ui/Input";
@@ -27,19 +27,19 @@ function AddOrEditBoardModal({ title, modalType, workspace, setWorkspace, toBeEd
   const {activeModal, closeModal} = useModal();
   const isOpen = activeModal === modalType;
 
-  const [currentBoard, setCurrentBoard] = useState<BoardType | undefined>(
-    () => {
-      if (modalType === "createBoard") {
-        return {
-          id: "",
-          name: "", 
-          workspaceId: workspace?.id,
-        } as BoardType;
-      } else if (modalType === 'editBoard') {
-        return toBeEditedBoard
-      }
-    },
-  );
+  const [currentBoard, setCurrentBoard] = useState<BoardType | undefined>(undefined);
+
+  useEffect(() => {
+    if (modalType === "createBoard") {
+      setCurrentBoard({
+        id: "",
+        name: "",
+        workspaceId: workspace?.id,
+      } as BoardType);
+    } else if (modalType === 'editBoard') {
+      setCurrentBoard(toBeEditedBoard);
+    }
+  }, [modalType, workspace, toBeEditedBoard]);
 
   const handleFieldChange = useCallback(
     (field: keyof BoardType, value: string) => {

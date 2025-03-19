@@ -6,13 +6,17 @@ import AddOrEditBoardModal from "../modals/AddOrEditBoardModal";
 import useSingleWorkspace from "../../../hooks/useSingleWorkspace";
 import { BoardWithListsType } from "../../../utils/types";
 import DeleteBoardModal from "../modals/DeleteBoardModal";
+import React from "react";
 
 type BoardHeaderProps = {
   board: BoardWithListsType;
   setBoard: React.Dispatch<React.SetStateAction<BoardWithListsType>>;
 };
 
-function BoardHeader({ board, setBoard }: BoardHeaderProps) {
+const BoardHeader = React.memo(function BoardHeader({
+  board,
+  setBoard,
+}: BoardHeaderProps) {
   const router = useRouter();
   const goBack = () => {
     router.history.back();
@@ -28,6 +32,8 @@ function BoardHeader({ board, setBoard }: BoardHeaderProps) {
   const handleDeleteClick = () => {
     openModal("deleteBoard");
   };
+
+  console.log(board);
 
   return (
     <section className="border-muted font-secondary text-foreground flex items-center justify-between border-b p-[11px] px-4 text-lg font-semibold">
@@ -67,6 +73,6 @@ function BoardHeader({ board, setBoard }: BoardHeaderProps) {
       />
     </section>
   );
-}
+});
 
 export default BoardHeader;

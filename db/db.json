@@ -49,7 +49,75 @@
       "userId": "0iirwg74IN",
       "members": [
         "vFXHDwVOU5",
-        "Pud_xM3ovO"
+        "Pud_xM3ovO",
+        "ef0Q6JWDtY",
+        "TH97DXgQOz"
+      ],
+      "boards": [
+        {
+          "id": 1,
+          "name": "Sprint Planning",
+          "workspaceId": "1",
+          "lists": [
+            {
+              "id": "y4zoJQ5tD5AKAiD",
+              "name": "To Do",
+              "boardId": 1,
+              "position": 1,
+              "listName": "To Dos"
+            },
+            {
+              "id": "scjZfAaaWG3wob3",
+              "name": "In Progress",
+              "boardId": 1,
+              "position": 2
+            },
+            {
+              "id": "xF2GwS3Sy058mVk",
+              "boardId": 1,
+              "name": "Completed Tasks",
+              "position": 3
+            },
+            {
+              "id": "OWkry-86_FkOXKr",
+              "boardId": 1,
+              "position": 4,
+              "name": "Testing-4"
+            }
+          ]
+        },
+        {
+          "id": "TuyvU5dr2zUiE-P",
+          "name": "test1",
+          "workspaceId": "1",
+          "lists": [
+            {
+              "id": "y4zoJQ5tD5AKAiD",
+              "name": "To Do",
+              "boardId": 1,
+              "position": 1,
+              "listName": "To Dos"
+            },
+            {
+              "id": "scjZfAaaWG3wob3",
+              "name": "In Progress",
+              "boardId": 1,
+              "position": 2
+            },
+            {
+              "id": "xF2GwS3Sy058mVk",
+              "boardId": 1,
+              "name": "Completed Tasks",
+              "position": 3
+            },
+            {
+              "id": "OWkry-86_FkOXKr",
+              "boardId": 1,
+              "position": 4,
+              "name": "Testing-4"
+            }
+          ]
+        }
       ]
     },
     {

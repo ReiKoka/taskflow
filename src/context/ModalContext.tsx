@@ -9,6 +9,7 @@ export type ModalType =
   | "deleteBoard"
   | `deleteList-${string}`
   | `editCard-${string}`
+  | 'addMembers'
   | null;
 
 interface ModalContextType {

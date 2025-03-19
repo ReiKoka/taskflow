@@ -23,7 +23,7 @@ function MembersMain() {
   return (
     <section className="mt-4 flex grow flex-col">
       <h1 className="text-foreground text-xl font-medium">Members</h1>
-      <div className="relative mt-6 flex flex-col gap-4">
+      <div className="relative flex flex-col gap-4">
         <div className="border-muted flex flex-col items-center justify-center border-b pb-6">
           <h2 className="text-md mb-4 font-medium">Admin</h2>
           <SingleMemberCard

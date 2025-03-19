@@ -6,6 +6,7 @@ import DeleteWorkspaceModal from "../modals/DeleteWorkspaceModal";
 import Loader from "../../ui/Loader";
 import useSingleWorkspace from "../../../hooks/useSingleWorkspace";
 import useModal from "../../../hooks/useModal";
+import AddMembersModal from "../modals/AddMembersModal";
 
 type WorkspaceHeaderProps = {
   isAdmin: boolean;
@@ -24,6 +25,10 @@ function WorkspaceHeader({isAdmin}: WorkspaceHeaderProps) {
   const handleDeleteClick = () => {
       openModal("deleteWorkspace");
   };
+
+  const handleAddMembers = () => {
+    openModal('addMembers')
+  }
 
   if (!workspace) return <Loader />
 
@@ -50,7 +55,7 @@ function WorkspaceHeader({isAdmin}: WorkspaceHeaderProps) {
             <span>Edit Workspace</span>
           </Button>
 
-          <Button variant="default">
+          <Button variant="default" onClick={handleAddMembers}>
             <HiUserPlus />
             <span>Add members</span>
           </Button>
@@ -67,6 +72,7 @@ function WorkspaceHeader({isAdmin}: WorkspaceHeaderProps) {
         oldWorkspace={workspace}
         setOldWorkspace={setWorkspace}
       />
+      <AddMembersModal title={"Add new members"} modalType="addMembers" workspace={workspace} setWorkspace={setWorkspace} />
       <DeleteWorkspaceModal title="Delete Workspace" modalType="deleteWorkspace" workspace={workspace}/>
     </section>
   );

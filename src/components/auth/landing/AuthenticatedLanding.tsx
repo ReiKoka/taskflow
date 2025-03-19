@@ -50,7 +50,7 @@ function AuthenticatedLanding() {
         </div>
       </section>
 
-      {workspacesWhereAdmin.length > 0 || workspacesWhereGuest.length > 0 ? (
+      {workspacesWhereAdmin?.length > 0 || workspacesWhereGuest?.length > 0 ? (
         <>
           <LandingWorkspaceCard
             icon={HiOutlineUser}
