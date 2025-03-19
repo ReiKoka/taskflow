@@ -64,11 +64,9 @@ function SingleBoard() {
   const handleDragStart = (listId: string) => {
     setDraggedListId(listId);
   };
-
   const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault();
   };
-
   const handleDragEnd = () => {
     setDraggedListId(null);
   };
