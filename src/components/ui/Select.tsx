@@ -20,7 +20,7 @@ function Select({
   options,
 }: SelectType) {
   const baseStyles =
-    "border-muted block w-full min-w-full rounded-lg bg-background border p-2.5 text-foreground text-sm focus-visible:border-primary focus-visible:ring-primary focus-visible:ring-1 focus-visible:outline-0 font-secondary capitalize cursor-pointer ";
+    "border-muted block w-full min-w-full rounded-lg bg-secondary border p-2.5 text-foreground text-sm focus-visible:border-primary focus-visible:ring-primary focus-visible:ring-1 focus-visible:outline-0 font-secondary capitalize cursor-pointer ";
 
   const selectStyles = twMerge(clsx(baseStyles, className));
 
