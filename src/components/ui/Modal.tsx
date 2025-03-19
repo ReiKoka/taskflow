@@ -34,11 +34,11 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, title, description, chil
   return (
     <dialog
       ref={dialogRef}
-      className="fixed top-0 left-0 z-50 m-0 flex h-dvh max-h-none w-dvw max-w-none items-center justify-center bg-transparent dark:bg-secondary/50 backdrop-blur-sm"
+      className="fixed top-0 left-0 z-50 m-0 flex h-dvh max-h-none w-dvw max-w-none items-center justify-center bg-transparent dark:bg-secondary/30 backdrop-blur-[5px] animate-fade animate-once animate-duration-500 animate-ease-out"
       onClose={onClose}
       onClick={handleOutsideClick}
     >
-      <div className="bg-background shadow-toast shadow-muted-foreground animate-jump-in duration-500 animate-ease-out flex w-full max-w-md flex-col rounded-lg p-6 dark:shadow-black">
+      <div className="bg-background dark:bg-secondary shadow-sm shadow-muted-foreground animate-jump-in duration-500 animate-ease-out flex w-full max-w-md flex-col rounded-lg p-6 dark:shadow-muted">
         <Button
           variant="icon"
           className="border-destructive group/x hover:bg-destructive group w-fit self-end"

@@ -14,7 +14,7 @@ function SingleMemberCard({ user, workspace }: SingleMemberCardProps) {
   const isAdmin = user?.id === workspace.userId;
 
   return (
-    <div className="shadow-custom-3 dark:border-border dark:shadow-toast-dark back flex w-80 flex-col gap-8 overflow-hidden rounded-3xl dark:border">
+    <div className="shadow-sm dark:shadow-muted back flex w-80 flex-col gap-8 overflow-hidden rounded-3xl bg-background dark:bg-secondary">
       <div className="bg-primary relative h-24 rounded-b-3xl">
         <div className="ring-muted-foreground absolute -bottom-6 left-[50%] aspect-square w-20 -translate-x-[50%] overflow-hidden rounded-full ring-4">
           {isPicture(user?.avatar as string) ? (

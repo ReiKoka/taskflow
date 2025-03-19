@@ -32,9 +32,11 @@ function MembersMain() {
           />
         </div>
 
-        <div className="flex flex-col justify-center w-full flex-wrap">
-          <h2 className="text-md mb-4 font-medium max-w-full text-center">Workspace Members</h2>
-          <div className="flex gap-8 flex-wrap justify-center">
+        <div className="flex w-full flex-col flex-wrap justify-center">
+          <h2 className="text-md mb-4 max-w-full text-center font-medium">
+            Workspace Members
+          </h2>
+          <div className="mb-6 flex flex-wrap justify-center gap-6">
             {members?.map((member) => (
               <SingleMemberCard user={member} workspace={workspace} />
             ))}
