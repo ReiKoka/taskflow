@@ -5,7 +5,7 @@ import SingleCard from "./SingleCard";
 import useAuth from "../../../hooks/useAuth";
 import AddCardOnList from "./AddCardOnList";
 import { useDragDrop } from "../../../hooks/useDragDrop";
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { showToast } from "../../../utils/showToast";
 import { editList } from "../../../services/lists";
 import Button from "../../ui/Button";

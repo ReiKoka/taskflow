@@ -10,7 +10,7 @@ function Workspace() {
   });
 
   return (
-    <div className="grid grid-cols-[270px_minmax(0,1fr)]">
+    <div className="grid h-full grid-cols-[270px_minmax(0,1fr)] overflow-hidden">
       <SingleWorkspaceProvider initialWorkspace={workspace}>
         <Sidebar />
         <Outlet />

@@ -9,7 +9,7 @@ function Members() {
 
   const isAdmin = user?.id === workspace?.userId;
   return (
-    <main className="font-secondary flex w-full flex-col px-40 py-6">
+    <main className="font-secondary flex w-full flex-col px-40 py-6 overflow-hidden">
       <WorkspaceHeader isAdmin={isAdmin} />
       <MembersMain />
     </main>

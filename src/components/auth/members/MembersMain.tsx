@@ -21,9 +21,9 @@ function MembersMain() {
   }, [workspace.members]);
 
   return (
-    <section className="mt-4 flex grow flex-col">
+    <section className="mt-4 flex grow flex-col overflow-hidden">
       <h1 className="text-foreground text-xl font-medium">Members</h1>
-      <div className="relative flex flex-col gap-4">
+      <div className="relative flex flex-col gap-4 overflow-y-auto">
         <div className="border-muted flex flex-col items-center justify-center border-b pb-6">
           <h2 className="text-md mb-4 font-medium">Admin</h2>
           <SingleMemberCard
@@ -32,9 +32,9 @@ function MembersMain() {
           />
         </div>
 
-        <div className="flex flex-col flex-wrap items-center justify-center">
-          <h2 className="text-md mb-4 font-medium">Workspace Members</h2>
-          <div className="flex gap-8">
+        <div className="flex flex-col justify-center w-full flex-wrap">
+          <h2 className="text-md mb-4 font-medium max-w-full text-center">Workspace Members</h2>
+          <div className="flex gap-8 flex-wrap justify-center">
             {members?.map((member) => (
               <SingleMemberCard user={member} workspace={workspace} />
             ))}

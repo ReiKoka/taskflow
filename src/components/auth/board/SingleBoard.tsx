@@ -11,6 +11,7 @@ import { useAllCards } from "../../../hooks/useAllCards";
 import { useCardMovement } from "../../../hooks/useCardMovement";
 import useSelectedCard from "../../../hooks/useSelectedCard";
 import SingleCardModal from "../modals/SingleCardModal";
+import useHeight from "../../../hooks/useHeight";
 
 function SingleBoard() {
   // Loading the data from the loader
@@ -176,21 +177,7 @@ function SingleBoard() {
     }
   };
 
-  const heightRef = useRef<HTMLDivElement>(null);
-  const [height, setHeight] = useState(0);
-
-  useEffect(() => {
-    const updateHeight = () => {
-      if (heightRef.current) {
-        setHeight(heightRef.current.offsetHeight);
-      }
-    };
-
-    updateHeight();
-    window.addEventListener("resize", updateHeight);
-
-    return () => window.removeEventListener("resize", updateHeight);
-  }, [height]);
+  const { heightRef, height } = useHeight();
 
   return (
     <main className="flex h-[calc(100dvh-60px)] flex-col">
