@@ -1,7 +1,7 @@
 import Modal from "../../ui/Modal";
 import Button from "../../ui/Button";
 import useModal from "../../../hooks/useModal";
-import { User, WorkspaceWithBoardsType } from "../../../utils/types";
+import { WorkspaceWithBoardsType } from "../../../utils/types";
 import { editWorkspace } from "../../../services/workspaces";
 import { showToast } from "../../../utils/showToast";
 
@@ -11,12 +11,11 @@ type DeleteMembersModalProps = {
   onClose: () => void;
   workspace: WorkspaceWithBoardsType;
   setWorkspace: React.Dispatch<React.SetStateAction<WorkspaceWithBoardsType>>;
-  setMembers: React.Dispatch<React.SetStateAction<User[]>>;
   memberToDelete: string;
 };
 
 //prettier-ignore
-function DeleteMembersModal({ title, modalType, onClose, workspace, setWorkspace, setMembers, memberToDelete}: DeleteMembersModalProps) {
+function DeleteMembersModal({ title, modalType, onClose, workspace, setWorkspace, memberToDelete}: DeleteMembersModalProps) {
   const {activeModal} = useModal();
   const isOpen = activeModal === modalType;
 

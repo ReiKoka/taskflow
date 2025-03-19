@@ -66,7 +66,6 @@ function MembersMain() {
         onClose={closeModal}
         workspace={workspace}
         setWorkspace={setWorkspace}
-        setMembers={setMembers}
         memberToDelete={memberToDelete}
       />
     </>
