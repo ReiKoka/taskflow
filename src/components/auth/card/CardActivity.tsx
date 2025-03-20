@@ -3,6 +3,7 @@ import Textarea from "../../ui/Textarea";
 import { getInitials } from "../../../utils/helpers";
 import { AuthenticatedUser, CommentsWithUserType } from "../../../utils/types";
 import { useState } from "react";
+import SingleCardComment from "./SingleCardComment";
 
 type CardActivityProps = {
   comments: CommentsWithUserType[];
@@ -32,8 +33,10 @@ function CardActivity({ comments, setComments, user }: CardActivityProps) {
             className="min-h-8"
           />
         </div>
-        <div className="flex w-full flex-col gap-2">
-          {comments?.map((comment) => <p>{comment.content}</p>)}
+        <div className="mt-3 flex w-full flex-col gap-3">
+          {comments?.map((comment) => (
+            <SingleCardComment key={comment.id} comment={comment} user={user} />
+          ))}
         </div>
       </div>
     </div>
