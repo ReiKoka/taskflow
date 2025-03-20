@@ -39,7 +39,7 @@ function DeleteMembersModal({ title, modalType, onClose, workspace, setWorkspace
   }
 
   return <Modal isOpen={isOpen} onClose={onClose} title={title}>
-    <h3 className="text-base text-center text-foreground font-secondary mb-6">Are you sure you want to delete this member? You can still add them again later!</h3>
+    <h3 className="text-base text-center text-balance text-foreground font-secondary mb-6">Are you sure you want to delete this member? <span className="block">You can still add them again later!</span></h3>
     <div className="flex items-center gap-4 justify-end">
       <Button type="button" variant="outline" onClick={handleCancel}>Cancel</Button>
       <Button type="button" variant="destructive" onClick={handleConfirm}>Confirm Delete</Button>

@@ -36,8 +36,6 @@ function SingleBoardList({ list, setItems, cards, onCardMove, setAllCards, onEdi
   const handleFocus = () => {
     onEditStateChange?.(list.id, true);
   };
-
-
   
   const onBlurHandle = () => {
     onEditStateChange?.(list.id, false);

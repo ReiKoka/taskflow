@@ -1,7 +1,6 @@
-import { useEffect, useState } from "react";
-import { CardStatusType, CardType } from "../../../utils/types";
 import { HiCheck } from "react-icons/hi2";
-import { editCardStatus } from "../../../services/cards";
+import useChangeStatus from "../../../hooks/useChangeStatus";
+import { CardType } from "../../../utils/types";
 
 type SingleCardProps = {
   item: CardType;
@@ -10,42 +9,12 @@ type SingleCardProps = {
 };
 
 function SingleCard({ item, updateCards, onCardClick }: SingleCardProps) {
-  const [status, setStatus] = useState<CardStatusType>(item.status);
-
-  useEffect(() => {
-    setStatus(item.status);
-  }, [item.status]);
+  const { status, handleStatusChange } = useChangeStatus(item, updateCards);
 
   const handleDragStart = (e: React.DragEvent<HTMLDivElement>) => {
     e.stopPropagation();
     e.dataTransfer.setData("cardId", item.id);
     e.dataTransfer.setData("sourceListId", item.listId);
-  };
-
-  const handleStatusChange = async (
-    e: React.MouseEvent<HTMLDivElement, MouseEvent>,
-  ) => {
-    e.stopPropagation();
-
-    const newStatus: CardStatusType =
-      status === "completed" ? "in-complete" : "completed";
-    setStatus(newStatus);
-    const updatedCard = { ...item, status: newStatus };
-
-    if (updateCards) {
-      updateCards(updatedCard);
-    }
-
-    try {
-      await editCardStatus(item.id, newStatus);
-    } catch (error) {
-      console.error("Failed to update card status:", error);
-
-      setStatus(item.status);
-      if (updateCards) {
-        updateCards(item);
-      }
-    }
   };
 
   const handleCardClick = () => {
@@ -68,10 +37,10 @@ function SingleCard({ item, updateCards, onCardClick }: SingleCardProps) {
             <HiCheck
               size={10}
               strokeWidth={2}
-              className={`stroke-background dark:stroke-secondary-foreground transition-all duration-300 ${
+              className={`stroke-background dark:stroke-secondary-foreground transition-all duration-1000 ${
                 status === "completed"
                   ? "animate-jump-in animate-once animate-ease-out opacity-100"
-                  : "opacity-0"
+                  : "animate-jump-out animate-once animate-ease-out"
               }`}
             />
           </div>

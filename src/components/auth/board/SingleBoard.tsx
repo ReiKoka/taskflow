@@ -234,6 +234,13 @@ function SingleBoard() {
           title="Edit Card"
           card={selectedCard}
           modalType={`editCard-${selectedCard.id}`}
+          updateCards={(updatedCard) => {
+            setAllCards((prevCards) =>
+              prevCards.map((c) =>
+                c.id === updatedCard.id ? updatedCard : c,
+              ),
+            );
+          }}
           onClose={() => {
             setSelectedCard(null);
           }}
