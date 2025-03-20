@@ -1,5 +1,6 @@
 import { getInitials } from "../../../utils/helpers";
 import { AuthenticatedUser, CommentsWithUserType } from "../../../utils/types";
+import Button from "../../ui/Button";
 
 type SingleCartCommentProps = {
   comment: CommentsWithUserType;
@@ -16,9 +17,21 @@ function SingleCardComment({ comment, user }: SingleCartCommentProps) {
           {getInitials([comment.user?.firstName as string, comment.user?.lastName as string])}
         </span>
       </p>
-      <p className="border-secondary dark:border-muted bg-secondary dark:bg-muted w-full rounded-lg border px-2 py-1.5 text-sm">
-        {comment.content}
-      </p>
+      <div className="flex flex-col gap-1">
+        <p className="border-secondary dark:border-muted bg-secondary dark:bg-muted w-full rounded-lg border px-2 py-1.5 text-sm">
+          {comment.content}
+        </p>
+        {comment.userId === user.id && (
+          <div className="ml-0.5 flex items-center gap-4">
+            <Button className="bg-background text-foreground rounded-none border-0 px-0 py-0 text-xs font-medium underline-offset-2 hover:scale-100 hover:underline active:scale-100">
+              Edit
+            </Button>
+            <Button className="bg-background text-destructive rounded-none border-0 px-0 py-0 text-xs font-medium underline-offset-2 hover:scale-100 hover:underline active:scale-100">
+              Delete
+            </Button>
+          </div>
+        )}
+      </div>
     </div>
   );
 }

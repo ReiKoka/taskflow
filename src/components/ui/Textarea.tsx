@@ -26,7 +26,7 @@ function Textarea({ id, value, onChange, onKeyDown, placeholder, className }: Te
   
 
   const baseStyles =
-    "border-border font-secondary text-sm text-foreground dark:border-muted-foreground block h-auto w-full resize-none overflow-hidden rounded-lg border px-3 py-1.5 outline-0";
+    "border-border font-secondary text-sm text-foreground dark:border-muted-foreground block h-auto w-full resize-none overflow-hidden rounded-lg border px-3 py-1.5 outline-0 focus-visible:outline-0 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-primary";
   const styles = twMerge(clsx(baseStyles, className));
 
   return (
