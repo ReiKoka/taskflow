@@ -26,11 +26,14 @@ function SingleBoard() {
   const lastListPosition = board.lists[board.lists.length - 1]?.position || 0;
 
   // Using the custom hook to set up the lists.
-  const { items, setItems, isAdding, setIsAdding, handleAdd, handleCancel } =
-    useAddItem<ListType>(board.lists, createList, {
+  const { items, setItems, isAdding, setIsAdding, handleAdd, handleCancel } = useAddItem<ListType>(
+    board.lists,
+    createList,
+    {
       boardId: board.id,
       position: lastListPosition + 1,
-    });
+    },
+  );
 
   // State for all cards (of the lists of a specific board. => board -> 3 lists each with 3 cards = 9 cards in an array.)
   const { allCards, setAllCards } = useAllCards(items);
@@ -72,9 +75,7 @@ function SingleBoard() {
   };
 
   // Sort lists by position for rendering
-  const sortedItems = [...(items || [])].sort(
-    (a, b) => a.position - b.position,
-  );
+  const sortedItems = [...(items || [])].sort((a, b) => a.position - b.position);
 
   //prettier-ignore
   const handleDrop = async (e: React.DragEvent<HTMLDivElement>,targetListId: string) => {
@@ -185,11 +186,7 @@ function SingleBoard() {
         {board?.lists && board?.lists?.length > 0 ? (
           <>
             {sortedItems.map((list) => (
-              <div
-                key={list.id}
-                className="group flex flex-col"
-                ref={heightRef}
-              >
+              <div key={list.id} className="group flex flex-col" ref={heightRef}>
                 <div
                   draggable={editingListId === null}
                   onDragStart={() => handleDragStart(list.id)}
@@ -236,14 +233,13 @@ function SingleBoard() {
           modalType={`editCard-${selectedCard.id}`}
           updateCards={(updatedCard) => {
             setAllCards((prevCards) =>
-              prevCards.map((c) =>
-                c.id === updatedCard.id ? updatedCard : c,
-              ),
+              prevCards.map((c) => (c.id === updatedCard.id ? updatedCard : c)),
             );
           }}
           onClose={() => {
             setSelectedCard(null);
           }}
+          lists={board.lists}
         />
       )}
     </main>

@@ -10,15 +10,7 @@ export const getFirstLetter = (str: string) => {
 
 export const isPicture = (filename: string) => {
   if (!filename || typeof filename !== "string") return false;
-  const validExtensions = [
-    ".jpg",
-    ".jpeg",
-    ".png",
-    ".gif",
-    ".bmp",
-    ".svg",
-    ".webp",
-  ];
+  const validExtensions = [".jpg", ".jpeg", ".png", ".gif", ".bmp", ".svg", ".webp"];
   return validExtensions.some((ext) => filename.toLowerCase().endsWith(ext));
 };
 
@@ -31,7 +23,9 @@ export function normalizeWorkspaceType(type: string): string {
 
   const normalizedType = type.toLowerCase().replace(/\s+/g, "-");
 
-  return TYPES_OF_WORKSPACES.some((opt) => opt.value === normalizedType)
-    ? normalizedType
-    : "";
+  return TYPES_OF_WORKSPACES.some((opt) => opt.value === normalizedType) ? normalizedType : "";
+}
+
+export function getInitials(words: string[]) {
+  return words.map((word) => word.trim()[0] || "").join("");
 }

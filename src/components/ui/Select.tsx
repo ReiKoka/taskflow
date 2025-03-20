@@ -9,6 +9,7 @@ type SelectType = {
   onChange?: (e: React.ChangeEvent<HTMLSelectElement>) => void;
   placeholderSelected: string;
   options: { value: string; textValue: string }[];
+  label: string;
 };
 
 function Select({
@@ -18,6 +19,7 @@ function Select({
   value,
   onChange,
   options,
+  label,
 }: SelectType) {
   const baseStyles =
     "border-border block w-full min-w-full rounded-lg bg-background dark:bg-secondary border p-2.5 text-foreground text-sm focus-visible:border-primary focus-visible:ring-primary focus-visible:ring-1 focus-visible:outline-0 font-secondary capitalize cursor-pointer ";
@@ -26,29 +28,22 @@ function Select({
 
   return (
     <div>
-      <label
-        htmlFor={id}
-        className="font-secondary text-foreground mb-2 block text-sm font-medium"
-      >
-        Select an option
-      </label>
+      {label && (
+        <label
+          htmlFor={id}
+          className="font-secondary text-foreground mb-2 block text-sm font-medium"
+        >
+          Select an option
+        </label>
+      )}
 
       <div className="group relative">
-        <select
-          id={id}
-          className={selectStyles}
-          value={value}
-          onChange={onChange}
-        >
+        <select id={id} className={selectStyles} value={value} onChange={onChange}>
           <option value="" disabled>
             {placeholderSelected}
           </option>
           {options.map((option) => (
-            <option
-              key={option.value}
-              value={option.value}
-              className="capitalize"
-            >
+            <option key={option.value} value={option.value} className="capitalize">
               {option.textValue}
             </option>
           ))}

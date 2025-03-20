@@ -62,6 +62,18 @@ export interface CardType {
   status: CardStatusType;
 }
 
+export interface CommentsType {
+  id: string;
+  cardId: string;
+  userId: string;
+  content: string;
+  createdAt: string;
+}
+
+export interface CommentsWithUserType extends CommentsType {
+  user: User
+}
+
 export type CardStatusType = "in-complete" | "completed";
 
 export interface WorkspaceWithBoardsType extends WorkspaceType {

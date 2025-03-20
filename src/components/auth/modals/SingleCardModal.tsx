@@ -1,12 +1,17 @@
 import Modal from "../../ui/Modal";
-import Button from "../../ui/Button";
 import useModal from "../../../hooks/useModal";
-
-import { CardType } from "../../../utils/types";
-import useChangeStatus from "../../../hooks/useChangeStatus";
-import { HiCheck, HiChevronDown } from "react-icons/hi2";
-import { useState } from "react";
-import DropdownMenu from "../../ui/DropdownMenu";
+import { AuthenticatedUser, CardType, CommentsWithUserType, ListType } from "../../../utils/types";
+import CardHeader from "../card/CardHeader";
+import CardDescription from "../card/CardDescription";
+import { HiChartBar } from "react-icons/hi2";
+import { useEffect, useState } from "react";
+import Textarea from "../../ui/Textarea";
+import { getCommentsOfCard } from "../../../services/comments";
+import { showToast } from "../../../utils/showToast";
+import { getInitials } from "../../../utils/helpers";
+import useAuth from "../../../hooks/useAuth";
+import CardActivity from "../card/CardActivity";
+import Loader from "../../ui/Loader";
 
 type SingleCardModalProps = {
   title: string;
@@ -14,17 +19,23 @@ type SingleCardModalProps = {
   modalType: `editCard-${string}`;
   updateCards?: ((updatedCard: CardType) => void) | undefined;
   onClose: () => void;
+  lists: ListType[];
 };
 
-function SingleCardModal({ card, title, modalType, onClose, updateCards }: SingleCardModalProps) {
+function SingleCardModal({
+  card,
+  title,
+  modalType,
+  onClose,
+  updateCards,
+  lists,
+}: SingleCardModalProps) {
   const { activeModal } = useModal();
   const isOpen = activeModal === modalType;
-  const { status, handleStatusChange } = useChangeStatus(card, updateCards);
-  const [isPopupMenuOpen, setIsPopupMenuOpen] = useState(false);
-
   if (!isOpen) return null;
 
-  
+  const [comments, setComments] = useState<CommentsWithUserType[] | undefined>(undefined);
+  const { user } = useAuth();
 
   // const handleCancel = () => {
   //   onClose();
@@ -34,53 +45,34 @@ function SingleCardModal({ card, title, modalType, onClose, updateCards }: Singl
   //   console.log("Test Card");
   // };
 
+  useEffect(() => {
+    const fetchComments = async () => {
+      try {
+        const commentsData = await getCommentsOfCard(card.id);
+        setComments(commentsData);
+      } catch (error) {
+        console.error(error);
+        showToast("error", "Failed to get comments of card");
+      }
+    };
+    fetchComments();
+  }, []);
+
   return (
     <Modal isOpen={isOpen} onClose={onClose} title={title}>
-      <div className="group/card font-secondary flex w-full max-w-full cursor-pointer items-center gap-4 px-2 py-2">
-        <div
-          tabIndex={1}
-          onClick={handleStatusChange}
-          className={`ring-offset-muted border-border flex aspect-square h-5 w-5 cursor-pointer items-center justify-center rounded-full border opacity-100 ring-green-400 ring-offset-2 transition-all duration-300 ease-in group-hover/card:ease-out focus-visible:ring focus-visible:outline-0 ${
-            status === "completed" &&
-            "border-green-500 bg-green-500 dark:border-green-700 dark:bg-green-700 dark:ring-green-700"
-          }`}
-        >
-          <HiCheck
-            size={12}
-            strokeWidth={2}
-            className={`stroke-background dark:stroke-secondary-foreground animate-duration-500 transition-all ${
-              status === "completed"
-                ? "animate-jump-in animate-once animate-ease-out opacity-100"
-                : "animate-once animate-ease-out animate-jump-out"
-            }`}
+      {!user || !comments ? (
+        <Loader />
+      ) : (
+        <section className="text-foreground flex flex-col gap-4">
+          <CardHeader card={card} updateCards={updateCards} lists={lists} />
+          <CardDescription />
+          <CardActivity
+            user={user as AuthenticatedUser}
+            comments={comments as CommentsWithUserType[]}
+            setComments={setComments}
           />
-        </div>
-        <h2
-          className={`text-foreground max-w-[345px] text-base font-semibold break-words text-ellipsis whitespace-normal transition-transform duration-300 ease-in group-hover/card:translate-x-0 group-hover/card:ease-out`}
-        >
-          {card?.title}
-        </h2>
-      </div>
-
-      <div className="ml-11 flex gap-2 items-end">
-        <p className="font-secondary text-foreground text-sm">In list </p>
-        <div className="relative">
-          <Button
-            variant="outline"
-            className="group rounded-md text-sm hover:translate-0 hover:scale-100 py-0 border border-border px-2 "
-            onClick={() => setIsPopupMenuOpen(!isPopupMenuOpen)}
-          >
-            <span></span>
-            <HiChevronDown
-              className="group-hover:text-primary mt-0.5 transition-all group-focus:rotate-180"
-              strokeWidth={1.1}
-            />
-          </Button>
-          <DropdownMenu isOpen={isPopupMenuOpen} setIsOpen={setIsPopupMenuOpen} position="top-7 left-0" className="dark:bg-secondary border-border border">
-            <p className="text-foreground font-secondary">HIIII</p>
-          </DropdownMenu>
-        </div>
-      </div>
+        </section>
+      )}
     </Modal>
   );
 }
