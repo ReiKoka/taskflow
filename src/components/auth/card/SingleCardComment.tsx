@@ -11,7 +11,7 @@ function SingleCardComment({ comment, user }: SingleCartCommentProps) {
   return (
     <div className="flex w-full items-start gap-4">
       <p
-        className={`${comment.userId === user.id ? "bg-primary" : "bg-muted-foreground"} text-primary-foreground flex aspect-square w-9 items-center justify-center rounded-full text-xs font-medium tracking-wide capitalize`}
+        className={`${comment.userId === user.id ? "bg-primary" : "bg-muted-foreground"} text-primary-foreground flex aspect-square h-9 min-h-9 w-9 min-w-9 items-center justify-center rounded-full text-xs font-medium tracking-wide capitalize`}
       >
         <span>
           {getInitials([comment.user?.firstName as string, comment.user?.lastName as string])}
