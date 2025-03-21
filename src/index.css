@@ -57,13 +57,11 @@
   --font-secondary: "Work Sans", serif;
   --shadow-custom: rgba(0, 0, 0, 0.4) 0px 30px 90px;
   --shadow-custom-2: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px;
-  --shadow-custom-3:
-    rgba(99, 99, 99, 0.2) 0px 2px 5px 0px, rgba(99, 99, 99, 0.05) 0px 1px 1px 0px;
+  --shadow-custom-3: rgba(99, 99, 99, 0.2) 0px 2px 5px 0px, rgba(99, 99, 99, 0.05) 0px 1px 1px 0px;
   --shadow-card: rgba(0, 0, 0, 0.1) 0px 4px 12px;
   --shadow-toast: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
   --shadow-toast-dark:
-    hsla(276, 10%, 10%, 0.16) 0px 2px 4px 0px,
-    hsla(276, 10%, 10%, 0.32) 0px 2px 16px 0px;
+    hsla(276, 10%, 10%, 0.16) 0px 2px 4px 0px, hsla(276, 10%, 10%, 0.32) 0px 2px 16px 0px;
 }
 
 .pattern-bg {
@@ -79,7 +77,6 @@ select {
   -webkit-appearance: none !important;
   -moz-appearance: none !important;
 }
-
 
 /* loader.css */
 .spinner {
@@ -158,11 +155,21 @@ select {
 }
 
 @keyframes spinner-fzua35 {
-  0%, 10%, 20%, 30%, 50%, 60%, 70%, 80%, 90%, 100% {
-     transform: rotate(calc(var(--rotation) * 1deg)) translate(0, calc(var(--translation) * 1%));
+  0%,
+  10%,
+  20%,
+  30%,
+  50%,
+  60%,
+  70%,
+  80%,
+  90%,
+  100% {
+    transform: rotate(calc(var(--rotation) * 1deg)) translate(0, calc(var(--translation) * 1%));
   }
 
   50% {
-     transform: rotate(calc(var(--rotation) * 1deg)) translate(0, calc(var(--translation) * 1.5%));
+    transform: rotate(calc(var(--rotation) * 1deg)) translate(0, calc(var(--translation) * 1.5%));
   }
 }
+

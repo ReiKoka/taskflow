@@ -8,6 +8,8 @@ import { AuthProvider } from "./context/AuthContext";
 import { ModalProvider } from "./context/ModalContext";
 import { AllWorkspacesProvider } from "./context/AllWorkspacesContext";
 
+import { Toaster } from "sonner";
+
 const rootElement = document.getElementById("root")!;
 if (!rootElement.innerHTML) {
   const root = createRoot(rootElement);
@@ -18,6 +20,7 @@ if (!rootElement.innerHTML) {
           <ModalProvider>
             <AllWorkspacesProvider>
               <App />
+              <Toaster duration={3000} position="bottom-right" />
             </AllWorkspacesProvider>
           </ModalProvider>
         </AuthProvider>
