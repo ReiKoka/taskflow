@@ -5,11 +5,12 @@ import { twMerge } from "tailwind-merge";
 type SelectType = {
   id: string;
   className?: string;
-  value?: string;
+  value?: string ;
   onChange?: (e: React.ChangeEvent<HTMLSelectElement>) => void;
   placeholderSelected: string;
   options: { value: string; textValue: string }[];
   label: string;
+  onBlur?: (e: React.FocusEvent<HTMLSelectElement>) => void;
 };
 
 function Select({
@@ -20,6 +21,7 @@ function Select({
   onChange,
   options,
   label,
+  onBlur
 }: SelectType) {
   const baseStyles =
     "border-border block w-full min-w-full rounded-lg bg-background dark:bg-secondary border p-2.5 text-foreground text-sm focus-visible:border-primary focus-visible:ring-primary focus-visible:ring-1 focus-visible:outline-0 font-secondary capitalize cursor-pointer ";
@@ -38,7 +40,7 @@ function Select({
       )}
 
       <div className="group relative">
-        <select id={id} className={selectStyles} value={value} onChange={onChange}>
+        <select id={id} className={selectStyles} value={value} onChange={onChange} onBlur={onBlur}>
           <option value="" disabled>
             {placeholderSelected}
           </option>

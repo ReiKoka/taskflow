@@ -34,13 +34,6 @@ function SingleCardModal({
   const [comments, setComments] = useState<CommentsWithUserType[] | undefined>(undefined);
   const { user } = useAuth();
 
-  // const handleCancel = () => {
-  //   onClose();
-  // };
-
-  // const handleConfirm = async () => {
-  //   console.log("Test Card");
-  // };
 
   useEffect(() => {
     const fetchComments = async () => {

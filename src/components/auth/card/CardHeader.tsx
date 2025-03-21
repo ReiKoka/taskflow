@@ -3,6 +3,8 @@ import useChangeStatus from "../../../hooks/useChangeStatus";
 import { CardType, ListType } from "../../../utils/types";
 import Select from "../../ui/Select";
 import { useState } from "react";
+import { editCardListId } from "../../../services/cards";
+import { showToast } from "../../../utils/showToast";
 
 type CardHeaderProps = {
   card: CardType;
@@ -14,6 +16,24 @@ function CardHeader({ card, updateCards, lists }: CardHeaderProps) {
   const { status, handleStatusChange } = useChangeStatus(card, updateCards);
   const [selectedList, setSelectedList] = useState(card.listId);
   const selectOptions = lists.map((list) => ({ value: list.id, textValue: list.name }));
+
+  const handleListChange = async () => {
+    if (card.listId === selectedList) return;
+    try {
+      const cardWithNewList = await editCardListId(card.id, selectedList);
+      updateCards?.(cardWithNewList);
+      showToast(
+        "success",
+        `Card ${card.title} was successfully transferred to list ${lists.find((list) => list.id === selectedList)?.name}`,
+      );
+    } catch (error) {
+      console.error(error);
+      showToast(
+        "error",
+        `Failed to transfer card ${card.title} to list ${lists.find((list) => list.id === selectedList)?.name}`,
+      );
+    }
+  };
 
   return (
     <div>
@@ -53,6 +73,7 @@ function CardHeader({ card, updateCards, lists }: CardHeaderProps) {
           className="bg-muted dark:bg-muted min-w-34 border-0 py-0.5 pr-0 pl-3 text-sm"
           value={selectedList}
           onChange={(e) => setSelectedList(e.target.value)}
+          onBlur={handleListChange}
         />
       </div>
     </div>
