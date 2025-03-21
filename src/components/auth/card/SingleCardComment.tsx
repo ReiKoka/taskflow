@@ -17,8 +17,8 @@ function SingleCardComment({ comment, user }: SingleCartCommentProps) {
           {getInitials([comment.user?.firstName as string, comment.user?.lastName as string])}
         </span>
       </p>
-      <div className="flex flex-col gap-1">
-        <p className="border-secondary dark:border-muted bg-secondary dark:bg-muted w-full rounded-lg border px-2 py-1.5 text-sm">
+      <div className="flex flex-col grow h-full max-h-full gap-1">
+        <p className="border-secondary dark:border-muted bg-secondary dark:bg-muted w-full max-w-[320px] rounded-lg border px-2 py-1.5 text-sm break-words text-ellipsis whitespace-normal">
           {comment.content}
         </p>
         {comment.userId === user.id && (
