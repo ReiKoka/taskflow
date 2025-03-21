@@ -4,9 +4,7 @@ import { CardStatusType, CardType } from "../utils/types";
 
 export const getCards = async (listId: string): Promise<CardType[]> => {
   try {
-    const response = await axios.get<CardType[]>(
-      `${baseURL}/cards/?listId=${listId}`,
-    );
+    const response = await axios.get<CardType[]>(`${baseURL}/cards/?listId=${listId}`);
     return response.data;
   } catch (error) {
     if (axios.isAxiosError(error) && error.response) {
@@ -59,6 +57,21 @@ export const editCardListId = async (cardId: string, listId: string): Promise<Ca
       throw new Error(
         `${error.response?.data}, Failed to edit card list ID. Please try again later!`,
       );
+    }
+    throw new Error("Network error. Please try again.");
+  }
+};
+
+export const editCardProperty = async <T extends Partial<CardType>>(
+  cardId: string,
+  data: T,
+): Promise<CardType> => {
+  try {
+    const response = await axios.patch<CardType>(`${baseURL}/cards/${cardId}`, data);
+    return response.data;
+  } catch (error: unknown) {
+    if (axios.isAxiosError(error) && error.response) {
+      throw new Error(`${error.response.data}, Failed to edit card. Please try again later!`);
     }
     throw new Error("Network error. Please try again.");
   }

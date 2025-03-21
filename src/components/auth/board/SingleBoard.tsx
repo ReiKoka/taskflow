@@ -4,7 +4,7 @@ import EmptyBoard from "./EmptyBoard";
 import { createList, editList } from "../../../services/lists";
 import { useAddItem } from "../../../hooks/useAddItem";
 import { BoardWithListsType, ListType } from "../../../utils/types";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import BoardHeader from "./BoardHeader";
 import AddListOnBoard from "./AddListOnBoard";
 import { useAllCards } from "../../../hooks/useAllCards";

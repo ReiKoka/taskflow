@@ -3,7 +3,7 @@ import useChangeStatus from "../../../hooks/useChangeStatus";
 import { CardType, ListType } from "../../../utils/types";
 import Select from "../../ui/Select";
 import { useState } from "react";
-import { editCardListId } from "../../../services/cards";
+import { editCardProperty } from "../../../services/cards";
 import { showToast } from "../../../utils/showToast";
 
 type CardHeaderProps = {
@@ -17,13 +17,10 @@ function CardHeader({ card, updateCards, lists }: CardHeaderProps) {
   const [selectedList, setSelectedList] = useState(card.listId);
   const selectOptions = lists.map((list) => ({ value: list.id, textValue: list.name }));
 
-  console.log(selectedList);
-  console.log(card.listId);
-
   const handleListChange = async () => {
     if (card.listId === selectedList) return;
     try {
-      const cardWithNewList = await editCardListId(card.id, selectedList);
+      const cardWithNewList = await editCardProperty(card.id, { listId: selectedList });
       updateCards?.(cardWithNewList);
       showToast(
         "success",

@@ -2,6 +2,7 @@ import { useRef } from "react";
 import Button from "./Button";
 import { twMerge } from "tailwind-merge";
 import clsx from "clsx";
+import { useOnClickOutside } from "usehooks-ts";
 
 type TextareaProps = {
   id: string;
@@ -10,9 +11,20 @@ type TextareaProps = {
   onKeyDown?: React.KeyboardEventHandler<HTMLTextAreaElement>;
   placeholder: string;
   className?: string;
+  setIsOpen?: React.Dispatch<React.SetStateAction<boolean>>;
+  onSave?: () => Promise<void>;
 };
 
-function Textarea({ id, value, onChange, onKeyDown, placeholder, className }: TextareaProps) {
+function Textarea({
+  id,
+  value,
+  onChange,
+  onKeyDown,
+  placeholder,
+  className,
+  setIsOpen,
+  onSave,
+}: TextareaProps) {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
   const adjustHeight = () => {
@@ -23,10 +35,16 @@ function Textarea({ id, value, onChange, onKeyDown, placeholder, className }: Te
       textarea.style.height = `${textarea.scrollHeight}px`;
     }
   };
-  
+
+  const handlePrimaryButtonClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.stopPropagation();
+    if (onSave) {
+      onSave();
+    }
+  };
 
   const baseStyles =
-    "border-border font-secondary text-sm text-foreground dark:border-muted-foreground block h-auto w-full resize-none overflow-hidden rounded-lg border px-3 py-1.5 outline-0 focus-visible:outline-0 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-primary";
+    "border-border dark:ring-offset-secondary font-secondary text-sm text-foreground dark:border-muted-foreground block h-auto w-full resize-none overflow-hidden rounded-lg border px-3 py-1.5 outline-0 focus-visible:outline-0 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-primary animate-flip-down animate-once animate-duration-500 animate-delay-100 animate-ease-out";
   const styles = twMerge(clsx(baseStyles, className));
 
   return (
@@ -44,10 +62,22 @@ function Textarea({ id, value, onChange, onKeyDown, placeholder, className }: Te
         onKeyDown={onKeyDown}
       />
       <div className="flex items-center justify-end gap-2">
-        <Button title="Send message" type="submit" variant="outline" className="h-fit w-fit py-1">
+        <Button
+          title="Send message"
+          type="button"
+          onClick={() => setIsOpen && setIsOpen(false)}
+          variant="outline"
+          className="h-fit w-fit py-1"
+        >
           Clear
         </Button>
-        <Button title="Send message" type="submit" variant="default" className="h-fit w-fit py-1">
+        <Button
+          title="Send message"
+          type="button"
+          variant="default"
+          className="h-fit w-fit py-1"
+          onClick={handlePrimaryButtonClick}
+        >
           Save
         </Button>
       </div>

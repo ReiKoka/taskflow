@@ -55,7 +55,7 @@ function SingleCardModal({
       ) : (
         <section className="text-foreground flex flex-col gap-4">
           <CardHeader card={card} updateCards={updateCards} lists={lists} />
-          <CardDescription />
+          <CardDescription card={card} updateCards={updateCards}/>
           <CardActivity
             user={user as AuthenticatedUser}
             comments={comments as CommentsWithUserType[]}
