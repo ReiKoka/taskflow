@@ -1,18 +1,49 @@
 import { HiChartBar } from "react-icons/hi2";
 import Textarea from "../../ui/Textarea";
 import { getInitials } from "../../../utils/helpers";
-import { AuthenticatedUser, CommentsWithUserType } from "../../../utils/types";
+import {
+  AuthenticatedUser,
+  CardType,
+  CommentsType,
+  CommentsWithUserType,
+} from "../../../utils/types";
 import { useState } from "react";
 import SingleCardComment from "./SingleCardComment";
+import { nanoid } from "nanoid";
+import { createComment } from "../../../services/comments";
+import { showToast } from "../../../utils/showToast";
 
 type CardActivityProps = {
   comments: CommentsWithUserType[];
   setComments: React.Dispatch<React.SetStateAction<CommentsWithUserType[] | undefined>>;
   user: AuthenticatedUser;
+  card: CardType;
 };
 
-function CardActivity({ comments, setComments, user }: CardActivityProps) {
+function CardActivity({ comments, setComments, user, card }: CardActivityProps) {
   const [content, setContent] = useState("");
+
+  const handleSave = async () => {
+    if (!content) return;
+    try {
+      const newComment: CommentsType = {
+        id: nanoid(),
+        cardId: card?.id,
+        userId: user?.id,
+        content,
+        createdAt: new Date().toString(),
+      };
+      await createComment(newComment);
+      setComments((prevComments) => [
+        ...(prevComments || []),
+        { ...newComment, user: { ...user, password: "" } },
+      ]);
+      showToast("success", "New comment added successfully!");
+    } catch (error) {
+      console.error(error);
+      showToast("error", "Failed to create new comment!");
+    }
+  };
   return (
     <div className="flex flex-col items-start gap-4 px-2 py-2">
       <div className="flex items-center gap-4">
@@ -31,6 +62,7 @@ function CardActivity({ comments, setComments, user }: CardActivityProps) {
             onChange={(e) => setContent(e.target.value)}
             placeholder="Write a comment..."
             className="min-h-8"
+            onSave={handleSave}
           />
         </div>
         <div className="mt-3 flex w-full flex-col gap-3">

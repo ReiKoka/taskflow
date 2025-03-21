@@ -60,6 +60,7 @@ function SingleCardModal({
             user={user as AuthenticatedUser}
             comments={comments as CommentsWithUserType[]}
             setComments={setComments}
+            card={card}
           />
         </section>
       )}

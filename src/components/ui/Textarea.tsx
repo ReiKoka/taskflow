@@ -2,7 +2,6 @@ import { useRef } from "react";
 import Button from "./Button";
 import { twMerge } from "tailwind-merge";
 import clsx from "clsx";
-import { useOnClickOutside } from "usehooks-ts";
 
 type TextareaProps = {
   id: string;
@@ -40,6 +39,10 @@ function Textarea({
     e.stopPropagation();
     if (onSave) {
       onSave();
+    }
+
+    if (setIsOpen) {
+      setIsOpen(false);
     }
   };
 
