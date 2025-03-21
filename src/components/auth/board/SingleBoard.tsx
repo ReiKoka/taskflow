@@ -235,6 +235,7 @@ function SingleBoard() {
             setAllCards((prevCards) =>
               prevCards.map((c) => (c.id === updatedCard.id ? updatedCard : c)),
             );
+            setSelectedCard(updatedCard);
           }}
           onClose={() => {
             setSelectedCard(null);

@@ -17,6 +17,9 @@ function CardHeader({ card, updateCards, lists }: CardHeaderProps) {
   const [selectedList, setSelectedList] = useState(card.listId);
   const selectOptions = lists.map((list) => ({ value: list.id, textValue: list.name }));
 
+  console.log(selectedList);
+  console.log(card.listId);
+
   const handleListChange = async () => {
     if (card.listId === selectedList) return;
     try {
@@ -63,14 +66,14 @@ function CardHeader({ card, updateCards, lists }: CardHeaderProps) {
         </h2>
       </div>
 
-      <div className="ml-11 flex items-end gap-1">
+      <div className="ml-11 flex items-end gap-2.5">
         <p className="font-secondary text-foreground py-0.5 text-sm">In list </p>
         <Select
           id="list"
           options={selectOptions}
           placeholderSelected=""
           label=""
-          className="bg-muted dark:bg-muted min-w-34 border-0 py-0.5 pr-0 pl-3 text-sm"
+          className="bg-muted dark:bg-muted w-full min-w-34 rounded-md border-0 py-0.5 pr-0 pl-3 text-sm"
           value={selectedList}
           onChange={(e) => setSelectedList(e.target.value)}
           onBlur={handleListChange}
