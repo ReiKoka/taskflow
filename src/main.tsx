@@ -20,7 +20,7 @@ if (!rootElement.innerHTML) {
           <ModalProvider>
             <AllWorkspacesProvider>
               <App />
-              <Toaster duration={3000} position="bottom-right" />
+              <Toaster duration={5000} position="bottom-right" />
             </AllWorkspacesProvider>
           </ModalProvider>
         </AuthProvider>
