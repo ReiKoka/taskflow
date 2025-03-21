@@ -15,16 +15,16 @@ interface ModalProps {
 const Modal: React.FC<ModalProps> = ({ isOpen, onClose, title, description, children }) => {
   if (!isOpen) return null;
 
-  // We use refs to detect outside clicks on the dialog content.
   const innerRef = useRef<HTMLDivElement>(null);
   useOnClickOutside(innerRef as React.RefObject<HTMLDivElement>, onClose);
 
   const modalContent = (
     <>
-      {/* Custom Backdrop */}
-      <div className="fixed inset-0 z-40" onClick={onClose} style={{ pointerEvents: "auto" }}>
-        <div className="animate-fade animate-once animate-duration-1000 animate-ease-out dark:bg-secondary/30 h-full w-full bg-transparent backdrop-blur-[5px]" />
-      </div>
+      <div
+        className="animate-fade animate-once animate-duration-1000 animate-ease-out dark:bg-secondary/30 fixed inset-0 z-40 h-full w-full bg-transparent backdrop-blur-[5px]"
+        onClick={onClose}
+        style={{ pointerEvents: "auto" }}
+      ></div>
 
       <dialog
         open
