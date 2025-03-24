@@ -4,8 +4,8 @@ import { getInitials } from "../../../utils/helpers";
 import {
   AuthenticatedUser,
   CardType,
-  CommentsType,
-  CommentsWithUserType,
+  CommentType,
+  CommentWithUserType,
 } from "../../../utils/types";
 import { useState } from "react";
 import SingleCardComment from "./SingleCardComment";
@@ -14,8 +14,8 @@ import { createComment } from "../../../services/comments";
 import { showToast } from "../../../utils/showToast";
 
 type CardActivityProps = {
-  comments: CommentsWithUserType[];
-  setComments: React.Dispatch<React.SetStateAction<CommentsWithUserType[] | undefined>>;
+  comments: CommentWithUserType[];
+  setComments: React.Dispatch<React.SetStateAction<CommentWithUserType[] | undefined>>;
   user: AuthenticatedUser;
   card: CardType;
 };
@@ -26,7 +26,7 @@ function CardActivity({ comments, setComments, user, card }: CardActivityProps) 
   const handleSave = async () => {
     if (!content) return;
     try {
-      const newComment: CommentsType = {
+      const newComment: CommentType = {
         id: nanoid(),
         cardId: card?.id,
         userId: user?.id,
@@ -67,7 +67,7 @@ function CardActivity({ comments, setComments, user, card }: CardActivityProps) 
             onSave={handleSave}
           />
         </div>
-        <div className="mt-3 flex w-full flex-col gap-3">
+        <div className="mt-3 flex w-full flex-col gap-4">
           {comments?.map((comment) => (
             <SingleCardComment key={comment.id} comment={comment} user={user} />
           ))}

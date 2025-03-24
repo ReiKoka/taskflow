@@ -1,6 +1,6 @@
 import Modal from "../../ui/Modal";
 import useModal from "../../../hooks/useModal";
-import { AuthenticatedUser, CardType, CommentsWithUserType, ListType } from "../../../utils/types";
+import { AuthenticatedUser, CardType, CommentWithUserType, ListType } from "../../../utils/types";
 import CardHeader from "../card/CardHeader";
 import CardDescription from "../card/CardDescription";
 import { useEffect, useState } from "react";
@@ -31,9 +31,8 @@ function SingleCardModal({
   const isOpen = activeModal === modalType;
   if (!isOpen) return null;
 
-  const [comments, setComments] = useState<CommentsWithUserType[] | undefined>(undefined);
+  const [comments, setComments] = useState<CommentWithUserType[] | undefined>(undefined);
   const { user } = useAuth();
-
 
   useEffect(() => {
     const fetchComments = async () => {
@@ -55,10 +54,10 @@ function SingleCardModal({
       ) : (
         <section className="text-foreground flex flex-col gap-4">
           <CardHeader card={card} updateCards={updateCards} lists={lists} />
-          <CardDescription card={card} updateCards={updateCards}/>
+          <CardDescription card={card} updateCards={updateCards} />
           <CardActivity
             user={user as AuthenticatedUser}
-            comments={comments as CommentsWithUserType[]}
+            comments={comments as CommentWithUserType[]}
             setComments={setComments}
             card={card}
           />

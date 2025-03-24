@@ -62,7 +62,7 @@ export interface CardType {
   status: CardStatusType;
 }
 
-export interface CommentsType {
+export interface CommentType {
   id: string;
   cardId: string;
   userId: string;
@@ -70,7 +70,7 @@ export interface CommentsType {
   createdAt: string;
 }
 
-export interface CommentsWithUserType extends CommentsType {
+export interface CommentWithUserType extends CommentType {
   user: User
 }
 

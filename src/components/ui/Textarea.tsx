@@ -41,7 +41,7 @@ function Textarea({
   // Handle Click Outside div containing text area and the buttons to save the changes.
   const handleClickOutside = (event: MouseEvent | TouchEvent | FocusEvent) => {
     if (modalRef?.current && modalRef.current.contains(event.target as Node)) {
-      onSave && onSave();
+      if (textareaRef) onSave && onSave();
       setIsOpen && value && setIsOpen(false);
     }
   };
@@ -79,15 +79,6 @@ function Textarea({
         onKeyDown={onKeyDown}
       />
       <div className="flex items-center justify-end gap-2">
-        <Button
-          title="Send message"
-          type="button"
-          onClick={() => setIsOpen && setIsOpen(false)}
-          variant="outline"
-          className="h-fit w-fit py-1"
-        >
-          Clear
-        </Button>
         <Button
           title="Send message"
           type="button"

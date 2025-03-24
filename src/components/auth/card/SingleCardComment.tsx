@@ -1,11 +1,13 @@
 import { useState } from "react";
 import { getInitials } from "../../../utils/helpers";
-import { AuthenticatedUser, CommentsWithUserType } from "../../../utils/types";
+import { AuthenticatedUser, CommentWithUserType } from "../../../utils/types";
 import Button from "../../ui/Button";
 import Textarea from "../../ui/Textarea";
+import { editComment } from "../../../services/comments";
+import { showToast } from "../../../utils/showToast";
 
 type SingleCartCommentProps = {
-  comment: CommentsWithUserType;
+  comment: CommentWithUserType;
   user: AuthenticatedUser;
 };
 
@@ -18,7 +20,14 @@ function SingleCardComment({ comment, user }: SingleCartCommentProps) {
   };
 
   const handleSave = async () => {
-    setIsTextareaOpen(false);
+    if (!commentContent) return;
+    try {
+      await editComment(comment.id, commentContent);
+      showToast("success", `Comment successfully edited`);
+    } catch (error) {
+      console.error(error);
+      showToast("error", "Failed to edit comment");
+    }
   };
 
   return (
@@ -45,22 +54,23 @@ function SingleCardComment({ comment, user }: SingleCartCommentProps) {
             placeholder="Type something..."
             setIsOpen={setIsTextareaOpen}
             onSave={handleSave}
-            
           />
         )}
 
-        <div className="ml-0.5 flex items-center gap-4">
-          <Button
-            className="bg-background text-foreground rounded-none border-0 px-0 py-0 text-xs font-medium underline-offset-2 hover:scale-100 hover:underline active:scale-100"
-            onClick={handleEditClick}
-          >
-            Edit
-          </Button>
+        {comment.userId === user.id && (
+          <div className="ml-0.5 flex items-center gap-4">
+            <Button
+              className="text-foreground rounded-none border-0 bg-transparent px-0 py-0 text-xs font-medium underline-offset-2 hover:scale-100 hover:underline active:scale-100"
+              onClick={handleEditClick}
+            >
+              Edit
+            </Button>
 
-          <Button className="bg-background text-destructive rounded-none border-0 px-0 py-0 text-xs font-medium underline-offset-2 hover:scale-100 hover:underline active:scale-100">
-            Delete
-          </Button>
-        </div>
+            <Button className="text-destructive rounded-none border-0 bg-transparent px-0 py-0 text-xs font-medium underline-offset-2 hover:scale-100 hover:underline active:scale-100">
+              Delete
+            </Button>
+          </div>
+        )}
       </div>
     </div>
   );

@@ -239,7 +239,7 @@
     {
       "id": "hsbEMM7qNCSOzNa",
       "listId": "scjZfAaaWG3wob3",
-      "description": "",
+      "description": "asdfasdf",
       "userId": "0iirwg74IN",
       "status": "completed",
       "title": "Design a login page"
@@ -459,7 +459,8 @@
       "cardId": "R0Oqycz3I6piwnC",
       "userId": "0iirwg74IN",
       "content": "I think we should revise the layout for better UX.",
-      "createdAt": "2023-10-01T09:30:00Z"
+      "createdAt": "2023-10-01T09:30:00Z",
+      "newCommentContent": "I think we should revise the layout for better UX. Si thu ti?"
     },
     {
       "id": "cmt2",
@@ -509,6 +510,13 @@
       "userId": "0iirwg74IN",
       "content": "AAAAA",
       "createdAt": "Mon Mar 24 2025 09:19:12 GMT+0100 (Central European Standard Time)"
+    },
+    {
+      "id": "UUipA5hLSCgemmIxkVZ5P",
+      "cardId": "hsbEMM7qNCSOzNa",
+      "userId": "0iirwg74IN",
+      "content": "test",
+      "createdAt": "Mon Mar 24 2025 12:37:48 GMT+0100 (Central European Standard Time)"
     }
   ]
 }
