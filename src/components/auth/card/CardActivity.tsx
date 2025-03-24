@@ -39,11 +39,13 @@ function CardActivity({ comments, setComments, user, card }: CardActivityProps) 
         { ...newComment, user: { ...user, password: "" } },
       ]);
       showToast("success", "New comment added successfully!");
+      setContent("");
     } catch (error) {
       console.error(error);
       showToast("error", "Failed to create new comment!");
     }
   };
+
   return (
     <div className="flex flex-col items-start gap-4 px-2 py-2">
       <div className="flex items-center gap-4">

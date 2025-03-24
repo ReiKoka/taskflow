@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import Button from "./Button";
 import { twMerge } from "tailwind-merge";
 import clsx from "clsx";
@@ -30,10 +30,15 @@ function Textarea({
     const textarea = textareaRef.current;
 
     if (textarea) {
-      textarea.style.height = "auto";
-      textarea.style.height = `${textarea.scrollHeight}px`;
+      textarea.style.height = "auto"; // Reset height to auto to recalculate
+      textarea.style.height = `${textarea.scrollHeight}px`; // Set height to match content
     }
   };
+
+  // Call adjustHeight on initial render and whenever the value changes
+  useEffect(() => {
+    adjustHeight();
+  }, [value]);
 
   const handlePrimaryButtonClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
@@ -41,7 +46,7 @@ function Textarea({
       onSave();
     }
 
-    if (setIsOpen) {
+    if (setIsOpen && value) {
       setIsOpen(false);
     }
   };
@@ -57,7 +62,7 @@ function Textarea({
         id={id}
         ref={textareaRef}
         rows={1}
-        onInput={adjustHeight}
+        onInput={adjustHeight} // Adjust height on input
         className={styles}
         placeholder={placeholder}
         value={value}

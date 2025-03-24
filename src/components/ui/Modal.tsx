@@ -13,10 +13,9 @@ interface ModalProps {
 }
 
 const Modal: React.FC<ModalProps> = ({ isOpen, onClose, title, description, children }) => {
-  if (!isOpen) return null;
-
   const innerRef = useRef<HTMLDivElement>(null);
   useOnClickOutside(innerRef as React.RefObject<HTMLDivElement>, onClose);
+  if (!isOpen) return null;
 
   const modalContent = (
     <>
