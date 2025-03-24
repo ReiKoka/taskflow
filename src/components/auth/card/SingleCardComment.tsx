@@ -34,7 +34,7 @@ function SingleCardComment({ comment, user }: SingleCartCommentProps) {
       </p>
       <div className="flex h-full max-h-full grow flex-col gap-1">
         {!isTextareaOpen ? (
-          <p className="border-secondary dark:border-muted bg-secondary dark:bg-muted w-full max-w-[320px] rounded-lg border px-2 py-1.5 text-sm break-words text-ellipsis whitespace-normal">
+          <p className="border-secondary dark:border-muted bg-secondary dark:bg-muted w-full max-w-[450px] rounded-lg border px-2 py-1.5 text-sm break-words text-ellipsis whitespace-normal">
             {commentContent}
           </p>
         ) : (

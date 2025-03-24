@@ -1,4 +1,4 @@
-import { createContext, FC, ReactNode, useState } from "react";
+import { createContext, FC, ReactNode, RefObject, useRef, useState } from "react";
 
 export type ModalType =
   | "createWorkspace"
@@ -17,6 +17,7 @@ interface ModalContextType {
   activeModal: ModalType;
   openModal: (modal: ModalType) => void;
   closeModal: () => void;
+  modalRef?: RefObject<HTMLDivElement | null>;
 }
 
 const ModalContext = createContext<ModalContextType | undefined>(undefined);
@@ -27,6 +28,7 @@ interface ModalProviderProps {
 
 export const ModalProvider: FC<ModalProviderProps> = ({ children }) => {
   const [activeModal, setActiveModal] = useState<ModalType | null>(null);
+  const modalRef = useRef<HTMLDivElement>(null);
 
   function openModal(modal: ModalType) {
     setActiveModal(modal);
@@ -37,7 +39,7 @@ export const ModalProvider: FC<ModalProviderProps> = ({ children }) => {
   }
 
   return (
-    <ModalContext.Provider value={{ activeModal, closeModal, openModal }}>
+    <ModalContext.Provider value={{ activeModal, closeModal, openModal, modalRef }}>
       {children}
     </ModalContext.Provider>
   );

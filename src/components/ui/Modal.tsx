@@ -1,8 +1,9 @@
-import { ReactNode, useRef } from "react";
+import { ReactNode } from "react";
 import { createPortal } from "react-dom";
 import Button from "./Button";
 import { HiXMark } from "react-icons/hi2";
 import { useOnClickOutside } from "usehooks-ts";
+import useModal from "../../hooks/useModal";
 
 interface ModalProps {
   isOpen: boolean;
@@ -13,14 +14,15 @@ interface ModalProps {
 }
 
 const Modal: React.FC<ModalProps> = ({ isOpen, onClose, title, description, children }) => {
-  const innerRef = useRef<HTMLDivElement>(null);
-  useOnClickOutside(innerRef as React.RefObject<HTMLDivElement>, onClose);
+  const { modalRef } = useModal();
+
+  useOnClickOutside(modalRef as React.RefObject<HTMLDivElement>, onClose);
   if (!isOpen) return null;
 
   const modalContent = (
     <>
       <div
-        className="animate-fade animate-once animate-duration-1000 animate-ease-out dark:bg-secondary/30 fixed inset-0 z-40 h-full w-full bg-transparent backdrop-blur-[5px]"
+        className="animate-fade animate-once animate-duration-1000 animate-ease-out dark:bg-secondary/30 fixed inset-0 z-40 h-full w-full bg-transparent backdrop-blur-[2.5px]"
         onClick={onClose}
         style={{ pointerEvents: "auto" }}
       ></div>
@@ -33,8 +35,9 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, title, description, chil
         aria-modal="true"
       >
         <div
-          className="bg-background dark:border-muted dark:bg-secondary shadow-muted-foreground dark:shadow-muted animate-jump-in animate-ease-out relative flex max-h-[90dvh] w-full max-w-md flex-col overflow-y-auto rounded-lg p-6 shadow-sm duration-500 dark:border"
-          ref={innerRef}
+          id="modal-content"
+          className="bg-background dark:border-muted dark:bg-secondary shadow-muted-foreground dark:shadow-muted animate-jump-in animate-ease-out relative flex max-h-[90dvh] w-full max-w-xl flex-col overflow-y-auto rounded-lg p-6 shadow-sm duration-500 dark:border"
+          ref={modalRef}
         >
           <Button
             variant="icon"

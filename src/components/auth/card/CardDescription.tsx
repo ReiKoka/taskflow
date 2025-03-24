@@ -15,7 +15,6 @@ function CardDescription({ card, updateCards }: CardDescriptionProps) {
   const [isTextareaOpen, setIsTextareaOpen] = useState(description ? false : true);
 
   const handleSave = async () => {
-    if (!description) return;
     try {
       const cardWithNewDescription = await editCardProperty(card.id, { description });
       if (updateCards) {
@@ -45,12 +44,14 @@ function CardDescription({ card, updateCards }: CardDescriptionProps) {
           onSave={handleSave}
         />
       ) : (
-        <p
-          className="font-secondary ml-10 w-[calc(100%-36px)] cursor-pointer text-sm"
-          onClick={() => setIsTextareaOpen(true)}
-        >
-          {description}
-        </p>
+        description && (
+          <p
+            className="font-secondary ml-10 w-[calc(100%-36px)] cursor-pointer text-sm"
+            onClick={() => setIsTextareaOpen(true)}
+          >
+            {description}
+          </p>
+        )
       )}
     </div>
   );

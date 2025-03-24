@@ -1,7 +1,9 @@
-import { useEffect, useRef } from "react";
+import { RefObject, useEffect, useRef } from "react";
 import Button from "./Button";
 import { twMerge } from "tailwind-merge";
 import clsx from "clsx";
+import { useOnClickOutside } from "usehooks-ts";
+import useModal from "../../hooks/useModal";
 
 type TextareaProps = {
   id: string;
@@ -14,6 +16,14 @@ type TextareaProps = {
   onSave?: () => Promise<void>;
 };
 
+const adjustHeight = (textareaRef: RefObject<HTMLTextAreaElement>) => {
+  const textarea = textareaRef.current;
+  if (textarea) {
+    textarea.style.height = "auto";
+    textarea.style.height = `${textarea.scrollHeight}px`;
+  }
+};
+
 function Textarea({
   id,
   value,
@@ -24,31 +34,30 @@ function Textarea({
   setIsOpen,
   onSave,
 }: TextareaProps) {
+  const divOfTextarea = useRef<HTMLDivElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const { modalRef } = useModal();
 
-  const adjustHeight = () => {
-    const textarea = textareaRef.current;
-
-    if (textarea) {
-      textarea.style.height = "auto"; // Reset height to auto to recalculate
-      textarea.style.height = `${textarea.scrollHeight}px`; // Set height to match content
+  // Handle Click Outside div containing text area and the buttons to save the changes.
+  const handleClickOutside = (event: MouseEvent | TouchEvent | FocusEvent) => {
+    if (modalRef?.current && modalRef.current.contains(event.target as Node)) {
+      onSave && onSave();
+      setIsOpen && value && setIsOpen(false);
     }
   };
 
-  // Call adjustHeight on initial render and whenever the value changes
+  // useEffect to adjust the height of the textarea whenever value changes. Necessary when clicking on edit button for changing a comment.
   useEffect(() => {
-    adjustHeight();
+    adjustHeight(textareaRef as RefObject<HTMLTextAreaElement>);
   }, [value]);
 
-  const handlePrimaryButtonClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.stopPropagation();
-    if (onSave) {
-      onSave();
-    }
+  // useOnClickOutside hook to handle the click from useHooks.ts
+  useOnClickOutside(divOfTextarea as RefObject<HTMLDivElement>, handleClickOutside);
 
-    if (setIsOpen && value) {
-      setIsOpen(false);
-    }
+  // HandlePrimaryButtonClick function to handle the save button in the text area to save the changes
+  const handlePrimaryButtonClick = () => {
+    onSave && onSave();
+    setIsOpen && value && setIsOpen(false);
   };
 
   const baseStyles =
@@ -56,13 +65,13 @@ function Textarea({
   const styles = twMerge(clsx(baseStyles, className));
 
   return (
-    <div className="flex w-full flex-col gap-2">
+    <div className="flex w-full flex-col gap-2" ref={divOfTextarea}>
       <label htmlFor={id} className="hidden"></label>
       <textarea
         id={id}
         ref={textareaRef}
         rows={1}
-        onInput={adjustHeight} // Adjust height on input
+        onInput={() => adjustHeight(textareaRef as RefObject<HTMLTextAreaElement>)}
         className={styles}
         placeholder={placeholder}
         value={value}
