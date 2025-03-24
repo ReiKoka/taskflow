@@ -69,7 +69,7 @@ function CardActivity({ comments, setComments, user, card }: CardActivityProps) 
         </div>
         <div className="mt-3 flex w-full flex-col gap-4">
           {comments?.map((comment) => (
-            <SingleCardComment key={comment.id} comment={comment} user={user} />
+            <SingleCardComment key={comment.id} comment={comment} user={user} setComments={setComments} />
           ))}
         </div>
       </div>

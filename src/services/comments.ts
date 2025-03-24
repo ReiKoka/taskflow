@@ -42,3 +42,15 @@ export const editComment = async ( commentId: string, content: string): Promise<
     throw new Error("Network error. Please try again.");
   }
 };
+
+export const deleteComment = async (commentId: string): Promise<CommentType> => {
+  try {
+    const response = await axios.delete<CommentType>(`${baseURL}/comments/${commentId}`);
+    return response.data;
+  } catch (error) {
+    if (axios.isAxiosError(error) && error.response) {
+      throw new Error(`${error.response?.data}, Failed to delete comment`);
+    }
+    throw new Error("Network error. Please try again.");
+  }
+};

@@ -3,16 +3,17 @@ import { getInitials } from "../../../utils/helpers";
 import { AuthenticatedUser, CommentWithUserType } from "../../../utils/types";
 import Button from "../../ui/Button";
 import Textarea from "../../ui/Textarea";
-import { editComment } from "../../../services/comments";
+import { deleteComment, editComment } from "../../../services/comments";
 import { showToast } from "../../../utils/showToast";
 import DropdownMenu from "../../ui/DropdownMenu";
 
 type SingleCartCommentProps = {
   comment: CommentWithUserType;
   user: AuthenticatedUser;
+  setComments: React.Dispatch<React.SetStateAction<CommentWithUserType[] | undefined>>;
 };
 
-function SingleCardComment({ comment, user }: SingleCartCommentProps) {
+function SingleCardComment({ comment, user, setComments }: SingleCartCommentProps) {
   const [commentContent, setCommentContent] = useState(comment.content);
   const [isTextareaOpen, setIsTextareaOpen] = useState(false);
   const [isDeleteBoxOpen, setIsDeleteBoxOpen] = useState(false);
@@ -26,13 +27,25 @@ function SingleCardComment({ comment, user }: SingleCartCommentProps) {
   };
 
   const handleSave = async () => {
-    if (!commentContent) return;
+    if (!commentContent || commentContent === comment.content) return;
     try {
       await editComment(comment.id, commentContent);
       showToast("success", `Comment successfully edited`);
     } catch (error) {
       console.error(error);
       showToast("error", "Failed to edit comment");
+    }
+  };
+
+  const handleDeleteComment = async () => {
+    try {
+      await deleteComment(comment.id);
+      showToast("info", "Comment deleted");
+      setComments((prevComments) => prevComments?.filter((item) => item.id !== comment.id));
+      setIsDeleteBoxOpen(false);
+    } catch (error) {
+      console.error(error);
+      showToast("error", "Failed to delete comment");
     }
   };
 
@@ -48,6 +61,9 @@ function SingleCardComment({ comment, user }: SingleCartCommentProps) {
         </span>
       </p>
       <div className="flex h-full max-h-full grow flex-col gap-1">
+        <p className="text-sm font-medium capitalize">
+          {comment.user?.firstName} {comment.user?.lastName}
+        </p>
         {!isTextareaOpen ? (
           <p className="border-secondary dark:border-muted bg-secondary dark:bg-muted w-full max-w-[450px] rounded-lg border px-2 py-1.5 text-sm break-words text-ellipsis whitespace-normal">
             {commentContent}
@@ -91,10 +107,18 @@ function SingleCardComment({ comment, user }: SingleCartCommentProps) {
                 Deleting a comment is forever. There is no undo.
               </p>
               <div className="mt-4 flex justify-center gap-2">
-                <Button variant="outline" className="flex-1/2 justify-center text-xs">
+                <Button
+                  variant="outline"
+                  className="flex-1/2 justify-center text-xs"
+                  onClick={() => setIsDeleteBoxOpen(false)}
+                >
                   Cancel
                 </Button>
-                <Button variant="destructive" className="flex-1/2 justify-center text-xs">
+                <Button
+                  variant="destructive"
+                  className="flex-1/2 justify-center text-xs"
+                  onClick={handleDeleteComment}
+                >
                   Delete comment
                 </Button>
               </div>
