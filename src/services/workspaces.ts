@@ -9,41 +9,42 @@ export const getWorkspacesOfAdmin = async (adminId: string): Promise<WorkspaceTy
     return response.data;
   } catch (error) {
     if (axios.isAxiosError(error) && error.response) {
-      throw new Error(`${error.response?.data}, Failed to get your workspaces. Please try again later!`);
+      throw new Error(`${error?.message}`);
     }
-    throw new Error("Network error. Please try again.");
+    throw error;
   }
-}
+};
 
 //prettier-ignore
-export const getWorkspacesWhereUserIsGuest = async (adminId:string): Promise<WorkspaceType[]> => {
+
+export const getWorkspacesWhereUserIsGuest = async (adminId: string): Promise<WorkspaceType[]> => {
   try {
-    const response = await axios.get<WorkspaceType[]>(`${baseURL}/workspaces?members_like=${adminId}`);
+    const response = await axios.get<WorkspaceType[]>(
+      `${baseURL}/workspaces?members_like=${adminId}`,
+    );
     return response.data;
   } catch (error) {
     if (axios.isAxiosError(error) && error.response) {
-      throw new Error(
-        `${error.response?.data}, Failed to get your workspaces. Please try again later!`,
-      );
+      throw new Error(`${error?.message}`);
     }
-    throw new Error("Network error. Please try again.");
+    throw error;
   }
-}
+};
 
 //prettier-ignore
 export const getSingleWorkspaceWithBoards = async (workspaceId: string): Promise<WorkspaceWithBoardsType> => {
   try {
-    const response = await axios.get<WorkspaceWithBoardsType>(`${baseURL}/workspaces/${workspaceId}?_embed=boards`);
+    const response = await axios.get<WorkspaceWithBoardsType>(
+      `${baseURL}/workspaces/${workspaceId}?_embed=boards`,
+    );
     return response.data;
   } catch (error) {
     if (axios.isAxiosError(error) && error.response) {
-      throw new Error(
-        `${error.response?.data}, Failed to get your workspaces. Please try again later!`,
-      );
+      throw new Error(`${error?.message}`);
     }
-    throw new Error("Network error. Please try again.");
+    throw error;
   }
-}
+};
 
 //prettier-ignore
 export const createWorkspace = async (workspace: WorkspaceType): Promise<WorkspaceType> => {
@@ -52,34 +53,37 @@ export const createWorkspace = async (workspace: WorkspaceType): Promise<Workspa
     return response.data;
   } catch (error) {
     if (axios.isAxiosError(error) && error.response) {
-      throw new Error(`${error.response?.data}, Failed to create workspace. Please try again later!`);
+      throw new Error(`${error.response?.data}`);
     }
-    throw new Error("Network error. Please try again.");
-  }
-}
-
-//prettier-ignore
-export const editWorkspace = async (id:string, updatedWorkspace: WorkspaceType): Promise<WorkspaceType> => {
-  try {
-    const response = await axios.put<WorkspaceType>(`${baseURL}/workspaces/${id}`, updatedWorkspace);
-    return response.data;
-  } catch (error) {
-    if (axios.isAxiosError(error) && error.response) {
-      throw new Error(`${error.response?.data}, Failed to update workspace. Please try again later!`);
-    }
-    throw new Error("Network error. Please try again.");
+    throw error;
   }
 };
 
 //prettier-ignore
-export const deleteWorkspace = async (id:string): Promise<WorkspaceType> => {
+export const editWorkspace = async ( id: string, updatedWorkspace: WorkspaceType): Promise<WorkspaceType> => {
+  try {
+    const response = await axios.put<WorkspaceType>(
+      `${baseURL}/workspaces/${id}`,
+      updatedWorkspace,
+    );
+    return response.data;
+  } catch (error) {
+    if (axios.isAxiosError(error) && error.response) {
+      throw new Error(`${error?.message}`);
+    }
+    throw error;
+  }
+};
+
+//prettier-ignore
+export const deleteWorkspace = async (id: string): Promise<WorkspaceType> => {
   try {
     const response = await axios.delete<WorkspaceType>(`${baseURL}/workspaces/${id}`);
     return response.data;
   } catch (error) {
     if (axios.isAxiosError(error) && error.response) {
-      throw new Error(`${error.response?.data}, Failed to delete workspace. Please try again later!`);
+      throw new Error(`${error?.message}`);
     }
-    throw new Error("Network error. Please try again.");
+    throw error;
   }
-}
+};
