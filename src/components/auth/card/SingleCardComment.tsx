@@ -5,6 +5,7 @@ import Button from "../../ui/Button";
 import Textarea from "../../ui/Textarea";
 import { editComment } from "../../../services/comments";
 import { showToast } from "../../../utils/showToast";
+import DropdownMenu from "../../ui/DropdownMenu";
 
 type SingleCartCommentProps = {
   comment: CommentWithUserType;
@@ -14,9 +15,14 @@ type SingleCartCommentProps = {
 function SingleCardComment({ comment, user }: SingleCartCommentProps) {
   const [commentContent, setCommentContent] = useState(comment.content);
   const [isTextareaOpen, setIsTextareaOpen] = useState(false);
+  const [isDeleteBoxOpen, setIsDeleteBoxOpen] = useState(false);
 
   const handleEditClick = () => {
     setIsTextareaOpen(true);
+  };
+
+  const handleDeleteClick = () => {
+    setIsDeleteBoxOpen(true);
   };
 
   const handleSave = async () => {
@@ -58,18 +64,42 @@ function SingleCardComment({ comment, user }: SingleCartCommentProps) {
         )}
 
         {comment.userId === user.id && (
-          <div className="ml-0.5 flex items-center gap-4">
-            <Button
-              className="text-foreground rounded-none border-0 bg-transparent px-0 py-0 text-xs font-medium underline-offset-2 hover:scale-100 hover:underline active:scale-100"
-              onClick={handleEditClick}
-            >
-              Edit
-            </Button>
+          <>
+            <div className="ml-0.5 flex items-center gap-4">
+              <Button
+                className="text-foreground rounded-none border-0 bg-transparent px-0 py-0 text-xs font-medium underline-offset-2 hover:scale-100 hover:underline active:scale-100"
+                onClick={handleEditClick}
+              >
+                Edit
+              </Button>
 
-            <Button className="text-destructive rounded-none border-0 bg-transparent px-0 py-0 text-xs font-medium underline-offset-2 hover:scale-100 hover:underline active:scale-100">
-              Delete
-            </Button>
-          </div>
+              <Button
+                className="text-destructive rounded-none border-0 bg-transparent px-0 py-0 text-xs font-medium underline-offset-2 hover:scale-100 hover:underline active:scale-100"
+                onClick={handleDeleteClick}
+              >
+                Delete
+              </Button>
+            </div>
+            <DropdownMenu
+              isOpen={isDeleteBoxOpen}
+              setIsOpen={setIsDeleteBoxOpen}
+              position="top-0 left-22"
+              className="relative p-4"
+            >
+              <h1 className="font-secondary mb-6 text-center font-medium">Delete Comment?</h1>
+              <p className="font-secondary font-base max-w-72 text-center text-sm">
+                Deleting a comment is forever. There is no undo.
+              </p>
+              <div className="mt-4 flex justify-center gap-2">
+                <Button variant="outline" className="flex-1/2 justify-center text-xs">
+                  Cancel
+                </Button>
+                <Button variant="destructive" className="flex-1/2 justify-center text-xs">
+                  Delete comment
+                </Button>
+              </div>
+            </DropdownMenu>
+          </>
         )}
       </div>
     </div>

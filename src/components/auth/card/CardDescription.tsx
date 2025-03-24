@@ -15,7 +15,7 @@ function CardDescription({ card, updateCards }: CardDescriptionProps) {
   const [isTextareaOpen, setIsTextareaOpen] = useState(description ? false : true);
 
   const handleSave = async () => {
-    if (!description) return;
+    if (!description || description === card.description) return;
     try {
       const cardWithNewDescription = await editCardProperty(card.id, { description });
       if (updateCards) {
