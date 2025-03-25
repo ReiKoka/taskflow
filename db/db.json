@@ -217,12 +217,6 @@
       "position": 3
     },
     {
-      "id": "OWkry-86_FkOXKr",
-      "boardId": 1,
-      "position": 4,
-      "name": "Testing-4"
-    },
-    {
       "id": "r7hAXNNxrPwmKna",
       "boardId": "TuyvU5dr2zUiE-P",
       "position": 1,
@@ -270,7 +264,7 @@
     },
     {
       "id": "SNxaEMYA2h64Pfs",
-      "listId": "OWkry-86_FkOXKr",
+      "listId": "xF2GwS3Sy058mVk",
       "description": "Hello 123",
       "userId": "0iirwg74IN",
       "status": "in-complete",
@@ -278,7 +272,7 @@
     },
     {
       "id": "OGJ2jNbFs79p9yL",
-      "listId": "OWkry-86_FkOXKr",
+      "listId": "xF2GwS3Sy058mVk",
       "description": "Kryeqytet-Tirana \n",
       "userId": "0iirwg74IN",
       "status": "completed",
@@ -482,13 +476,6 @@
       "userId": "0iirwg74IN",
       "content": "adfasdfa",
       "createdAt": "Mon Mar 24 2025 14:35:35 GMT+0100 (Central European Standard Time)"
-    },
-    {
-      "id": "XzghqxjCWteaBxwE6bh9j",
-      "cardId": "R0Oqycz3I6piwnC",
-      "userId": "0iirwg74IN",
-      "content": "Sounds great!",
-      "createdAt": "Mon Mar 24 2025 15:57:02 GMT+0100 (Central European Standard Time)"
     },
     {
       "id": "cHwIC5RsNI8Q2-IFePfMW",
