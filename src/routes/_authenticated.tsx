@@ -1,6 +1,7 @@
 import { createFileRoute, redirect } from "@tanstack/react-router";
 import { AuthContextType } from "../context/AuthContext";
-import LayoutWrapper from "../layouts/LayoutWrapper";
+
+import AuthenticatedLanding from "../components/auth/landing/AuthenticatedLanding";
 
 export const Route = createFileRoute("/_authenticated")({
   beforeLoad: ({ context }: { context: { auth?: AuthContextType } }) => {
@@ -8,5 +9,5 @@ export const Route = createFileRoute("/_authenticated")({
       throw redirect({ to: "/login" });
     }
   },
-  component: () => <LayoutWrapper type="authenticated" />,
+  component: () => <AuthenticatedLanding />,
 });

@@ -53,7 +53,7 @@ export const createWorkspace = async (workspace: WorkspaceType): Promise<Workspa
     return response.data;
   } catch (error) {
     if (axios.isAxiosError(error) && error.response) {
-      throw new Error(`${error.response?.data}`);
+      throw new Error(`${error.message}`);
     }
     throw error;
   }

@@ -75,7 +75,7 @@ function AddMembersModal({ modalType, title, workspace, setWorkspace}: AddMember
   return (
     <Modal isOpen={isOpen} onClose={closeModal} title={title}>
       <form onSubmit={handleSubmit} className="mt-4 flex flex-col gap-4">
-        {options && options.length > 0 ?         <Select
+        {options && options.length > 0 ?         <Select label=""
           placeholderSelected="Choose new member"
           id="members"
           options={options || []}
